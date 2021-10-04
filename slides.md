@@ -1,348 +1,316 @@
 ---
 # try also 'default' to start simple
-theme: seriph
+theme: penguin
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
 background: https://source.unsplash.com/collection/94734566/1920x1080
 # apply any windi css classes to the current slide
 class: 'text-center'
-# https://sli.dev/custom/highlighters.html
-highlighter: shiki
 # show line numbers in code blocks
-lineNumbers: false
+lineNumbers: true
 # some information about the slides, markdown enabled
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
+  ## Javascript中級講義資料#1
+  VANTAN Techgord Academy
+  Created by [@unotovive](https://twitter.com/unotovive)
+fonts:
+  sans: 'Noto Sans JP'
+  # use with `font-serif` css class from windicss
+  serif: 'Noto Sans JP'
+  # for code blocks, inline code, etc.
+  mono: 'Fira Code'
 # persist drawings in exports and build
 drawings:
   persist: false
+layout: intro
 ---
 
-# Welcome to Slidev
+# Javascript中級
 
-Presentation slides for developers
+VANTAN Techford Academy
 
+### #1 概論と環境構築
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
     Press Space for next page <carbon:arrow-right class="inline"/>
   </span>
 </div>
 
-<div class="abs-br m-6 flex gap-2">
-  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon:edit />
-  </button>
-  <a href="https://github.com/slidevjs/slidev" target="_blank" alt="GitHub"
-    class="text-xl icon-btn opacity-50 !border-none !hover:text-white">
-    <carbon-logo-github />
-  </a>
+---
+layout: new-section
+---
+
+# 出席確認🖐
+
+<!--
+7分ぐらい
+-->
+
+---
+layout: new-section
+---
+
+# ご挨拶🖐
+
+<!--
+5分ぐらい
+-->
+
+---
+layout: presenter
+presenterImage: ./assets/1/me.jpg
+---
+
+# Takumi Otobe
+
+主にJavascript中級クラスを担当します。
+<br>
+半年ほどですがよろしくお願いします!
+
+- 📝 **職業** - UX engineer / Designer at YUMEMI
+- 🎨 **経歴** - 
+- 🧑‍💻 **得意な技術** - Vue, React, Typescript, AWS
+- 🤹 **趣味** - スノボとボルダリング
+
+<br>
+<br>
+
+Twitterアカウント [@unotovive](https://twitter.com/unotovive)
+
+---
+layout: new-section
+---
+
+# 授業の概要
+
+<!--
+3分
+-->
+
+---
+
+# 授業の概要
+
+### フロントエンドの授業です
+Javascriptという講義名ですが、Javascriptを利用したブラウザ上で動作するWebアプリケーションについて学び、簡単なアプリのフロントエンドを作成できるようになることが目的です。
+
+<br>
+
+### そもそもフロントエンドって？
+本日の次のコマで詳しく解説します。主にブラウザで動くアプリケーションの僕たちが実際に触る部分です。
+
+<!--
+フロントエンドって何ぞやって話は今日の2コマ目でするよ！
+-->
+
+---
+
+# 最終目標について
+
+この講義の最終目標は、フロントエンドフレームワーク「Vue.js」を利用し、簡単なSPAを1から作れる実力をつけることです。
+<br>
+<br>
+この最終目標を達成するために、Javascriptという言語の基本的な理解から、Vue.jsの基礎、Vue.jsを実際に使ってアプリを作る流れまでを学びます。
+
+
+---
+layout: new-section
+---
+
+# シラバスの確認
+
+<!-- 
+  10分ぐらい
+ -->
+
+---
+
+# シラバスの確認
+
+<br>
+
+| 日程 | 1コマ目 | 2コマ目 |
+| --- | --- | --- |
+| <kbd>1</kbd> | 概論と環境構築 | Webアプリケーション基礎 |
+| <kbd>2</kbd> | Javascript基礎① | Javascript基礎② |
+| <kbd>3</kbd> | Javascript基礎③ |Javascript基礎④ |
+| <kbd>4</kbd> | Javascript基礎⑤ | Javascript基礎⑥ |
+| <kbd>5</kbd> | Vue.jsとは？ | Vue.jsの基礎① |
+| <kbd>6</kbd> | Vue.jsの基礎② | Vue.jsの基礎③ |
+| <kbd>7</kbd> | Vue.jsの基礎④ | Vue.jsの基礎⑤ |
+
+---
+
+# シラバスの確認
+
+<br>
+
+| 日程 | 1コマ目 | 2コマ目 |
+| --- | --- | --- |
+| <kbd>8</kbd> | TODOアプリハンズオン① | TODOアプリハンズオン② |
+| <kbd>9</kbd> | TODOアプリハンズオン③ | TODOアプリハンズオン④ |
+| <kbd>10</kbd> | TODOアプリハンズオン⑤ | TODOアプリハンズオン⑥ |
+| <kbd>11</kbd> | Vue.js応用編① | Vue.js応用編② |
+
+---
+
+# シラバスの確認
+
+<br>
+
+| 日程 | 1コマ目 | 2コマ目 |
+| --- | --- | --- |
+| <kbd>12</kbd> | チーム開発について | Gitとバージョン管理 |
+| <kbd>13</kbd> | 最終課題について | 最終課題 (テーマ発表会) |
+| <kbd>14</kbd> | 実務Tips① | 最終課題検討① |
+| <kbd>15</kbd> | 実務Tips② | 最終課題検討② |
+| <kbd>16</kbd> | 最終発表会とフィードバック① | 最終発表会とフィードバック② |
+
+---
+layout: new-section
+---
+
+# 授業の進め方について
+
+---
+
+## こういう形式での講義が初めてです...!
+
+（進め方、ペース配分等）なにかあったら気軽に言ってください！
+
+※質問等は随時コメントで投稿してください！（挙手でも大丈夫）
+
+---
+
+## 講義資料は公開します！
+
+<div class="flex flex-grow  pt-8">
+<div>
+
+講義資料は [htttps://kougisiryounourl.com/#1](htttps://kougisiryounourl.com/#1) で公開します。<br>
+
+Password :  <code style="color: #fff;">vantan.js</code>
+
+コード等もここに写すので適宜自分でみながら進めてください。
+<br>
+<br>
+
+##### ※コピペはほどほどに
+
+</div>
+<div  class="h-xs flex-grow-0 pl-12">
+
+<img src="assets/1/me.jpg" class="h-xs">
+
+</div>
 </div>
 
 <!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
+コピペをするときは内容をよく読んで自分で理解したコードだけコピペしよう
 -->
 
 ---
+layout: new-section
+---
 
-# What is Slidev?
-
-Slidev is a slides maker and presenter designed for developers, consist of the following features
-
-- 📝 **Text-based** - focus on the content with Markdown, and then style them later
-- 🎨 **Themable** - theme can be shared and used with npm packages
-- 🧑‍💻 **Developer Friendly** - code highlighting, live coding with autocompletion
-- 🤹 **Interactive** - embedding Vue components to enhance your expressions
-- 🎥 **Recording** - built-in recording and camera view
-- 📤 **Portable** - export into PDF, PNGs, or even a hostable SPA
-- 🛠 **Hackable** - anything possible on a webpage
-
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
-
-<style>
-h1 {
-  background-color: #2B90B6;
-  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
-  background-size: 100%;
-  -webkit-background-clip: text;
-  -moz-background-clip: text;
-  -webkit-text-fill-color: transparent; 
-  -moz-text-fill-color: transparent;
-}
-</style>
+# 環境構築
 
 ---
 
-# Navigation
+# 今回必要な環境
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
-
-### Keyboard Shortcuts
-
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
-
-<!-- https://sli.dev/guide/animations.html#click-animations -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
+- **Node.js** : v14.18.0
+- **n** : 最新版
+- **VSCode** : 最新版
+- **Google Chrome** : 最新版
 
 ---
 layout: image-right
-image: https://source.unsplash.com/collection/94734566/1920x1080
+image: ./assets/1/node.png
 ---
 
-# Code
+# Node.js
 
-Use code snippets and get the highlighting directly![^1]
+以下の公式サイトから推奨版(14.18.0)を
+<br>ダウンロードしてインストール
 
-```ts {all|2|1-6|9|all}
-interface User {
-  id: number
-  firstName: string
-  lastName: string
-  role: string
-}
-
-function updateUser(id: number, update: User) {
-  const user = getUser(id)
-  const newUser = {...user, ...update}  
-  saveUser(id, newUser)
-}
-```
-
-<arrow v-click="3" x1="400" y1="420" x2="230" y2="330" color="#564" width="3" arrowSize="1" />
-
-[^1]: [Learn More](https://sli.dev/guide/syntax.html#line-highlighting)
-
-<style>
-.footnotes-sep {
-  @apply mt-20 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
----
-
-# Components
-
-<div grid="~ cols-2 gap-4">
 <div>
+  <a href="https://nodejs.org/ja/" target="_blank" class="px-2 py-1 rounded cursor-pointer ring-inset bg-green-200">
+    公式サイト <carbon:arrow-right class="inline"/>
+  </a>
+</div>
 
-You can use Vue components directly inside your slides.
+```bash
+$ node -v
+> v14.18.0
 
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
+$ npm -v
+> 6.14.13
 ```
 
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
-</div>
-<div>
-
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
-
-
----
-class: px-20
 ---
 
-# Themes
+### Node.jsとは?
 
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="-t-2">
-
-```yaml
----
-theme: default
----
-```
-
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/themes/use.html) and
-check out the [Awesome Themes Gallery](https://sli.dev/themes/gallery.html).
-
----
-preload: false
----
-
-# Animations
-
-Animations are powered by [@vueuse/motion](https://motion.vueuse.org/).
-
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }">
-  Slidev
-</div>
-```
-
-<div class="w-60 relative mt-6">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-square.png"
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-circle.png"
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute top-0 left-0 right-0 bottom-0"
-      src="https://sli.dev/logo-triangle.png"
-    />
-  </div>
-
-  <div 
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
-
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 40, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn More](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box powered by [KaTeX](https://katex.org/).
-
+v8 javascriptエンジンで動くJSの実行環境。<br>
+ECMA Scriptの仕様にサーバーサイドで必要な機能を盛り込んだもの。
+<br>
 <br>
 
-Inline $\sqrt{3x-1}+(1+x)^2$
+### ECMA Scriptとは...?
 
-Block
-$$
-\begin{array}{c}
+Javascriptの言語仕様のコア部分。<br>
+毎年アップデートされて新機能が追加されたりしている(ES2020とか)
 
-\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\partial t} &
-= \frac{4\pi}{c}\vec{\mathbf{j}}    \nabla \cdot \vec{\mathbf{E}} & = 4 \pi \rho \\
-
-\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t} & = \vec{\mathbf{0}} \\
-
-\nabla \cdot \vec{\mathbf{B}} & = 0
-
-\end{array}
-$$
-
-<br>
-
-[Learn more](https://sli.dev/guide/syntax#latex)
+<!--
+ESいくつの機能か確認しないと実行する環境によっては動かなかったり...
+-->
 
 ---
 
-# Diagrams
+# nの導入
 
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
+「n」とは、nodeのバージョン管理ツールの一つ。
+同じPC内で様々なバージョンのNodeを使い分けられます。
 
-<div class="grid grid-cols-2 gap-10 pt-4 -mb-6">
-
-```mermaid {scale: 0.9}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
+```bash
+$ sudo npm install -g n
+$ n --version
+> v7.5.0
 ```
 
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
+---
 
+未インストールの場合、それぞれ最新版をインストールしましょう。
+
+## VSCodeの導入
+
+<div class="py-8">
+  <a href="https://azure.microsoft.com/ja-jp/products/visual-studio-code/" target="_blank" class="px-2 py-1 rounded cursor-pointer ring-inset bg-green-200">
+    公式サイト <carbon:arrow-right class="inline"/>
+  </a>
 </div>
 
-[Learn More](https://sli.dev/guide/syntax.html#diagrams)
+## Google Chromeの導入
 
+<div class="py-8">
+  <a href="https://www.google.com/intl/ja_jp/chrome/" target="_blank" class="px-2 py-1 rounded cursor-pointer ring-inset bg-green-200">
+    公式サイト <carbon:arrow-right class="inline"/>
+  </a>
+</div>
 
 ---
-layout: center
-class: text-center
----
 
-# Learn More
+# VSCodeの設定
 
-[Documentations](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/showcases.html)
+- formatOnSave: true
+- Japanese Language Pack for Visual Studio Code
+- prettierの導入
+- Veturの導入
+- CodeSpellCheckerの導入
+- Material Icon Themeの導入
+- (オススメ) Atom One Dark Theme
+
+<!--
+実際に導入しながら説明
+-->
