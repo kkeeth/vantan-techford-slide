@@ -8,7 +8,9 @@
   "dependencies": {
     "@slidev/cli": "^0.27.1",
     "@slidev/theme-default": "*",
-    "@slidev/theme-seriph": "*"
+    "@slidev/theme-seriph": "*",
+    "slidev-theme-penguin": "^1.1.2",
+    "vite-svg-loader": "^2.2.0"
   },
   "name": "techford-javascript-slide"
 }
