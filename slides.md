@@ -29,7 +29,7 @@ layout: intro
 
 VANTAN Techford Academy
 
-### #1 概論と環境構築
+### #1 概論と環境構築 / Webアプリケーション基礎
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
     Press Space for next page <carbon:arrow-right class="inline"/>
@@ -68,7 +68,7 @@ presenterImage: ./assets/1/me.jpg
 半年ほどですがよろしくお願いします!
 
 - 📝 **職業** - UX engineer / Designer at YUMEMI
-- 🎨 **経歴** - 
+- 🎨 **経歴** - あとで
 - 🧑‍💻 **得意な技術** - Vue, React, Typescript, AWS
 - 🤹 **趣味** - スノボとボルダリング
 
