@@ -200,7 +200,7 @@ Password :  <code style="color: #fff;">vantan.js</code>
 </div>
 <div  class="h-xs flex-grow-0 pl-12">
 
-<img src="assets/1/me.jpg" class="h-xs">
+<img src="/assets/1/me.jpg" class="h-xs">
 
 </div>
 </div>
@@ -394,7 +394,7 @@ layout: new-section
 
 ## 大まかな流れ
 
-<img src="assets/1/web.png" class="h-md pl-20">
+<img src="/assets/1/web.png" class="h-md pl-20">
 
 ---
 
@@ -443,7 +443,7 @@ Cascading Style Sheets。HTMLの体裁や見た目を表現するための言語
 
 # CSSで装飾する
 
-<img src="assets/1/css.png" class="h-md pl-20">
+<img src="/assets/1/css.png" class="h-md pl-20">
 
 ---
 
@@ -467,7 +467,7 @@ layout: new-section
 
 ### Webサーバー + CGI
 Webサーバーがリクエストを受け取るたびにアプリケーションプログラムを起動して処理を行い、その結果を標準出力で受け取る
-<img src="assets/1/cgi.png" class="h-xs pl-4 pt-4">
+<img src="/assets/1/cgi.png" class="h-xs pl-4 pt-4">
 
 <!-- だいぶ昔の話で、今はほとんど使われていない、Pythonの標準入出力をイメージしてもらうと分かりやすいかもしれない -->
 
@@ -477,7 +477,7 @@ Webサーバーがリクエストを受け取るたびにアプリケーショ�
 Webアプリケーションを実行するサーバー。CGIとは違い常時起動している。
 <br>
 アプリケーションサーバーとプログラムの間ではメソッドなどでやり取りがされている。
-<img src="assets/1/app.png" class="h-xs pl-4 pt-4">
+<img src="/assets/1/app.png" class="h-xs pl-4 pt-4">
 
 <!-- 昨今の一般的なWebアプリケーションの一つ -->
 
@@ -532,7 +532,7 @@ Single Page Application。単一ページで動作するアプリケーション
 
 ## SPA + APIモデル
 
-<img src="assets/1/spa-api.png" class="h-md pl-12">
+<img src="/assets/1/spa-api.png" class="h-md pl-12">
 
 ---
 layout: new-section
@@ -582,7 +582,7 @@ DOMとは「Document Object Model」で、木構造のデータ。<br>
 
 ### 仮想DOMとは
 
-<img src="assets/1/vdom.png" class="h-md pl-20">
+<img src="/assets/1/vdom.png" class="h-md pl-20">
 
 ---
 
@@ -630,3 +630,9 @@ layout: new-section
 
 ## 来週
 Javascriptの概念や仕様から、基本的な文法を学びます！
+
+---
+layout: new-section
+---
+
+# おしまい
