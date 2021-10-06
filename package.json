@@ -1,10 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "build": "slidev build && npm run authProvide",
+    "build": "slidev build",
     "dev": "slidev --open",
     "export": "slidev export",
-    "authProvide": "rm -rf tmp && mkdir tmp && mv dist/* tmp/ && mkdir dist/public && mv tmp/* dist/public/ && cp app.js dist/app.js"
+    "vercel-build": "yarn build"
   },
   "dependencies": {
     "@slidev/cli": "^0.27.1",
@@ -13,5 +13,9 @@
     "slidev-theme-penguin": "^1.1.2",
     "vite-svg-loader": "^2.2.0"
   },
-  "name": "techford-javascript-slide"
+  "name": "techford-javascript-slide",
+  "devDependencies": {
+    "safe-compare": "^1.1.4",
+    "static-auth": "^2.0.0"
+  }
 }
