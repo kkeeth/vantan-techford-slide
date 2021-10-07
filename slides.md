@@ -58,7 +58,7 @@ layout: new-section
 
 ---
 layout: presenter
-presenterImage: ./assets/1/kuwahara.png
+presenterImage: /assets/1/kuwahara.png
 ---
 
 # Kiyohito KEETH Kuwahara
@@ -69,8 +69,8 @@ presenterImage: ./assets/1/kuwahara.png
 
 - 📝 **職業** - Front-end Techlead / Board at YUMEMI
 - 🎨 **経歴** - あとで
-- 🧑‍💻 **得意な技術** - Riot, React, TypeScript
-- 🤹 **趣味** - バスケットボール，ロードバイク，LT
+- 🧑‍💻 **得意な技術** - Riot.js, Next.js, Nuxt.js, Node.js
+- 🤹 **趣味** - バスケットボール, ロードバイク, LT, アパレル
 
 <br>
 <hr />
@@ -82,7 +82,6 @@ presenterImage: ./assets/1/kuwahara.png
 - Zenn: [@kkeeth](https://zenn.dev/kkeeth)
 - Qiita: [@clown0082](https://qiita.com/clown0082)
 - GitHub: [@kkeeth](https://github.com/kkeeth)
-
 
 ---
 layout: new-section
@@ -114,7 +113,7 @@ JavaScriptという講義名ですが、JavaScriptを利用したブラウザ上
 
 # 最終目標について
 
-この講義の最終目標は、フロントエンドフレームワーク「Vue.js」を利用し、簡単なSPAを1から作れる実力をつけることです。
+この講義の最終目標は、フロントエンドフレームワーク __Vue.js__ を利用し、簡単なSPAを1からフルスクラッチで作れる実力を身につけることです。
 <br>
 <br>
 この最終目標を達成するために、JavaScriptという言語の基本的な理解から、Vue.jsの基礎、Vue.jsを実際に使ってアプリを作る流れまでを学びます。
@@ -174,6 +173,30 @@ layout: new-section
 | <kbd>16</kbd> | 最終発表会とフィードバック① | 最終発表会とフィードバック② |
 
 ---
+layout: cover
+---
+
+## 要は step by step
+
+<img src="/assets/1/step-by-step.jpeg">
+
+---
+layout: image-right
+image: /assets/1/todomvc.png
+---
+
+## TODOサンプル
+
+８週目の講義で一緒に手を動かしながら作るアプリケーションのサンプルとなります。
+###### ※あくまでサンプルで、実際のデザインや機能は講義でお伝え致します。
+
+Sample: [TODO MVC](https://todomvc.com/examples/vue/)
+
+<!--
+実際のアプリを軽く触る．どうやって作る？もそうだが，どうやって公開する？などアプリ全体を示唆させるように話す．
+-->
+
+---
 layout: new-section
 ---
 
@@ -194,9 +217,8 @@ layout: new-section
 <div class="flex flex-grow  pt-8">
 <div>
 
-講義資料は [htttps://kougisiryounourl.com/#1](htttps://kougisiryounourl.com/#1) で公開します。<br>
+講義資料は [https://hungry-cray-fabfa8.netlify.app/#1](https://hungry-cray-fabfa8.netlify.app/#1) で公開します。<br>
 
-Password :  <code style="color: #fff;">vantan.js</code>
 
 コード等もここに写すので適宜自分でみながら進めてください。
 <br>
@@ -207,7 +229,7 @@ Password :  <code style="color: #fff;">vantan.js</code>
 </div>
 <div  class="h-xs flex-grow-0 pl-12">
 
-<img src="/assets/1/me.jpg" class="h-xs">
+<img src="/assets/1/kuwahara.png" class="h-xs">
 
 </div>
 </div>
@@ -227,7 +249,8 @@ layout: new-section
 # 今回必要な環境
 
 - **Node.js** : v14.18.0
-- **n** : 最新版
+- **n** : 最新版（Mac, Ubuntu などの Linux ディストリビューションの人）
+- **nvm** : 最新版（Windows の人）
 - **VSCode** : 最新版
 - **Google Chrome** : 最新版
 
@@ -284,6 +307,10 @@ ESいくつの機能か確認しないと実行する環境によっては動か
 $ sudo npm install -g n
 $ n --version
 > v7.5.0
+
+$ n stable
+$ node -v
+>
 ```
 
 ---
