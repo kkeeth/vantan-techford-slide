@@ -10,7 +10,7 @@ class: 'text-center'
 lineNumbers: true
 # some information about the slides, markdown enabled
 info: |
-  ## Javascript中級講義資料#1
+  ## JavaScript初級講義資料#1
   VANTAN Techgord Academy
   Created by [@unotovive](https://twitter.com/unotovive)
 fonts:
@@ -25,7 +25,7 @@ drawings:
 layout: intro
 ---
 
-# Javascript中級
+# JavaScript初級
 
 VANTAN Techford Academy
 
@@ -58,24 +58,31 @@ layout: new-section
 
 ---
 layout: presenter
-presenterImage: ./assets/1/me.jpg
+presenterImage: ./assets/1/kuwahara.png
 ---
 
-# Takumi Otobe
+# Kiyohito KEETH Kuwahara
 
-主にJavascript中級クラスを担当します。
+主にJavaScript初級クラスを担当します。
 <br>
 半年ほどですがよろしくお願いします!
 
-- 📝 **職業** - UX engineer / Designer at YUMEMI
+- 📝 **職業** - Front-end Techlead / Board at YUMEMI
 - 🎨 **経歴** - あとで
-- 🧑‍💻 **得意な技術** - Vue, React, Typescript, AWS
-- 🤹 **趣味** - スノボとボルダリング
+- 🧑‍💻 **得意な技術** - Riot, React, TypeScript
+- 🤹 **趣味** - バスケットボール，ロードバイク，LT
 
 <br>
+<hr />
 <br>
 
-Twitterアカウント [@unotovive](https://twitter.com/unotovive)
+<h3>SNS</h3>
+
+- Twitter: [@kuwahara_jsri](https://twitter.com/kuwahara_jsri)
+- Zenn: [@kkeeth](https://zenn.dev/kkeeth)
+- Qiita: [@clown0082](https://qiita.com/clown0082)
+- GitHub: [@kkeeth](https://github.com/kkeeth)
+
 
 ---
 layout: new-section
@@ -92,7 +99,7 @@ layout: new-section
 # 授業の概要
 
 ### フロントエンドの授業です
-Javascriptという講義名ですが、Javascriptを利用したブラウザ上で動作するWebアプリケーションについて学び、簡単なアプリのフロントエンドを作成できるようになることが目的です。
+JavaScriptという講義名ですが、JavaScriptを利用したブラウザ上で動作するWebアプリケーションについて学び、簡単なアプリのフロントエンドを作成できるようになることが目的です。
 
 <br>
 
@@ -110,7 +117,7 @@ Javascriptという講義名ですが、Javascriptを利用したブラウザ上
 この講義の最終目標は、フロントエンドフレームワーク「Vue.js」を利用し、簡単なSPAを1から作れる実力をつけることです。
 <br>
 <br>
-この最終目標を達成するために、Javascriptという言語の基本的な理解から、Vue.jsの基礎、Vue.jsを実際に使ってアプリを作る流れまでを学びます。
+この最終目標を達成するために、JavaScriptという言語の基本的な理解から、Vue.jsの基礎、Vue.jsを実際に使ってアプリを作る流れまでを学びます。
 
 
 ---
@@ -119,7 +126,7 @@ layout: new-section
 
 # シラバスの確認
 
-<!-- 
+<!--
   10分ぐらい
  -->
 
@@ -132,9 +139,9 @@ layout: new-section
 | 日程 | 1コマ目 | 2コマ目 |
 | --- | --- | --- |
 | <kbd>1</kbd> | 概論と環境構築 | Webアプリケーション基礎 |
-| <kbd>2</kbd> | Javascript基礎① | Javascript基礎② |
-| <kbd>3</kbd> | Javascript基礎③ |Javascript基礎④ |
-| <kbd>4</kbd> | Javascript基礎⑤ | Javascript基礎⑥ |
+| <kbd>2</kbd> | JavaScript基礎① | JavaScript基礎② |
+| <kbd>3</kbd> | JavaScript基礎③ |JavaScript基礎④ |
+| <kbd>4</kbd> | JavaScript基礎⑤ | JavaScript基礎⑥ |
 | <kbd>5</kbd> | Vue.jsとは？ | Vue.jsの基礎① |
 | <kbd>6</kbd> | Vue.jsの基礎② | Vue.jsの基礎③ |
 | <kbd>7</kbd> | Vue.jsの基礎④ | Vue.jsの基礎⑤ |
@@ -259,7 +266,7 @@ ECMA Scriptの仕様にサーバーサイドで必要な機能を盛り込んだ
 
 ### ECMA Scriptとは...?
 
-Javascriptの言語仕様のコア部分。<br>
+JavaScriptの言語仕様のコア部分。<br>
 毎年アップデートされて新機能が追加されたりしている(ES2020とか)
 
 <!--
@@ -356,7 +363,7 @@ Webとは、インターネット上で標準的に用いられている文書�
 世界中に広がる情報網が「クモの巣」のように見えるという理由で、<br>
 「世界中に広がるクモの巣」＝「World Wide Web(WWW)」と名付けた
 
-<!-- 
+<!--
 ティムは、このシステムを発表する時にどんな名前にするかとても悩んでいたようです。たとえば「The Information Mine」という、「情報鉱山」という候補があったようです。これは頭文字を取ると「TIM(ティム)」になりますね。さすがにそれは自分本位すぎる！と思って止めたんだ、と後に本人のWebサイトで語られています。
  -->
 
@@ -489,8 +496,8 @@ layout: new-section
 
 ---
 
-# v8 Javascriptエンジンの登場
-Google製OSSのJavascriptエンジン。2008年ぐらいに公開され、Google ChromeやNode.js等様々な所で使われている
+# v8 JavaScriptエンジンの登場
+Google製OSSのJavaScriptエンジン。2008年ぐらいに公開され、Google ChromeやNode.js等様々な所で使われている
 
 作者はラース・バクさん。スクリプト言語なのにめっちゃ早い。<a href="https://blog.kkty.jp/entry/2019/01/10/204947" target="_blank">高速化について</a>
 
@@ -570,7 +577,7 @@ UIをパーツごとに切り出し、構造・見た目・振る舞いをセッ
 
 ## 仮想DOM
 DOMとは「Document Object Model」で、木構造のデータ。<br>
-ブラウザにページを表示するためのデータで、Javascriptなどで操作可能。厳密には違うけども基本的にHTMLと同じようなイメージで大丈夫
+ブラウザにページを表示するためのデータで、JavaScriptなどで操作可能。厳密には違うけども基本的にHTMLと同じようなイメージで大丈夫
 ###### 開発者ツールのElementsタブで見えるのがDOM
 <br>
 
@@ -586,9 +593,9 @@ DOMとは「Document Object Model」で、木構造のデータ。<br>
 
 ---
 
-## SSRとJamstack
+## SSRとJAMStack
 
-SPAは単一のアプリケーションであるが故に、SEO対策やパフォーマンスなどで問題を抱えており、それを解決するために近年よく出てくるのが、SSR (Server Side Rendering) と Jamstack (Static Site Generation)です。
+SPAは単一のアプリケーションであるが故に、SEO対策やパフォーマンスなどで問題を抱えており、それを解決するために近年よく出てくるのが、SSR (Server Side Rendering) と JAMStack (Static Site Generation)です。
 <br><br>
 
 <a class="mb-4" href="https://medium.com/@sundaycrafts/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E4%BD%93%E9%A8%93%E3%82%92%E5%90%91%E4%B8%8A%E3%81%95%E3%81%9B%E3%82%8B%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%B5%E3%82%A4%E3%83%89%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0javascript-%E6%AD%B4%E5%8F%B2%E3%81%A8%E5%88%A9%E7%82%B9-df68cd7cd991" target="_blank">SSRについて</a>
@@ -596,7 +603,7 @@ SPAは単一のアプリケーションであるが故に、SEO対策やパフ�
 <br>
 <br>
 
-<a href="https://blog.microcms.io/what-is-jamstack/" target="_blank">Jamstackについて</a>
+<a href="https://blog.microcms.io/what-is-jamstack/" target="_blank">JAMStackについて</a>
 
 ###### 今回の授業では詳しく取り扱いませんが、気になる人は聞いてください！
 
@@ -624,12 +631,12 @@ layout: new-section
 
 ---
 
-## 今回のJavascript中級
+## 今回のJavaScript初級
 フロントエンドフレームワークのVueを学びます。
 フロントエンドフレームワークは全体的に思想が似ている部分もあり、一つを学ぶことで他のフレームワークへの学習アプローチがしやすくなることもあります。
 
 ## 来週
-Javascriptの概念や仕様から、基本的な文法を学びます！
+JavaScriptの概念や仕様から、基本的な文法を学びます！
 
 ---
 layout: new-section
