@@ -84,6 +84,13 @@ presenterImage: /assets/1/kuwahara.png
 - GitHub: [@kkeeth](https://github.com/kkeeth)
 
 ---
+
+## Other Outputs
+
+<img src="/assets/1/other_outputs.jpeg">
+
+
+---
 layout: new-section
 ---
 
