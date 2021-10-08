@@ -25,7 +25,7 @@ drawings:
 layout: intro
 ---
 
-# JavaScript初級
+# JavaScript/Vue.js入門講座
 
 VANTAN Techford Academy
 
@@ -58,7 +58,7 @@ layout: new-section
 
 ---
 layout: presenter
-presenterImage: ./assets/1/kuwahara.png
+presenterImage: /assets/1/kuwahara.png
 ---
 
 # Kiyohito KEETH Kuwahara
