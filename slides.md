@@ -284,7 +284,7 @@ $ npm -v
 
 ### Node.jsとは?
 
-v8 javascriptエンジンで動くJSの実行環境。<br>
+V8 JavaScriptエンジンで動くJSの実行環境。<br>
 ECMA Scriptの仕様にサーバーサイドで必要な機能を盛り込んだもの。
 <br>
 <br>
@@ -483,15 +483,15 @@ Cascading Style Sheets。HTMLの体裁や見た目を表現するための言語
 
 ---
 
-# javascriptで「動作」を作る
+# JavaScriptで「動作」を作る
 
-## javascriptとは
+## JavaScriptとは
 ブラウザで動作する唯一のスクリプト言語で、Webページ上で複雑な機能や動きを実現する。
 <br>
 <br>
 動くWebページ、モーダル、3Dアニメーション、トラッキングや計量化対策など、Webでのあらゆる動作を行う。
 
-※詳しくは次週、javascript基礎でやります！
+※詳しくは次週、JavaScript基礎でやります！
 
 ---
 layout: new-section
@@ -525,7 +525,7 @@ layout: new-section
 
 ---
 
-# v8 JavaScriptエンジンの登場
+# V8 JavaScriptエンジンの登場
 Google製OSSのJavaScriptエンジン。2008年ぐらいに公開され、Google ChromeやNode.js等様々な所で使われている
 
 作者はラース・バクさん。スクリプト言語なのにめっちゃ早い。<a href="https://blog.kkty.jp/entry/2019/01/10/204947" target="_blank">高速化について</a>
@@ -538,7 +538,7 @@ Google製OSSのJavaScriptエンジン。2008年ぐらいに公開され、Google
 
 # SPA + APIモデルの登場
 
-高速なv8 javascriptエンジンの登場に伴い、javascript(frontend)周りの技術進化が一気に起こった。
+高速なV8 JavaScriptエンジンの登場に伴い、JavaScript(frontend)周りの技術進化が一気に起こった。
 <br>
 仮想DOMやコンポーネント思考、などの新しい概念がたくさん生まれ、それらの技術を駆使したSPA + APIモデルなアプリケーションが登場した。
 
@@ -557,7 +557,7 @@ Application Programing Interface。アプリケーションと他の何かをつ
 
 # SPAとは
 Single Page Application。単一ページで動作するアプリケーションのこと。
-一つのhtml上で、アプリケーションのUIを構築し、画面遷移などはjavascriptによって見せているページを切り替えて行う。
+一つのhtml上で、アプリケーションのUIを構築し、画面遷移などはJavaScriptによって見せているページを切り替えて行う。
 <br>
 データの取得はAPIからjsonなどでデータのみを取得する。（HTML等はイチイチ取得しない）
 <br>
@@ -627,7 +627,7 @@ DOMとは「Document Object Model」で、木構造のデータ。<br>
 SPAは単一のアプリケーションであるが故に、SEO対策やパフォーマンスなどで問題を抱えており、それを解決するために近年よく出てくるのが、SSR (Server Side Rendering) と JAMStack (Static Site Generation)です。
 <br><br>
 
-<a class="mb-4" href="https://medium.com/@sundaycrafts/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E4%BD%93%E9%A8%93%E3%82%92%E5%90%91%E4%B8%8A%E3%81%95%E3%81%9B%E3%82%8B%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%B5%E3%82%A4%E3%83%89%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0javascript-%E6%AD%B4%E5%8F%B2%E3%81%A8%E5%88%A9%E7%82%B9-df68cd7cd991" target="_blank">SSRについて</a>
+<a class="mb-4" href="https://medium.com/@sundaycrafts/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E4%BD%93%E9%A8%93%E3%82%92%E5%90%91%E4%B8%8A%E3%81%95%E3%81%9B%E3%82%8B%E3%82%B5%E3%83%BC%E3%83%90%E3%83%BC%E3%82%B5%E3%82%A4%E3%83%89%E3%83%AC%E3%83%B3%E3%83%80%E3%83%AA%E3%83%B3%E3%82%B0JavaScript-%E6%AD%B4%E5%8F%B2%E3%81%A8%E5%88%A9%E7%82%B9-df68cd7cd991" target="_blank">SSRについて</a>
 
 <br>
 <br>
@@ -650,6 +650,8 @@ SPAは単一のアプリケーションであるが故に、SEO対策やパフ�
 - 機械学習（TensorFlow.js）
 - C/C++で書かれたようなコードを動かす（WebAssembly）
 - 音楽、動画、高度な3Dゲームその他（AudioAPI / Three.jsなど）
+
+###### JavaSript でできること、と言っても良いかも
 
 ---
 layout: new-section
