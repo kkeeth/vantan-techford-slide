@@ -58,7 +58,7 @@ layout: new-section
 
 ---
 layout: presenter
-presenterImage: /assets/1/kuwahara.png
+presenterImage: ./assets/1/kuwahara.png
 ---
 
 # Kiyohito KEETH Kuwahara
@@ -309,7 +309,7 @@ ESいくつの機能か確認しないと実行する環境によっては動か
 
 # nの導入
 
-「n」とは、nodeのバージョン管理ツールの一つ。
+「n」とは、Node.jsのバージョン管理ツールの一つ。
 同じPC内で様々なバージョンのNodeを使い分けられます。
 
 ```bash
@@ -320,6 +320,29 @@ $ n --version
 $ n stable
 $ node -v
 >
+```
+
+---
+
+# nvmの導入
+
+「nvm」は、「n」と同様にNode.jsのバージョン管理ツールの一つ。
+
+インストール方法としては
+
+- [インストーラーで自動インストール](https://docs.microsoft.com/ja-jp/windows/dev-environment/javascript/nodejs-on-windows)
+- 手動でマニュアルインストール
+
+どちらを選択するのも自由ですが、初学者はインストーラーがおすすめです。
+
+```bash
+$ nvm ls
+> No installations recognized.
+
+$ nvm install 14.18.0
+$ nvm use 14.18.0
+$ node -v
+> 14.18.0
 ```
 
 ---
