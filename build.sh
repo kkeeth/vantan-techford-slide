@@ -36,3 +36,5 @@ slidev build -o dist/beginner/13 --base "/beginner/13" slides/beginner/13.md
 slidev build -o dist/beginner/14 --base "/beginner/14" slides/beginner/14.md
 slidev build -o dist/beginner/15 --base "/beginner/15" slides/beginner/15.md
 slidev build -o dist/beginner/16 --base "/beginner/16" slides/beginner/16.md
+
+cp index.html dist/index.html
