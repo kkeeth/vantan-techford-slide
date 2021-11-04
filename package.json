@@ -6,7 +6,7 @@
     "build-all": "sh build.sh"
   },
   "dependencies": {
-    "@slidev/cli": "^0.27.8",
+    "@slidev/cli": "^0.27.8 ",
     "@slidev/theme-default": "*",
     "@slidev/theme-seriph": "*",
     "slidev-theme-penguin": "^1.1.2",
