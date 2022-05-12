@@ -1,9 +1,36 @@
 {
-  "builds": [
-    {
-      "src": "app.js",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [{ "src": "/.*", "dest": "app.js" }]
+  "redirects": [
+    { "source": "/advance/1", "destination": "/advance/1/index.html" },
+    { "source": "/advance/2", "destination": "/advance/2/index.html" },
+    { "source": "/advance/3", "destination": "/advance/3/index.html" },
+    { "source": "/advance/4", "destination": "/advance/4/index.html" },
+    { "source": "/advance/5", "destination": "/advance/5/index.html" },
+    { "source": "/advance/6", "destination": "/advance/6/index.html" },
+    { "source": "/advance/7", "destination": "/advance/7/index.html" },
+    { "source": "/advance/8", "destination": "/advance/8/index.html" },
+    { "source": "/advance/9", "destination": "/advance/9/index.html" },
+    { "source": "/advance/10", "destination": "/advance/10/index.html" },
+    { "source": "/advance/11", "destination": "/advance/11/index.html" },
+    { "source": "/advance/12", "destination": "/advance/12/index.html" },
+    { "source": "/advance/13", "destination": "/advance/13/index.html" },
+    { "source": "/advance/14", "destination": "/advance/14/index.html" },
+    { "source": "/advance/15", "destination": "/advance/15/index.html" },
+    { "source": "/advance/16", "destination": "/advance/16/index.html" },
+    { "source": "/beginner/1", "destination": "/beginner/1/index.html" },
+    { "source": "/beginner/2", "destination": "/beginner/2/index.html" },
+    { "source": "/beginner/3", "destination": "/beginner/3/index.html" },
+    { "source": "/beginner/4", "destination": "/beginner/4/index.html" },
+    { "source": "/beginner/5", "destination": "/beginner/5/index.html" },
+    { "source": "/beginner/6", "destination": "/beginner/6/index.html" },
+    { "source": "/beginner/7", "destination": "/beginner/7/index.html" },
+    { "source": "/beginner/8", "destination": "/beginner/8/index.html" },
+    { "source": "/beginner/9", "destination": "/beginner/9/index.html" },
+    { "source": "/beginner/10", "destination": "/beginner/10/index.html" },
+    { "source": "/beginner/11", "destination": "/beginner/11/index.html" },
+    { "source": "/beginner/12", "destination": "/beginner/12/index.html" },
+    { "source": "/beginner/13", "destination": "/beginner/13/index.html" },
+    { "source": "/beginner/14", "destination": "/beginner/14/index.html" },
+    { "source": "/beginner/15", "destination": "/beginner/15/index.html" },
+    { "source": "/beginner/16", "destination": "/beginner/16/index.html" }
+  ]
 }

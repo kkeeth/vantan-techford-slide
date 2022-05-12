@@ -1,21 +1,16 @@
 {
   "private": true,
   "scripts": {
-    "build": "slidev build",
     "dev": "slidev --open",
     "export": "slidev export",
-    "vercel-build": "yarn build"
+    "build-all": "sh build.sh"
   },
   "dependencies": {
-    "@slidev/cli": "^0.27.1",
+    "@slidev/cli": "0.27.11",
     "@slidev/theme-default": "*",
     "@slidev/theme-seriph": "*",
     "slidev-theme-penguin": "^1.1.2",
     "vite-svg-loader": "^2.2.0"
   },
-  "name": "techford-javascript-slide",
-  "devDependencies": {
-    "safe-compare": "^1.1.4",
-    "static-auth": "^2.0.0"
-  }
+  "name": "techford-javascript-slide"
 }
