@@ -1,20 +1,20 @@
 {
   "redirects": [
-    { "source": "/1", "destination": "/1/index.html" },
-    { "source": "/2", "destination": "/2/index.html" },
-    { "source": "/3", "destination": "/3/index.html" },
-    { "source": "/4", "destination": "/4/index.html" },
-    { "source": "/5", "destination": "/5/index.html" },
-    { "source": "/6", "destination": "/6/index.html" },
-    { "source": "/7", "destination": "/7/index.html" },
-    { "source": "/8", "destination": "/8/index.html" },
-    { "source": "/9", "destination": "/9/index.html" },
-    { "source": "/10", "destination": "/10/index.html" },
-    { "source": "/11", "destination": "/11/index.html" },
-    { "source": "/12", "destination": "/12/index.html" },
-    { "source": "/13", "destination": "/13/index.html" },
-    { "source": "/14", "destination": "/14/index.html" },
-    { "source": "/15", "destination": "/15/index.html" },
-    { "source": "/16", "destination": "/16/index.html" }
+    { "source": "/1/:path", "destination": "/1/index.html" },
+    { "source": "/2/:path", "destination": "/2/index.html" },
+    { "source": "/3/:path", "destination": "/3/index.html" },
+    { "source": "/4/:path", "destination": "/4/index.html" },
+    { "source": "/5/:path", "destination": "/5/index.html" },
+    { "source": "/6/:path", "destination": "/6/index.html" },
+    { "source": "/7/:path", "destination": "/7/index.html" },
+    { "source": "/8/:path", "destination": "/8/index.html" },
+    { "source": "/9/:path", "destination": "/9/index.html" },
+    { "source": "/10/:path", "destination": "/10/index.html" },
+    { "source": "/11/:path", "destination": "/11/index.html" },
+    { "source": "/12/:path", "destination": "/12/index.html" },
+    { "source": "/13/:path", "destination": "/13/index.html" },
+    { "source": "/14/:path", "destination": "/14/index.html" },
+    { "source": "/15/:path", "destination": "/15/index.html" },
+    { "source": "/16/:path", "destination": "/16/index.html" }
   ]
 }
