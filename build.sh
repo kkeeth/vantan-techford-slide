@@ -4,7 +4,7 @@ rm rf dist
 # 全部ビルド
 slidev build -o dist/1 --base "/1" slides/1.md
 slidev build -o dist/2 --base "/2" slides/2.md
-#slidev build -o dist/3 --base "/3" slides/3.md
+slidev build -o dist/3 --base "/3" slides/3.md
 #slidev build -o dist/4 --base "/4" slides/4.md
 #slidev build -o dist/5 --base "/5" slides/5.md
 #slidev build -o dist/6 --base "/6" slides/6.md
