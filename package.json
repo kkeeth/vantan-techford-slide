@@ -3,14 +3,19 @@
   "scripts": {
     "dev": "slidev --open",
     "export": "slidev export",
-    "build-all": "sh build.sh"
+    "build-all": "rimraf dist && sh build.sh"
   },
   "dependencies": {
     "@slidev/cli": "0.27.11",
+    "@slidev/theme-bricks": "^0.0.2",
     "@slidev/theme-default": "*",
-    "@slidev/theme-seriph": "*",
-    "slidev-theme-penguin": "^1.1.2",
+    "@slidev/theme-seriph": "^0.21.2",
+    "slidev-theme-penguin": "^1.4.1",
     "vite-svg-loader": "^2.2.0"
   },
-  "name": "techford-javascript-slide"
+  "name": "techford-javascript-slide",
+  "devDependencies": {
+    "@iconify-json/logos": "^1.1.5",
+    "rimraf": "^3.0.2"
+  }
 }

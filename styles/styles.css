@@ -1,0 +1,13 @@
+pre {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+:not(pre) > code {
+  background-color: #e3e3e3;
+  color: #EB5757 !important;
+}
+
+.token.tag {
+  color: var(--prism-keyword);
+}
