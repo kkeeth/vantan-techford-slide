@@ -4,7 +4,10 @@ p /*, li*/ {
 
 /* .special { */
 /* #special { */
-li em {
+/* li em { */
+/* ul > .special { */
+/* p + ul { */
+p ~ ul {
   font-weight: bold;
   color: green;
   list-style-type: circle;
