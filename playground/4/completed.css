@@ -1,5 +1,14 @@
+body {
+  font-family: 'Noto Sans JP', Josefin sans, Arial, Helvetica, sans-serif;
+}
+
 p /*, li*/ {
   color: red;
+  text-decoration: wavy underline blue;
+  line-height: 2rem;
+  background: border-box pink;
+  width: 500px;
+  height: calc(50% - 40px);
 }
 
 /* .special { */
