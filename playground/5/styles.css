@@ -1,0 +1,41 @@
+#outer div ul li a { /* specificity: 0104 */
+  color: yellow;
+}
+#outer div ul .nav a { /* specificity: 0113 */
+  color: pink;
+}
+#outer #inner a { /* specificity: 0201 */
+  background-color: blue;
+}
+#outer a { /* specificity: 0101 */
+  background-color: red;
+}
+
+div div li:nth-child(2) a:hover { /* specificity: 0024 */
+  border: 10px solid black;
+}
+div li:nth-child(2) a:hover { /* specificity: 0023 */
+  border: 10px dashed yellow !important;
+}
+div div .nav:nth-child(2) a:hover { /* specificity: 0033 */
+  border: 10px double black;
+}
+
+
+a {
+  display: inline-block;
+  line-height: 40px;
+  font-size: 20px;
+  text-decoration: none;
+  text-align: center;
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
