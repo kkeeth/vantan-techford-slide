@@ -22,6 +22,16 @@ nav ul {
   list-style: none;
 }
 
+nav li {
+  background: #eee;
+  padding: 1rem;
+  display: inline;
+  border: 1px solid #ccc;
+}
+nav li + li {
+  margin-left: -10px;
+}
+
 main {
   background: #f6ffc5;
   height: 55vh;
