@@ -1,0 +1,58 @@
+body {
+  font-family: 'Noto Sans JP', Josefin sans, Arial, Helvetica, sans-serif;
+}
+
+header,
+main,
+footer {
+  padding: 2rem;
+}
+
+header {
+  background: #bef5ff;
+}
+
+nav {
+  background: #f5c5ff;
+}
+
+nav ul {
+  margin: 0;
+  padding: 1rem;
+  list-style: none;
+}
+
+main {
+  background: #f6ffc5;
+  height: 55vh;
+}
+
+main h1 {
+  margin: 0;
+}
+
+.list,
+.text {
+  padding: 1rem;
+}
+.contents .list,
+.contents .text {
+  display: inline-block;
+  width: 300px;
+  background: #c5ffc8;
+  margin-bottom: 1rem;
+}
+.contents .text {
+  position: relative;
+  top: -5.7em;
+}
+
+.items {
+  background: #ffc5c5;
+  padding: .7rem;
+}
+
+footer {
+  background: #bcbbff;
+  text-align: center;
+}
