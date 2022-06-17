@@ -1,16 +1,27 @@
 p {
   animation-duration: 3s;
   animation-name: slidein;
+  animation-iteration-count: 3;
+  animation-direction: alternate;
+  font-size: 2rem;
 }
 
 @keyframes slidein {
   from {
     margin-left: 100%;
-    width: 300%;
+    width: 200%;
+    font-size: 1rem;
+  }
+
+  75% {
+    font-size: 3rem;
+    margin-left: 20%;
+    width: 150%;
   }
 
   to {
     margin-left: 0%;
+    font-size: 2rem;
     width: 100%;
   }
 }
