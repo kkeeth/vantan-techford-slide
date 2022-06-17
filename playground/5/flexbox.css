@@ -1,0 +1,20 @@
+.box {
+  display: flex;
+  /* flex-wrap: wrap; */
+  /* flex-direction: row-reverse; */
+  /* flex-direction: column-reverse; */
+  align-items: stretch;
+  justify-content: space-around;
+  width: 500px;
+  border: 2px dotted #608ba8;
+  padding: 1rem;
+}
+
+.box > * {
+  flex-basis: 100px;
+  border: 2px solid #608ba8;
+  border-radius: 5px;
+  background-color: #608ba833;
+}
+.box > .first-item {
+}
