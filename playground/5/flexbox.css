@@ -18,3 +18,10 @@
 }
 .box > .first-item {
 }
+
+@media screen and (min-width: 800px) {
+  .container {
+    margin: 2rem 4rem;
+    font-size: 2rem;
+  }
+}
