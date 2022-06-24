@@ -117,13 +117,54 @@ header .header-sns-items li + li {
 /*--------------------
 プロフィール
 ---------------------*/
-
+#about .bio {
+  margin-bottom: 50px;
+}
+#about {
+  font-size: 14px;
+  line-height: 2;
+}
+.profile {
+  display: flex;
+  justify-content: space-between;
+}
+.profile .flex-box-left {
+  flex-basis: 20%;
+}
+.profile .flex-box-left img {
+  width: 160px;
+}
+.profile .flex-box-right {
+  flex-basis: 75%;
+}
+.profile .flex-box-right dl {
+  display: flex;
+  flex-wrap: wrap;
+}
+.profile .flex-box-right dt {
+  flex-basis: 20%;
+  font-weight: bold;
+}
+.profile .flex-box-right dd {
+  flex-basis: 80%;
+}
 
 
 /*--------------------
 実績
 ---------------------*/
-
+.works-items {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.works-items .item {
+  margin-bottom: 2rem;
+}
+.works-items .item img:hover {
+  opacity: 0.7;
+  transition: all 0.3s;
+}
 
 
 /*--------------------
