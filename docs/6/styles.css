@@ -92,8 +92,27 @@ header .header-sns-items li + li {
 /*--------------------
 メインビジュアル
 ---------------------*/
-
-
+.main-visual {
+  margin-bottom: 120px;
+}
+.main-visual img {
+  width: 100%;
+  height: calc(100vh - 240px);
+  opacity: 0.3;
+  z-index: 1;
+}
+.main-visual .main-text {
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 8px;
+  width: 100%;
+  position: absolute;
+  top: calc(50% + 120px);
+}
+.main-visual .main-text h2 {
+  font-size: 2.25rem;
+  font-weight: bold;
+}
 
 /*--------------------
 プロフィール
