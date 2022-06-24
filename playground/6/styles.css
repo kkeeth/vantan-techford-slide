@@ -104,7 +104,8 @@ header .header-sns-items img {
   height: calc(100vh - 240px);
 }
 .main-visual img {
-  /* width: 100%; */
+  width: 100%;
+  height: calc(100vh - 240px);
   opacity: .3;
   z-index: 1;
 }
