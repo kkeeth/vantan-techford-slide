@@ -1,18 +1,198 @@
 /*--------------------
 共通
 ---------------------*/
-h2 {
+/* body {
+  background-image: url("https://picsum.photos/id/77/1280");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+  z-index: 1;
+}
+body::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: white;
+  opacity: 0.8;
+} */
+/* header,
+main,
+footer {
+  position: relative;
+  z-index: 3;
+} */
+section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  margin-bottom: 120px;
+}
+.section-title {
   text-transform: uppercase;
   font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 40px;
+  margin-bottom: 60px;
   text-align: center;
   letter-spacing: 8px;
+  font-family: Josefin Sans;
 }
 
-section {
-  margin: 0 auto 80px;
+/*--------------------
+ヘッダー
+---------------------*/
+header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 240px;
+  margin: 0 30px 0 auto;
   padding: 0 2rem;
+}
+header .logo img {
+  width: 40px;
+}
+header .logo .site-name {
+  font-size: 2.8rem;
+  font-family: Futura;
+  margin-left: 12px;
+  margin-bottom: 10px;
+  position: relative;
+  top: -4px;
+}
+header .header-items {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  flex-basis: 50%;
+  height: 100%;
+  margin-bottom: 30px;
+}
+header .header-nav-items ul,
+header .header-sns-items {
+  display: flex;
+  justify-content: flex-end;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+header .header-nav-items ul li + li {
+  margin-left: 50px;
+}
+header .header-sns-items li +li {
+  margin-left: 20px;
+}
+header .header-sns-items {
+  position: absolute;
+  top: 112px;
+  right: 32px;
+}
+header .header-sns-items img {
+  width: 30px;
+  height: 30px;
+}
+
+/*--------------------
+メインビジュアル
+---------------------*/
+.main-visual {
+  margin-bottom: 120px;
+  /* width: 100vw; */
+  height: calc(100vh - 240px);
+}
+.main-visual img {
+  /* width: 100%; */
+  opacity: .3;
+  z-index: 1;
+}
+.main-visual .main-text {
+  font-family: Josefin Sans;
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  transform: translateX(-50%);
+  top: calc(50% + 120px);
+  left: 50%;
+}
+.main-visual .main-text h2 {
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+
+
+/*--------------------
+プロフィール
+---------------------*/
+#about {
+  font-size: 14px;
+  line-height: 2;
+}
+#about .bio {
+  margin-bottom: 50px;
+}
+.profile {
+  display: flex;
+  justify-content: space-between;
+}
+.profile .flex-box-left {
+  flex-basis: 20%;
+}
+.profile .flex-box-right {
+  flex-basis: 75%;
+}
+.profile .flex-box-right dl {
+  display: flex;
+  flex-wrap: wrap;
+}
+.profile .flex-box-right dt {
+  flex-basis: 20%;
+  font-weight: bold;
+}
+.profile .flex-box-right dd {
+  flex-basis: 80%;
+}
+
+/*--------------------
+実績
+---------------------*/
+.works-items {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.works-items .item {
+  width: 30%;
+  margin-bottom: 2rem;
+}
+.works-items .item img:hover {
+  opacity: .8;
+  transition: all .3s;
+}
+
+/*--------------------
+ニュース
+---------------------*/
+.news-items {
+  font-size: .9rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.news-items .item {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: solid 1px #c8c8c8;
+  padding: 1rem 2rem 1rem;
+}
+.news-items .item:last-child {
+  border-bottom: solid 1px #c8c8c8;
+}
+.news-items .item dt {
+  flex-basis: 25%;
 }
 
 /*--------------------
