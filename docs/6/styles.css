@@ -170,7 +170,23 @@ header .header-sns-items li + li {
 /*--------------------
 ニュース
 ---------------------*/
-
+.news-items {
+  font-size: 0.9rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.news-items .item {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: solid 1px #c8c8c8;
+  padding: 1rem 2rem 1rem;
+}
+.news-items .item:last-child {
+  border-bottom: solid 1px #c8c8c8;
+}
+.news-items .item dt {
+  flex-basis: 25%;
+}
 
 
 /*--------------------
