@@ -11,3 +11,7 @@ pre {
 .token.tag {
   color: var(--prism-keyword);
 }
+
+.slidev-layout.new-section .flex-col {
+  height: 100%;
+}
