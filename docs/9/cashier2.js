@@ -28,17 +28,18 @@ let result = 0;
 
 // 上の変数に、cartの中身の金額の合計を計算して代入（同時に、レジ表示関数でそれぞれのアイテムのログを出す）
 // hint① for 文を使おう
-// hint② もし for 文を使う場合，配列の長さは 配列.length で取得できます
+// hint② 配列の長さは 配列.length で取得できます
 
-cart.forEach(({name, price}) => {
-  result += Number(price);
-  showCashier({name, price});
-})
+for (let i = 0; i < cart.length; i++) {
+  result += Number(cart[i].price);
+  showCashier(cart[i]);
+}
+
 // 以下でもオーケー
-// for (let i = 0; i < cartItem.length; i++) {
-//   result += price;
+// cart.forEach(({name, price}) => {
+//   result += Number(price);
 //   showCashier({name, price});
-// }
+// })
 
 
 // もし、金額の合計値が、500円以上であればキャンペーンで5% オフ
