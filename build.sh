@@ -7,7 +7,7 @@ slidev build -o dist/5 --base /5 slides/5.md
 slidev build -o dist/6 --base /6 slides/6.md
 slidev build -o dist/7 --base /7 slides/7.md
 slidev build -o dist/8 --base /8 slides/8.md
-#slidev build -o dist/9 --base "/9" slides/9.md
+slidev build -o dist/9 --base /9 slides/9.md
 #slidev build -o dist/10 --base "/10" slides/10.md
 #slidev build -o dist/11 --base "/11" slides/11.md
 #slidev build -o dist/12 --base "/12" slides/12.md
