@@ -1,7 +1,6 @@
 * {
   box-sizing: border-box;
 }
-
 body {
   font-family: Futura, Josefin sans, sans-serif;
   color: #fff;
@@ -13,11 +12,11 @@ body {
   background-image: url(./lake-1581879_1920.jpg);
   background-size: cover;
   background-position: center center;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
 }
 
 h1 {
@@ -34,17 +33,19 @@ h1 {
   text-align: center;
 }
 
-.countdown-elements span {
-  font-family: Josefin sans;
-  font-weight: bold;
-  font-size: 1.5rem;
-}
 .countdown-elements + .countdown-elements {
   margin-left: 1rem;
 }
-.big-text {
+
+.countdown-elements .value {
   font-weight: bold;
   font-size: 6rem;
   line-height: 1;
   margin: 0 2rem 0.5rem;
+}
+
+.countdown-elements .unit {
+  font-family: Josefin sans;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
