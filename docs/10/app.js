@@ -23,7 +23,7 @@ const formatTime = (time) => {
 /**
  * カウントダウン処理本体
  */
-const countdown = function() {
+const countdown = () => {
   const currentDate = new Date()
   const totalSeconds = (newYearsDate - currentDate) / 1000
 
@@ -36,4 +36,4 @@ const countdown = function() {
 /**
  * カウントダウン実行
  */
- setInterval(countdown, 0);
+ setInterval(countdown, 1000);
