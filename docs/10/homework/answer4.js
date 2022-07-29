@@ -7,7 +7,7 @@ const cart = [
 const onlyName = cart.map(({ name }) => name);
 
 // 丁寧に書くと以下になります
-// const onlyName = cart.map((item))) => {
+// const onlyName = cart.map((item) => {
 //   return item.name;
 // });
 
