@@ -1,0 +1,23 @@
+body {
+  padding: 20px;
+}
+
+p {
+  /* ここは無視される */
+  background-color: blueviolet;
+}
+
+#app {
+  color: green;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  background-color: #eee;
+}
+
+#app p {
+  font-size: 1.5rem;
+  color: skyblue;
+  /* ここが適用される */
+  background-color: pink;
+}
