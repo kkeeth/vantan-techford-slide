@@ -32,7 +32,7 @@
   .card {
     display: flex;
     flex-direction: column;
-    max-width: 300px;
+    min-width: 280px;
     margin: 0;
     gap: 8px;
   }

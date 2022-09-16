@@ -30,7 +30,8 @@ export default {
   .wrapper {
     margin: 0 2rem;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    justify-items: center;
     gap: 1rem;
   }
 </style>
