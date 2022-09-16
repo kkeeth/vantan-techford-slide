@@ -11,6 +11,11 @@ const Omikuji = {
       return this.result === "大吉" ? "＼( 'ω')／大吉ウオオオオオアアアーーーッ！" : this.result
     }
   },
+  watch: {
+    result() {
+      this.result === "大吉" && alert("＼( 'ω')／大吉ウオオオオオアアアーーーッ！")
+    }
+  },
   methods: {
     drawAFortune() {
       let index = Math.floor(Math.random(0, 6) * 10)
