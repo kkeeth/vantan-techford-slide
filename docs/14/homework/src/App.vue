@@ -14,28 +14,32 @@ export default {
     return {
       movies: [
         {
-          thumbnailImageUrl: 'https://giphy.com/gifs/stefanie-shank-house-of-joy-stef-xT0GqqWj0MagW1COzu',
-          uploadName: 'ゆめみ一郎',
-          uploadIconImageUrl: '',
+          thumbnailImageUrl: 'https://media.giphy.com/media/xT0GqqWj0MagW1COzu/giphy.gif',
+          channelName: 'ゆめみ一郎',
+          movieTitle: '動画タイトル１',
+          uploadIconImageUrl: 'https://placedog.net/500/500',
           liveFlg: false,
         },
         {
-          thumbnailImageUrl: 'https://giphy.com/gifs/animation-bird-flying-xTcnSMB8VXjTox23zW',
-          uploadName: 'ゆめみ二郎',
-          uploadIconImageUrl: '',
+          thumbnailImageUrl: 'https://media.giphy.com/media/xTcnSMB8VXjTox23zW/giphy.gif',
+          channelName: 'ゆめみ二郎',
+          movieTitle: '動画タイトル２',
+          uploadIconImageUrl: 'https://placedog.net/400/400',
+          liveFlg: true,
+        },
+        {
+          thumbnailImageUrl: 'https://media.giphy.com/media/QVsIdgs7sToek/giphy.gif',
+          channelName: 'ゆめみ三郎',
+          movieTitle: '動画タイトル３',
+          uploadIconImageUrl: 'https://placedog.net/300/300',
           liveFlg: false,
         },
         {
-          thumbnailImageUrl: 'https://giphy.com/gifs/aww-animals-being-cute-QVsIdgs7sToek',
-          uploadName: 'ゆめみ三郎',
-          uploadIconImageUrl: '',
-          liveFlg: false,
-        },
-        {
-          thumbnailImageUrl: 'https://giphy.com/gifs/scifri-dance-bird-xT77XLWNWgg42wbKVi',
-          uploadName: 'ゆめみ四郎',
-          uploadIconImageUrl: '',
-          liveFlg: false,
+          thumbnailImageUrl: 'https://media.giphy.com/media/xT77XLWNWgg42wbKVi/giphy.gif',
+          channelName: 'ゆめみ四郎',
+          movieTitle: '動画タイトル４',
+          uploadIconImageUrl: 'https://placedog.net/200/200',
+          liveFlg: true,
         },
       ]
     }

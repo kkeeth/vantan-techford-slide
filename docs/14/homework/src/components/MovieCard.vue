@@ -10,7 +10,7 @@
       <div class="detail">
         <p class="title">{{ information.movieTitle }}</p>
         <p class="channel">{{ information.channelName }}</p>
-        <p class="live-badge" v-show="information.liveFlg">ライブ配信中</p>
+        <span class="live-badge" v-show="information.liveFlg">ライブ配信中</span>
       </div>
     </div>
   </div>
@@ -33,13 +33,18 @@
     display: flex;
     flex-direction: column;
     max-width: 300px;
-    border: 1px solid #ddd;
+    margin: 0;
+    gap: 8px;
   }
   .card p {
     margin: 0;
   }
+  .thumbnail {
+    height: 180px;
+  }
   .thumbnail img {
     width: 100%;
+    height: 100%;
   }
   .contents {
     display: flex;
@@ -48,19 +53,27 @@
     flex-basis: 20%;
   }
   .icon img {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
   }
   .detail {
     display: flex;
     flex-direction: column;
-    flex-basis: 75%;
     text-align: left;
     margin-left: 5%;
   }
-  .live-badge {
+  .detail .title {
+    font-weight: bold;
+    font-size: large;
+    margin-bottom: 4px;
+  }
+  .detail .channel {
+    color: #666;
+  }
+  .detail .live-badge {
     color: red;
     border: 1px solid red;
+    width: 100%;
   }
 </style>
