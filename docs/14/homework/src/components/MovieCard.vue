@@ -53,8 +53,8 @@
     flex-basis: 20%;
   }
   .icon img {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
   }
   .detail {
