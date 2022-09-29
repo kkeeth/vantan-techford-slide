@@ -30,6 +30,7 @@ button {
   background-color: #eb6100;
   padding: 4px 8px;
   border-radius: 8px;
+  border: 1px solid #eb6100;
   margin-left: 5px;
 }
 button:hover {
