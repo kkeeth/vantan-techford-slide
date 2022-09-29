@@ -12,6 +12,6 @@ slidev build -o dist/10 --base /10 slides/10.md
 slidev build -o dist/11 --base /11 slides/11.md
 slidev build -o dist/12 --base /12 slides/12.md
 slidev build -o dist/13 --base /13 slides/13.md
-slidev build -o dist/13 --base /14 slides/14.md
+slidev build -o dist/14 --base /14 slides/14.md
 
 cp index.html dist/index.html
