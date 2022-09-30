@@ -18,7 +18,7 @@
 <script>
 import VButton from "./VButton.vue";
 export default {
-  name: "TodoCard",
+  name: "TodoListCard",
   emits: ["deleteTodo"],
   components: {
     VButton,
@@ -46,7 +46,6 @@ export default {
   border: 1px solid #999;
   border-radius: 4px;
   min-width: 250px;
-  max-width: 320px;
   padding: 10px;
   background-color: #fff;
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.3);
@@ -55,6 +54,9 @@ contents-wrapper {
   margin-top: 12px;
   text-align: left;
   padding-left: 20px;
+}
+.contents-wrapper ul {
+  padding: 0 20px;
 }
 .contents-wrapper li {
   display: flex;

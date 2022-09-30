@@ -1,15 +1,31 @@
 <template>
-  <todo-card title="すべてのタスク" :todo-list="todoList" />
-  <todo-card title="完了済みタスク" :todo-list="completedTodoList" />
-  <todo-card title="未完了タスク" :todo-list="inCompletedTodoList" />
+  <todo-add-card @addTodo="addNewTodo" />
+  <todo-list-card
+    title="すべてのタスク"
+    :todo-list="todoList"
+    @deleteTodo="deleteTodo"
+  />
+  <todo-list-card
+    title="完了済みタスク"
+    :todo-list="completedTodoList"
+    @deleteTodo="deleteTodo"
+  />
+  <todo-list-card
+    title="未完了タスク"
+    :todo-list="inCompletedTodoList"
+    @deleteTodo="deleteTodo"
+  />
 </template>
 
 <script>
-import TodoCard from "./TodoCard.vue";
+import TodoAddCard from "./TodoAddCard.vue";
+import TodoListCard from "./TodoListCard.vue";
+
 export default {
   name: "ToDo",
   components: {
-    TodoCard,
+    TodoAddCard,
+    TodoListCard,
   },
   props: {
     msg: String,
@@ -32,6 +48,21 @@ export default {
     },
   },
   methods: {
+    addNewTodo(newTodo) {
+      // 同じ名前のタスクがないか確認
+      const duplicatedCheck = this.todoList.some((item) => {
+        return item.title === newTodo;
+      });
+      if (duplicatedCheck) {
+        alert("同じ名前のタスクが存在します．");
+        return;
+      } else {
+        this.todoList.push({
+          title: newTodo,
+          status: false,
+        });
+      }
+    },
     deleteTodo(targetIndex) {
       this.todoList = this.todoList.filter((_item, index) => {
         return index !== targetIndex;

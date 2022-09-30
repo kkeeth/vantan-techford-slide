@@ -1,14 +1,18 @@
 <template>
-  <button @click="handleClick" :disabled="isDisabled">{{ title }}</button>
+  <button @click="handleClick" :disabled="isDisabled">
+    {{ title }}
+  </button>
 </template>
 
 <script>
 export default {
   name: "VButton",
+  emits: ["click"],
   props: {
     title: {
       type: String,
-      required: true,
+      required: false,
+      default: "削除",
     },
     isDisabled: {
       type: Boolean,
@@ -30,7 +34,7 @@ button {
   background-color: #eb6100;
   padding: 4px 8px;
   border-radius: 8px;
-  border: 1px solid #eb6100;
+  border: 1px solid #fff;
   margin-left: 5px;
 }
 button:hover {
