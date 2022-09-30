@@ -50,10 +50,12 @@ export default {
   background-color: #fff;
   box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.3);
 }
-contents-wrapper {
+.card .title {
+  margin-bottom: 1rem;
+}
+.contents-wrapper {
   margin-top: 12px;
   text-align: left;
-  padding-left: 20px;
 }
 .contents-wrapper ul {
   padding: 0 20px;

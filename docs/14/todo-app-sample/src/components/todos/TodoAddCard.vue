@@ -34,6 +34,10 @@ export default {
 </script>
 
 <style scoped>
+.card .title {
+  margin-bottom: 1rem;
+}
+
 .contents-wrapper input {
   border: 1px solid #999;
   border-radius: 4px;
