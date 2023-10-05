@@ -15,3 +15,4 @@ slidev build -o dist/13 --base /13 slides/13.md
 slidev build -o dist/14 --base /14 slides/14.md
 
 cp index.html dist/index.html
+cp -R styles dist

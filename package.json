@@ -7,15 +7,16 @@
   },
   "dependencies": {
     "@slidev/cli": "^0.29.2",
+    "@slidev/theme-bricks": "^0.0.2",
     "@slidev/theme-default": "*",
     "@slidev/theme-seriph": "*",
-    "slidev-theme-penguin": "^1.4.1",
-    "vite-svg-loader": "^2.2.0"
+    "slidev-theme-penguin": "^1.4.1"
   },
   "name": "techford-javascript-slide",
   "devDependencies": {
     "@iconify-json/logos": "^1.1.5",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "vite-svg-loader": "^2.2.0"
   },
   "volta": {
     "node": "18.18.0"
