@@ -1,17 +1,22 @@
-# Welcome to VANTAN techford academy, javascript class slides
+# Welcome to KADOKAWA ドワンゴ情報工科学院, javascript class slides
 
-このリポジトリでは、VANTAN techford academyのjavascript初級/中級のスライドを管理しています。
+このリポジトリでは、KADOKAWA ドワンゴ情報工科学院のjavascript / React 講義のスライドを管理しています。
 
 複数のスライドを管理しています。`slides/`フォルダ内の各難易度、各会のスライドを作成してください。
 
 ## スライドを起動
-`yarn dev slides/[授業の難易度]/[回数].md`
+
+```bash
+$ cp slides/[回数].md ./
+$ npm run dev [回数].md
+```
 
 ## 全てビルド
-`yarn build-all`
 
-## デプロイを更新
-``
+```bash
+$ mv [回数].md slides/
+$ npm run build-all
+```
 
 # Welcome to [Slidev](https://github.com/slidevjs/slidev)!
 
