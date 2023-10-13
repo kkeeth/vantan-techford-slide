@@ -1,5 +1,5 @@
 header {
-  background: skyblue;
+  background: #BCF4FE;
   padding: 2rem;
 }
 
@@ -17,8 +17,9 @@ nav .menu {
 }
 
 main {
-  background: lemonchiffon;
+  background: #F7FFC5;
   padding: 2rem;
+  min-height: 500px;
 }
 
 main h1 {
@@ -30,11 +31,31 @@ main .blocks {
 }
 
 main .blocks .block {
-  background: lightgreen;
+  background: #C5FEC8;
   min-width: 25%;
   padding: 0 1rem;
 }
 
 .block + .block {
   margin-left: 8px;
+}
+
+.items {
+  display: flex;
+  margin-top: 5px;
+}
+
+.items .item {
+  background: #ffc5c5;
+  padding: .7rem;
+}
+
+.item + .item {
+  margin-left: 5px;
+}
+
+footer {
+  background-color: #BDBBFF;
+  padding: 3rem 1rem;
+  text-align: center;
 }
