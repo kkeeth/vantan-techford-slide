@@ -1,0 +1,40 @@
+header {
+  background: skyblue;
+  padding: 2rem;
+}
+
+nav {
+  background: pink;
+  display: flex;
+  padding-left: 1rem;
+}
+
+nav .menu {
+  padding: 16px;
+  background: #eee;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+main {
+  background: lemonchiffon;
+  padding: 2rem;
+}
+
+main h1 {
+  margin: 0;
+}
+
+main .blocks {
+  display: flex;
+}
+
+main .blocks .block {
+  background: lightgreen;
+  min-width: 25%;
+  padding: 0 1rem;
+}
+
+.block + .block {
+  margin-left: 8px;
+}
