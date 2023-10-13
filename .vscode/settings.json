@@ -1,5 +1,8 @@
 {
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
   "github.copilot.inlineSuggest.enable": true,
   "github.copilot.enable": {
     "*": false,
