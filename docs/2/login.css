@@ -1,0 +1,49 @@
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background: #eee;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 5px #ccc;
+}
+
+.card .contents {
+    text-align: right;
+    margin-bottom: 16px;
+}
+.card label {
+    padding: 8px 8px 8px 0;
+    text-align: right;
+}
+.card .item + .item {
+    margin-top: 8px;
+}
+.card input {
+    padding: 8px;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    min-width: 200px;
+}
+
+.card button {
+    align-self: flex-end;
+    background: pink;
+    padding: 4px 8px;
+    border: none;
+    border-radius: 8px;
+}
+
+.card button:hover {
+    cursor: pointer;
+}
