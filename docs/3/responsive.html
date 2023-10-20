@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>Header</header>
+      <nav>Navigation</nav>
+      <main>
+        <div class="main">Main</div>
+        <div class="sub">Sub</div>
+      </main>
+      <footer>Footer</footer>
+    </div>
+    <style>
+      * {
+        color: #fff;
+        padding: 16px;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+      main {
+        display: flex;
+      }
+      header {
+        background: #e4017e;
+      }
+      nav {
+        background: #dadf00;
+      }
+      .main {
+        background: #28a7e1;
+      }
+      .sub {
+        background: #f39800;
+      }
+      footer {
+        background: #898989;
+      }
+
+      @media screen and (max-width: 768px) {
+        main {
+          flex-direction: column;
+        }
+      }
+
+      @media screen and (max-width: 375px) {
+        .main {
+          height: 300px;
+        }
+      }
+    </style>
+  </body>
+</html>
