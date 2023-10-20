@@ -4,6 +4,7 @@ mv index.html top.html
 # 全部ビルド
 cp slides/1.md ./ && slidev build -o dist/1 --base /1/ 1.md && rm 1.md
 cp slides/2.md ./ && slidev build -o dist/2 --base /2/ 2.md && rm 2.md
+cp slides/3.md ./ && slidev build -o dist/3 --base /3/ 3.md && rm 3.md
 # slidev build -o dist/15 --base /15/ slides/15.md
 
 # TOP ページ用
