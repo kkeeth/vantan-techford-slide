@@ -1,5 +1,5 @@
 header {
-  background: #BCF4FE;
+  background: #bcf4fe;
   padding: 2rem;
 }
 
@@ -17,7 +17,7 @@ nav .menu {
 }
 
 main {
-  background: #F7FFC5;
+  background: #f7ffc5;
   padding: 2rem;
   min-height: 500px;
 }
@@ -31,7 +31,7 @@ main .blocks {
 }
 
 main .blocks .block {
-  background: #C5FEC8;
+  background: #c5fec8;
   min-width: 25%;
   padding: 0 1rem;
 }
@@ -41,21 +41,19 @@ main .blocks .block {
 }
 
 .items {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 50px);
+  grid-gap: 5px;
   margin-top: 5px;
 }
 
 .items .item {
   background: #ffc5c5;
-  padding: .7rem;
-}
-
-.item + .item {
-  margin-left: 5px;
+  padding: 0.7rem;
 }
 
 footer {
-  background-color: #BDBBFF;
+  background-color: #bdbbff;
   padding: 3rem 1rem;
   text-align: center;
 }
