@@ -1,3 +1,11 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 0.5fr 4fr 1fr;
+}
+
 header {
   background: #bcf4fe;
   padding: 2rem;
@@ -5,44 +13,55 @@ header {
 
 nav {
   background: pink;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  align-content: center;
   padding-left: 1rem;
 }
 
 nav .menu {
-  padding: 16px;
+  padding: 20px;
   background: #eee;
   border: 1px solid #ccc;
   text-align: center;
 }
 
 main {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 80px 1fr 100px;
+  grid-gap: 4px 8px;
   background: #f7ffc5;
   padding: 2rem;
-  min-height: 500px;
 }
 
 main h1 {
   margin: 0;
+  grid-column: span 3;
+  grid-row: 1 / 2;
 }
 
-main .blocks {
-  display: flex;
+main .left {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
 }
 
-main .blocks .block {
+main .right {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+main .block {
   background: #c5fec8;
   min-width: 25%;
   padding: 0 1rem;
 }
 
-.block + .block {
-  margin-left: 8px;
-}
-
-.items {
+main .items {
+  grid-row: 3 / 4;
   display: grid;
   grid-template-columns: repeat(5, 50px);
+  grid-template-rows: 50px;
   grid-gap: 5px;
   margin-top: 5px;
 }
