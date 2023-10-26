@@ -1,8 +1,13 @@
+html,
+body {
+  height: 100%;
+}
+
 body {
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-rows: 1fr 0.5fr 4fr 1fr;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -12,9 +17,7 @@ header {
 
 nav {
   background: pink;
-  display: grid;
-  grid-template-columns: repeat(3, 100px);
-  align-content: center;
+  display: flex;
   padding-left: 1rem;
 }
 
@@ -26,48 +29,40 @@ nav .menu {
 }
 
 main {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 80px 1fr 100px;
-  grid-gap: 4px 8px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   background: #f7ffc5;
   padding: 2rem;
 }
 
 main h1 {
   margin: 0;
-  grid-column: span 3;
-  grid-row: 1 / 2;
 }
 
-main .left {
-  grid-column: 1 / 2;
-  grid-row: 2 / 3;
-}
-
-main .right {
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
+main .block-wrapper {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
 }
 
 main .block {
   background: #c5fec8;
   min-width: 25%;
   padding: 0 1rem;
+  flex-basis: 30%;
 }
 
 main .items {
-  grid-row: 3 / 4;
-  display: grid;
-  grid-template-columns: repeat(5, 50px);
-  grid-template-rows: 50px;
-  grid-gap: 5px;
-  margin-top: 5px;
+  display: flex;
+  gap: 5px;
+  margin-top: 8px;
 }
 
 .items .item {
   background: #ffc5c5;
   padding: 0.7rem;
+  flex-basis: 4%;
 }
 
 footer {
