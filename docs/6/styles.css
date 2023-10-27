@@ -171,25 +171,10 @@ header .header-sns-items {
 .link-items {
   display: flex;
   justify-content: center;
+  gap: 50px;
 }
-.link-items .item {
-  position: relative;
-  top: 0;
-  background: #eee;
-  width: 120px;
-  height: 60px;
-  border-radius: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.3s;
-}
-.link-items .item:hover {
-  top: -3px;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-}
-.link-items .item + .item {
-  margin-left: 30px;
+.link-items img {
+  width: 48px;
 }
 
 /*--------------------
@@ -225,5 +210,9 @@ footer {
 
   .works-items {
     justify-content: center;
+  }
+
+  .link-items {
+    gap: 30px;
   }
 }
