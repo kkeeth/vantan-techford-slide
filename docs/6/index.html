@@ -22,37 +22,38 @@
           <span class="site-name">Keeth</span>
         </a>
       </h1>
-      <div class="header-items">
-        <nav class="header-nav-items">
-          <ul>
-            <li>
-              <a href="#about">About</a>
-            </li>
-            <li>
-              <a href="#works">Works</a>
-            </li>
-            <li>
-              <a href="#news">News</a>
-            </li>
-            <li>
-              <a href="#links">Links</a>
-            </li>
-          </ul>
-        </nav>
-        <ul class="header-sns-items">
+      <ul class="header-sns-items">
+        <li>
+          <a href="#">
+            <img src="twitter-brands.svg" alt="twitter アイコン" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="instagram-brands.svg" alt="instagram アイコン" />
+          </a>
+        </li>
+      </ul>
+    </header>
+
+    <div class="header-items">
+      <nav class="header-nav-items">
+        <ul>
           <li>
-            <a href="#">
-              <img src="twitter-brands.svg" alt="twitter アイコン" />
-            </a>
+            <a href="#about">About</a>
           </li>
           <li>
-            <a href="#">
-              <img src="instagram-brands.svg" alt="instagram アイコン" />
-            </a>
+            <a href="#works">Works</a>
+          </li>
+          <li>
+            <a href="#news">News</a>
+          </li>
+          <li>
+            <a href="#links">Links</a>
           </li>
         </ul>
-      </div>
-    </header>
+      </nav>
+    </div>
     <main>
       <div class="wrapper">
         <div class="main-visual">
@@ -65,7 +66,7 @@
         <section id="about">
           <h2 class="section-title">about</h2>
           <p class="bio">
-            1987年岡山県生まれ<br />
+            1987年岡山県生まれ<br class="" />
             個人事業主として Web
             アプリケーション開発・アドバイザリーをしております。<br />
             2011年、株式会社〇〇にて Web Developer としての人生を開始。<br />
@@ -99,50 +100,93 @@
           <ul class="works-items">
             <li class="item">
               <a href="#">
-                <img
-                  src="https://picsum.photos/id/10/268"
-                  alt="work thumbnail"
-                />
+                <picture>
+                  <source
+                    srcset="https://picsum.photos/id/10/268"
+                    media="(min-width: 768px)"
+                    type="image/jpg"
+                  />
+
+                  <img
+                    src="https://picsum.photos/id/10/400"
+                    alt="work thumbnail"
+                  />
+                </picture>
               </a>
             </li>
             <li class="item">
               <a href="#">
-                <img
-                  src="https://picsum.photos/id/20/268"
-                  alt="work thumbnail"
-                />
+                <picture>
+                  <source
+                    srcset="https://picsum.photos/id/20/268"
+                    media="(min-width: 768px)"
+                    type="image/jpg"
+                  />
+                  <img
+                    src="https://picsum.photos/id/20/400"
+                    alt="work thumbnail"
+                  />
+                </picture>
               </a>
             </li>
             <li class="item">
               <a href="#">
-                <img
-                  src="https://picsum.photos/id/30/268"
-                  alt="work thumbnail"
-                />
+                <picture>
+                  <source
+                    srcset="https://picsum.photos/id/30/268"
+                    media="(min-width: 768px)"
+                    type="image/jpg"
+                  />
+                  <img
+                    src="https://picsum.photos/id/30/400"
+                    alt="work thumbnail"
+                  />
+                </picture>
               </a>
             </li>
             <li class="item">
               <a href="#">
-                <img
-                  src="https://picsum.photos/id/40/268"
-                  alt="work thumbnail"
-                />
+                <picture>
+                  <source
+                    srcset="https://picsum.photos/id/40/268"
+                    media="(min-width: 768px)"
+                    type="image/jpg"
+                  />
+                  <img
+                    src="https://picsum.photos/id/40/400"
+                    alt="work thumbnail"
+                  />
+                </picture>
               </a>
             </li>
             <li class="item">
               <a href="#">
-                <img
-                  src="https://picsum.photos/id/50/268"
-                  alt="work thumbnail"
-                />
+                <picture>
+                  <source
+                    srcset="https://picsum.photos/id/50/268"
+                    media="(min-width: 768px)"
+                    type="image/jpg"
+                  />
+                  <img
+                    src="https://picsum.photos/id/50/400"
+                    alt="work thumbnail"
+                  />
+                </picture>
               </a>
             </li>
             <li class="item">
               <a href="#">
-                <img
-                  src="https://picsum.photos/id/60/268"
-                  alt="work thumbnail"
-                />
+                <picture>
+                  <source
+                    srcset="https://picsum.photos/id/60/268"
+                    media="(min-width: 768px)"
+                    type="image/jpg"
+                  />
+                  <img
+                    src="https://picsum.photos/id/60/400"
+                    alt="work thumbnail"
+                  />
+                </picture>
               </a>
             </li>
           </ul>

@@ -17,7 +17,6 @@ section {
   font-family: Josefin Sans;
 }
 
-
 /*--------------------
 ヘッダー
 ---------------------*/
@@ -29,6 +28,9 @@ header {
   height: 240px;
   margin: 0 30px 0 auto;
   padding: 0 2rem;
+}
+header h1 {
+  display: flex;
 }
 header .logo img {
   width: 40px;
@@ -42,29 +44,6 @@ header .logo .site-name {
   position: relative;
   top: -4px;
 }
-header .header-items {
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-start;
-  flex-basis: 50%;
-  margin-bottom: 30px;
-  height: 100%;
-}
-header .header-nav-items ul,
-header .header-sns-items {
-  display: flex;
-  justify-content: flex-end;
-  text-transform: uppercase;
-  font-size: 14px;
-}
-header .header-nav-items ul li + li {
-  margin-left: 50px;
-}
-header .header-sns-items {
-  position: absolute;
-  top: 112px;
-  right: 32px;
-}
 header .header-sns-items img {
   width: 30px;
   height: 30px;
@@ -73,6 +52,23 @@ header .header-sns-items li + li {
   margin-left: 20px;
 }
 
+/*--------------------
+ナビゲーション
+---------------------*/
+.header-nav-items ul,
+header .header-sns-items {
+  display: flex;
+  justify-content: flex-end;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.header-nav-items {
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+.header-nav-items ul li + li {
+  margin-left: 50px;
+}
 
 /*--------------------
 メインビジュアル
@@ -134,23 +130,19 @@ header .header-sns-items li + li {
   flex-basis: 80%;
 }
 
-
 /*--------------------
 実績
 ---------------------*/
 .works-items {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
-}
-.works-items .item {
-  margin-bottom: 2rem;
+  gap: 16px;
 }
 .works-items .item img:hover {
   opacity: 0.7;
   transition: all 0.3s;
 }
-
 
 /*--------------------
 ニュース
@@ -173,7 +165,6 @@ header .header-sns-items li + li {
   flex-basis: 25%;
 }
 
-
 /*--------------------
 リンク
 ---------------------*/
@@ -191,7 +182,7 @@ header .header-sns-items li + li {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 .link-items .item:hover {
   top: -3px;
@@ -201,13 +192,38 @@ header .header-sns-items li + li {
   margin-left: 30px;
 }
 
-
 /*--------------------
 フッター
 ---------------------*/
 footer {
-  background-color: #BDBBFF;
+  background-color: #bdbbff;
   color: #fff;
   padding: 3rem 1rem;
   text-align: center;
+}
+
+/*--------------------
+レスポンシブ
+---------------------*/
+@media screen and (max-width: 414px) {
+  header {
+    width: 100%;
+    height: 300px;
+  }
+
+  .header-items {
+    font-size: 16px;
+    overflow: scroll;
+  }
+  .header-items ul {
+    justify-content: flex-start;
+  }
+  .header-nav-items {
+    margin-right: 0;
+    padding: 0 16px;
+  }
+
+  .works-items {
+    justify-content: center;
+  }
 }
