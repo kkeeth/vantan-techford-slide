@@ -1,0 +1,1038 @@
+---
+theme: bricks
+class: 'text-center'
+lineNumbers: false
+info: |
+  ## JavaScript初級講義資料 #4
+  VANTAN Techgord Academy
+  Created by [@kuwahara_jsri](https://twitter.com/kuwahara_jsri)
+fonts:
+  sans: 'Josefin Sans'
+  # serif: 'Noto Sans JP'
+  mono: 'Fira Code'
+drawings:
+  persist: false
+layout: cover
+---
+
+# CSS 基礎②<br />詳細度/flexbox/<br />レスポンシブ/アニメーション
+<br />
+
+### JavaScript 初級<br />KADOKAWA ドワンゴ情報工科学院
+
+
+
+<div class="pt-12">
+  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
+    Press Space for next page <carbon:arrow-right class="inline"/>
+  </span>
+</div>
+
+---
+layout: intro
+---
+
+# 出席確認 🖐
+
+---
+layout: statement
+---
+
+# 今日話すこと 📋
+
+---
+layout: items
+cols: 4
+---
+
+# CSS 基礎②
+
+
+::items::
+<Polygon11 w="30" h="30" m="auto" mb="4" />詳細度
+
+<Polygon10 w="30" h="30" m="auto" mb="4" />flexbox
+
+<Polygon2 w="30" h="30" m="auto" mb="4" />レスポンシブ
+
+<Polygon4 w="30" h="30" m="auto" mb="4" />アニメーション
+
+
+---
+layout: intro
+---
+
+# 授業資料 📋
+
+---
+
+URL: <a href="https://vantan-techford-slide.vercel.app/" target="_blank">https://vantan-techford-slide.vercel.app/</a>
+
+<br>
+
+<img src="/assets/4/vercel.png" width="750">
+
+<style>
+  img {
+    margin: 24px auto 0;
+    border: 1px solid #eee;
+  }
+</style>
+
+---
+
+<a href="https://developer.mozilla.org/ja/" target="_blank">MDN</a>
+
+<br>
+
+<img src="/assets/2/mdn.png" width="750">
+
+<style>
+  img {
+    margin: 24px auto 0;
+    border: 1px solid #eee;
+  }
+</style>
+
+---
+layout: intro
+---
+
+# 前回の復習
+
+---
+
+## 📔 CSS とは/CSS のお作法💁
+  - CSS の書き方・構文
+  - 様々なセレクタの指定の仕方
+  - id, class属性
+  - 4つの結合子
+    - ` (空白)`, `>`, `+`, `~`
+## 📔 よく使う CSS プロパティ💁
+  - font系
+  - text系
+  - 余白（margin, padding）
+  - background
+  - サイズ（width, height）
+
+<style>
+  .slidev-layout {
+    padding: 4em 8em 4em;
+  }
+</style>
+
+---
+layout: statement
+---
+
+# 前回の課題
+
+---
+
+# 課題
+<br />
+<br />
+
+## 📔: IE で使えない CSS プロパティを調べて見てください
+
+<br />
+
+## 📔: HTML/CSS を用いて画面のレイアウトをしてみてください
+
+---
+
+# IE で使えない CSS プロパティ
+<br />
+
+以下，いくつか抜粋
+
+* `blend-mode`
+  * `mix-blend-mode`
+  * `background-blend-mode`
+* `filter`
+  * `filter-function`
+  * `filter()` ※ Safari のみ
+* `position: sticky`
+* `object-fit`
+
+
+※ IE を題材にしているだけで，IE だけを槍玉にする意図はないです🙇
+
+---
+
+# IE で使えない CSS プロパティ
+<br />
+
+<img src="/assets/5/ie11_eol.png" alt="IE11 EOL" width="700" />
+
+---
+
+# HTML/CSS を用いて画面のレイアウト
+
+ソースコードは[こちら](https://github.com/kkeeth/vantan-techford-slide/tree/main/playground/5/homework)💁
+
+<img src="/assets/5/homework_layout.png" alt="簡単なレイアウト" width="460" />
+
+---
+layout: statement
+---
+
+# では本日の授業へ GO 🚀
+
+---
+layout: intro
+---
+# 詳細度(Specificity)
+
+---
+
+# CSS で考慮する３つの要因
+<br />
+
+CSS には考慮すべき３つの要因がある．以下は重要度の高い順にリストしている。上にあるものは、下のものを無効にする。
+
+* 重要性 (Importance)
+  * `!important`
+  * とにかくこのルールが最優先！と指定する時に利用
+* 詳細度 (Specificity)
+  * 後述
+* ソースオーダー (Source order)
+  * 同じ詳細度の場合，後に書いた CSS ルールが優先される
+
+---
+
+# 詳細度(Specificity) とは
+<br />
+
+
+> どの CSS プロパティが要素に最も関係があるか、すなわち適用されるかをブラウザーが決定する手段です。詳細度は様々な組み合わせの CSS セレクタで構成される照合ルールに基づいています。
+
+by [MDN](https://developer.mozilla.org/ja/docs/Web/CSS/Specificity)
+
+<br />
+
+ブラウザはこの詳細度を計算して，どの CSS ルールでスタイリングするかを決めている💁
+---
+
+# セレクタの種類
+<br />
+
+以下，セレクタを詳細度の小さな順に並べたもの💁
+
+* 📝 [要素型セレクタ](https://developer.mozilla.org/ja/docs/Web/CSS/Type_selectors)（`h1` など）と擬似要素（`::before` など）
+* 📝 [クラスセレクタ](https://developer.mozilla.org/ja/docs/Web/CSS/Class_selectors)（`.example` など）、属性セレクタ（`[type="radio"]` など)、擬似クラス（`:hover` など）
+* 📝 ID セレクタ（`#example` など）
+* 📝 要素の `style` 属性にルールがある
+
+※ 全称セレクタ（`*`），結合子（`+`, `>`, `~`, `' '`）などは詳細度に影響を与えない
+
+---
+
+# 詳細度の計算
+<br />
+
+セレクタが持つ詳細度の量は，４つの異なる値を使用して測定される．これは，1,000、100、10、1 のそれぞれの位として考えることができる．
+
+|__セレクター__|__1,000__|__100__|__10__|__1__|__詳細度の合計__|
+|:--|:--|:--|:--|:--|:--|
+|`h1`|0|0|0|1|0001|
+|`h1 + p::first-letter`|0|0	|0|3|0003|
+|`li > a[href*="en-US"] > .inline-warning`|0|0	|2	|2|	0022|
+|`#identifier`|	0|	1|	0|	0|	0100|
+|セレクターなし、要素の style 属性にルールがある|	1|	0|	0|	0|	1000|
+
+具体的に見ていこう👉
+
+---
+
+`index.html` というファイルを作成し，以下の HTML タグを `<head>`，`<body>` 内にそれぞれ追記．
+
+__index.html__
+
+```html
+
+<!-- head 内の末尾 -->
+<link rel="stylesheet" href="styles.css" />
+
+<!-- body内 -->
+<div id="outer" class="container">
+  <div id="inner" class="container">
+    <ul>
+      <li class="nav"><a href="#">One</a></li>
+      <li class="nav"><a href="#">Two</a></li>
+    </ul>
+  </div>
+</div>
+```
+
+---
+
+続いて `styles.css` というファイルを作成し，以下の CSS を追記．
+
+```css
+a {
+display: inline-block;
+line-height: 40px;
+font-size: 20px;
+text-decoration: none;
+text-align: center;
+width: 200px;
+margin-bottom: 10px;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+```
+
+ここまでで準備は完了💁
+
+---
+
+この状態から，以下の CSS を __上から__ 追記していく．
+※順番に見ていくと分かりやすいです
+
+
+```css
+#outer a { /* specificity: 0101 */
+  background-color: red;
+}
+#outer #inner a { /* specificity: 0201 */
+  background-color: blue;
+}
+#outer div ul li a { /* specificity: 0104 */
+  color: yellow;
+}
+#outer div ul .nav a { /* specificity: 0113 */
+  color: pink;
+}
+div div li:nth-child(2) a:hover { /* specificity: 0024 */
+  border: 10px solid black;
+}
+div li:nth-child(2) a:hover { /* specificity: 0023 */
+  border: 10px dashed black;
+}
+div div .nav:nth-child(2) a:hover { /* specificity: 0033 */
+  border: 10px double black;
+}
+```
+
+---
+
+続いて `!important` の確認をするため，以下のように変更する．
+
+```diff
+  div li:nth-child(2) a:hover { /* specificity: 0023 */
+-   border: 10px dashed black;
++   border: 10px dashed yellow !important;
+  }
+
+```
+
+<br />
+
+最後に HTML タグに直接 `style` を書いてみる．index.html を以下のように変更．
+
+```diff
+  <ul>
+-   <li class="nav"><a href="#">One</a></li>
++   <li class="nav"><a href="#" style="background: skyblue;">One</a></li>
+    <li class="nav"><a href="#">Two</a></li>
+  </ul>
+```
+
+---
+layout: intro
+---
+# flexbox
+
+---
+
+# Flexbox（フレックスボックス）とは
+<br />
+
+
+> Flexbox は、アイテムを列方向や行方向など一次元に並べて表示するためのレイアウトモデルである [CSS Flexible Box Layout Module](https://www.w3.org/TR/css-flexbox-1/) に対する一般的な通称です。 by [MDN](https://developer.mozilla.org/ja/docs/Glossary/Flexbox)
+
+<br />
+
+> フレックスボックスが一次元であることは、フレックスボックスが一つの次元、つまり行か列のいずれかの方向にしかレイアウトしないことを述べています。これは [CSS グリッドレイアウト](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Grid_Layout) が行と列の二次元を同時に制御するモデルであることと対照的です。
+
+とにかく書いてみよう👉
+
+---
+
+# 準備
+<br />
+
+任意の `.html` ファイルに以下を追記
+
+```html
+<div class="box">
+  <div>One</div>
+  <div>Two</div>
+  <div>Three</div>
+</div>
+```
+
+---
+
+# 準備
+<br />
+
+続いて任意の `.css` ファイルに以下を追記
+
+```css
+.box {
+  width: 500px;
+  border: 2px dotted #608ba8;
+  padding: 1rem;
+}
+
+.box > * {
+  width: 70px;
+  border: 2px solid #608ba8;
+  border-radius: 5px;
+  background-color: #608ba833;
+}
+```
+
+準備完了したので，早速 flexbox の世界に入っていこう👉
+
+---
+
+# 初めての flexbox
+<br />
+
+先程の css ファイルに以下を追記
+
+```diff
+  .box {
++   display: flex;
+    width: 500px;
+    border: 2px dotted #608ba8;
+    padding: 1rem;
+  }
+```
+
+<br />
+
+flexbox を使ってレイアウトされる文書の領域は __フレックスコンテナ__ と呼ばれ，中のコンテンツは __フレックスアイテム__ と呼ばれる．
+
+フレックスコンテナを作るには，その領域のコンテナに対して `display` プロパティの値を `flex` もしくは `inline-flex` に設定する💁
+
+---
+
+# flex-direction の変更
+<br>
+
+フレックスアイテムの表示方向を変更したい場合は `flex-direction` を設定する．
+
+```diff
+  .box {
+    display: flex;
++   flex-direction: row-reverse;
+    width: 500px;
+    /* 省略 */
+  }
+
+```
+
+他にも `column`, `column-reverse` もある．やってみよう👉
+
+---
+
+# 複数行のフレックスコンテナ
+<br />
+
+コンテンツのサイズによっては幅いっぱいになってしまう場合がある．その際自動で収縮したり，折り返して表示するための設定が `flex-wrap` プロパティである．初期値は `nowrap（収縮）`．
+
+```diff
+  .box {
+    display: flex;
+-   flex-direction: row-reverse;
++   flex-wrap: wrap;
+    width: 500px;
+    /* 省略 */
+  }
+
+  .box > * {
+-   width: 70px;
++   width: 200px;
+    /* 省略 */
+  }
+```
+
+折返しの詳しい情報は[こちら](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Flexible_Box_Layout/Mastering_Wrapping_of_Flex_Items)をご参照ください💁
+
+---
+
+# 一括指定プロパティ flex-flow
+<br />
+
+`flex-direction`, `flex-wrap` をまとめて一括で指定するプロパティが `flex-flow` である．
+
+```css
+.box {
+  display: flex;
+  flex-flow: row wrap;
+}
+```
+
+このような CSS が書かれていた場合，`flex-flow` の１つ目が `flex-direction`，２つ目が `flex-wrap` である💁
+
+---
+
+# flexbox における余白
+<br />
+さらなる制御のために，以下の３つのプロパティに触れていく．
+
+* [flex-grow](https://developer.mozilla.org/ja/docs/Web/CSS/flex-grow)
+* [flex-shrink](https://developer.mozilla.org/ja/docs/Web/CSS/flex-shrink)
+* [flex-basis](https://developer.mozilla.org/ja/docs/Web/CSS/flex-basis)
+
+そのために，__分配可能な余白 (available space)__ の概念について知る必要があるため軽く触れておく．
+
+※__上記のプロパティを利用する = アイテム間での分配可能な余白の分配のしかたを変える__ ことを意味するため
+
+詳しくは[主軸におけるフレックスアイテムの比率の制御](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Flexible_Box_Layout/Controlling_Ratios_of_Flex_Items_Along_the_Main_Ax)をご参照ください💁
+---
+
+添付画像のように，500 ピクセル幅のコンテナ内に 100 ピクセル幅のアイテムが３つある場合，アイテムの配置に必要な幅は 300 ピクセルとなる．このとき 200 ピクセルの分配可能な余白が残るが，初期値を変更しなかった場合 flexbox は余白を最後のアイテムの後ろに配置する．
+
+<img src="/assets/5/flex-container-space.png" alt="余白の概念">
+
+Image URL: [フレックスボックスの基本概念](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox)
+
+この余白アイテムに柔軟に分配する機能を `flex` プロパティが提供してくれる💁
+
+---
+
+# flex-basis
+<br />
+主要部分の初期の寸法を担当するプロパティ．ここは「百聞は一見にしかず」の通り書いてみよう👉
+
+
+```diff
+  <!-- .html -->
+  <div class="box">
+-   <div>One</div>
++   <div class="first-item">One</div>
+    <!-- 省略 -->
+```
+
+
+```diff
+  /* .css */
+  .box > * {
+-   width: 200px;
++   width: 70px;
+    /* 省略 */
+  }
+
++ .box > .first-item {
++   flex-basis: auto; /* ここを色んな値に設定してみよう👉 */
++ }
+```
+
+詳しくは[flex-basis](https://developer.mozilla.org/ja/docs/Web/CSS/flex-basis) をご参照ください💁
+
+---
+
+# flex-shrink
+<br />
+すべてのフレックスアイテムの寸法がフレックスコンテナよりも大きい場合，このプロパティの値に従って縮小する．実際に書いてみよう👉
+
+
+```diff
+  .box > * {
+-   width: 70px;
++   width: 300px;
+    /* 省略 */
+  }
+
+  .box > .first-item {
+-   flex-basis: auto;
++   flex-shrink: 0; /* ここを色んな値に設定してみよう👉 */
+  }
+```
+
+詳しくは[flex-shrink](https://developer.mozilla.org/ja/docs/Web/CSS/flex-shrink) をご参照ください💁
+
+---
+
+# flex-grow
+<br />
+フレックスアイテムの主軸方向の寸法のフレックス伸長係数を設定する．実際に書いてみよう👉
+
+
+```diff
+  .box > * {
+-   width: 70px;
++   width: 300px;
++   flex-grow: 1;
+    /* 省略 */
+  }
+
+  .box > .first-item {
+-   flex-shrink: 0;
++   flex-grow: 2; /* ここを色んな値に設定してみよう👉 */
+  }
+```
+
+詳しくは[flex-grow](https://developer.mozilla.org/ja/docs/Web/CSS/flex-grow) をご参照ください💁
+
+---
+
+# 一括指定プロパティ flex
+<br />
+
+`flex-grow`, `flex-shrink`, `flex-basis` を個別に記述するケースはおそらく稀．代わりに，まとめて一括で指定するプロパティが `flex` を指定することが多いであろう．
+
+```css
+.box {
+  display: flex;
+  flex: 1 1 auto;
+  flex: 0 0 auto; /* これは none と同じで，伸縮しないアイテム*/
+  flex: initial; /* 初期化用の値 */
+  flex: 1; /* flex: 1 1 0 と同様 */
+}
+```
+
+このような CSS が書かれていた場合，`flex` の１つ目が `flex-grow`，２つ目が `flex-shrink`, ３つ目が `flex-basis` である💁
+
+---
+
+## align-items
+<br />
+
+基本的には縦軸（厳密には交差軸）におけるアイテムの位置合わせを行う．`flex-direction: column` が指定されていた場合は横軸となる．詳しくは[こちら](https://developer.mozilla.org/ja/docs/Web/CSS/align-items)をご参照ください💁
+
+```diff
+    <!-- .html -->
+-   <div>Three</div>
++   <div>Three
++     <br>has
++     <br>extra
++     <br>text
++   </div>
+```
+
+```diff
+/* .css */
+  .box {
+    display: flex;
++   align-items: stretch; // 初期値．最も高いフレックスアイテムの高さまで他のアイテムが伸張する
++   align-items: flex-start; // フレックスコンテナの先頭に揃える
++   align-items: flex-end; // フレックスコンテナの末尾に揃える
++   align-items: center; // フレックスコンテナの中央に揃える
+    /* 省略 */
+  }
+```
+
+---
+
+# justify-content
+<br />
+
+主軸におけるアイテムの配置、つまり `flex-direction` で設定された方向における位置合わせを行う．詳しくは[こちら](https://developer.mozilla.org/ja/docs/Web/CSS/justify-content)をご参照ください💁
+
+```diff
+  .box {
+    display: flex;
+    align-items: center;
++   justify-content: center; // フレックスコンテナの中央に配置
++   justify-content: flex-start; // フレックスコンテナの先頭から配置
++   justify-content: flex-end; // フレックスコンテナの末尾から配置
++   justify-content: space-between; // アイテムを配置したあとの残りの余白のすべてをアイテム間で均等に振り分け
++   justify-content: space-around; // コンテナの両端に，アイテムの間隔の半分の大きさの余白が設けられる
+    /* 省略 */
+  }
+.box > * {
+- flex-basis: 300px;
++ flex-basis: 100px;
+  /* 省略 */
+```
+
+---
+layout: intro
+---
+
+# レスポンシブ
+
+---
+
+# レスポンシブデザイン
+<br />
+
+__レスポンシブデザイン__ という用語は，2010年に [Ethan Marcotte](https://alistapart.com/article/responsive-web-design/) 氏によって初めて作られ，以下の３つのテクニックを組み合わせて使用​​することを説明している．
+
+#### 📔 __Gillenwater 氏が既に検討したフルード（流動的な）グリッドのアイデア．__
+
+  * Marcotte の記事 [Fluid Grids](https://alistapart.com/article/fluidgrids/) で読むことが可能
+
+<br />
+
+#### 📔 __[フルード画像](https://unstoppablerobotninja.com/entry/fluid-images) のアイデア__
+
+* `max-width: 100%` に設定する非常に単純なテクニック
+* 画像を含む列が画像の本来のサイズより狭くなった場合
+* 画像は小さく縮小されるも拡大することはなく，柔軟なサイズの列に収まる
+
+<br />
+
+#### 📔 __重要なコンポーネント [メディアクエリー](https://developer.mozilla.org/ja/docs/Web/CSS/Media_Queries)__
+
+* CSS のみを使用してレイアウトの切り替えが可能
+* 現代の主流
+
+---
+
+# メディアクエリ（media query）
+<br />
+レスポンシブデザインは、メディアクエリ（media query）によってのみ出現できた．CSS を選択的に適用し，ユーザーのニーズに合わせて適切にページをスタイルできる．
+
+書いてみよう👉
+
+```html
+<body>
+  <div class="container">
+    <!-- some contents -->
+  </div>
+</div>
+```
+
+```css
+@media screen and (min-width: 800px) {
+  .container {
+    margin: 2rem 4rem;
+  }
+}
+```
+
+現在の Web ページが画面メディアのビューポートの幅が少なくとも 800 ピクセルであるかどうかをテストし，`.container` セレクタの CSS を適用するかどうかを制御．
+
+---
+
+# ざっくり解説
+<br/>
+
+```css
+@media screen and (min-width: 800px) {
+  .container {
+    margin: 2rem 4rem;
+  }
+}
+```
+
+<br />
+
+* メディアタイプ: デバイスの種類（上記では `screen`）
+* メディア特性: 画面幅の条件（上記では `min-width: 800px`）
+
+これらの条件にマッチしたとき，指定の CSS ルールでスタイリングされる．
+
+---
+
+# メディアタイプの種類
+<br />
+
+メディアタイプとは、__どのメディアにCSSを適用させるか__ を指定するもの．W3C の [Media Queries Level 5](https://triple-underscore.github.io/mediaqueries5-ja.html) によると，以下の３つが推奨．
+
+|メディアタイプ	|適用されるデバイス|
+|:--|:--|
+|`all`	|全てのデバイス|
+|`print`	|プリンター|
+|`screen`	|プリンター以外のデバイス<br />（PC、スマホやiPadなど）|
+
+---
+
+# ブレイクポイント（breakpoints）
+<br />
+
+`width（幅の指定）` でデザインが切り替わる数値を __ブレイクポイント__ と言う．以下サンプル．
+
+```css
+@media screen and (max-width: 768px) {
+  /* 768px 未満 */
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  /* 768px　以上 1024px 未満 */
+}
+@media screen and (min-width:1024px) {
+  /* 1024px 以上 */
+}
+```
+
+書いてみよう👉
+
+---
+layout: intro
+---
+
+# アニメーション
+
+---
+
+# CSS アニメーション
+<br />
+
+__CSS アニメーション__ により、ある CSS のスタイル設定を別の設定へと遷移させることが可能．アニメーションは、次の２種類の要素
+
+## 📝 アニメーションについて記述するスタイル
+
+## 📝 アニメーションの先頭と末尾の CSS スタイルを示すキーフレーム
+
+<br />
+
+で構成されている．同様に、アニメーション途中の通過点となるスタイルを示すことも可能．
+
+---
+
+# CSS アニメーションの長所
+<br />
+
+CSS アニメーションは，従来のスクリプトによるアニメーションに比べて３つの長所がある．
+
+* __単純なアニメーションには使いやすくできている__
+  * `JavaScript` を知らなくてもアニメーションを作れる
+* __アニメーションのシステム負荷は中程度以下で良く動作する__
+  * `JavaScript` では (上手に作成しなければ) 単純なアニメーションでもシステムの負荷を高めてしまう可能性がある
+  * レンダリングエンジンは可能な限りパフォーマンスをなめらかに保つため，フレームを省略するなどの技術を用いることができる
+* __ブラウザはアニメーションの流れを制御し，パフォーマンスや効率を最適化する__
+  * 例：アクティブではないタブで動作しているアニメーションの更新の頻度を減らす，など
+
+---
+
+# ちなみに JavaScript ライブラリ
+<br />
+
+JavaScript 製のアニメーションライブラリもいくつか世の中にあるのでご紹介💁
+## ○Anime.js
+[https://animejs.com/](https://animejs.com/)
+
+## ○Popmotion
+[https://popmotion.io/](https://popmotion.io/)
+
+## ○Tween24.js
+[https://github.com/a24/tween24js](https://github.com/a24/tween24js)
+
+## ○Element.animate()
+[https://developer.mozilla.org/ja/docs/Web/API/Element/animate](https://developer.mozilla.org/ja/docs/Web/API/Element/animate)
+
+<style>
+  h1 {
+    margin-bottom: 0;
+  }
+  p:first-child {
+    margin-top: 0;
+  }
+  .slidev-layout p + h2 {
+    margin-top: 1rem;
+  }
+</style>
+
+---
+
+# キーフレームを用いたアニメーションの定義
+<br />
+とりあえず書いてみる👉
+
+```html
+<body>
+  <p>hello css animations!!</p>
+</body>
+```
+
+```css
+p {
+  animation-duration: 3s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+```
+
+---
+
+## ざっくり解説
+
+```css
+p {
+  animation-duration: 3s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 200%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+```
+* `animation-duration`: アニメーション全体の時間を定義
+* `animation-name`: どのアニメーションを使うか指定
+* `from`, `to`: 始まりと終わりのスタイルを定義（`0%`, `100%` の代替表記）
+* `@keyframes`: アニメーションそのものの定義
+
+---
+
+# もう少しいじってみる
+<br />
+
+先程の例をベースにもう少し改造してみよう💁
+
+```diff
+  p {
+    animation-duration: 3s;
+    animation-name: slidein;
++   font-size: 2rem;
+  }
+
+  from {
+    margin-left: 100%;
+    width: 200%;
++   font-size: 1rem;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
++   font-size: 2rem;
++   background: pink;
+  }
+```
+
+---
+
+# キーフレームの追加
+<br />
+
+もう少し細かくアニメーションのルールを定義してみよう．
+
+以下のルールを `.css` ファイルの `@keyframes` 内に追記💁
+
+```diff
+    width: 200%;
+    font-size: 1rem;
+  }
+
++ 75% {
++   font-size: 3rem;
++   margin-left: 20%;
++   width: 150%;
++ }
+
+  to {
+    margin-left: 0%;
+```
+
+---
+
+## アニメーションの繰り返し
+<br />
+
+アニメーションを何回繰り返すか数字で指定．`infinite` は文字通り無限に繰り返す．
+
+```diff
+  p {
+    animation-duration: 3s;
+    animation-name: slidein;
++   animation-iteration-count: infinite;
+    font-size: 2rem;
+  }
+```
+
+<br />
+
+## 前後の移動
+<br />
+アニメーション終了後，まるで逆再生のような動きをさせる．
+
+```diff
+  p {
+    animation-duration: 3s;
+    animation-name: slidein;
+    animation-iteration-count: infinite;
++   animation-direction: alternate;
+    font-size: 2rem;
+  }
+```
+
+---
+layout: intro
+---
+
+# 演習
+
+---
+layout: statement
+---
+
+# 簡単なレイアウトを<br />作ってみよう💁
+
+---
+layout: intro
+---
+
+# 課題
+
+---
+
+# 課題
+<br />
+
+* 📔: CSS `Grid` について学んでみてください
+* 📔: CSS グリッドレイアウトで簡単にレイアウトで遊んでみてください
+
+参考リンク： [CSS グリッドレイアウト](https://developer.mozilla.org/ja/docs/Web/CSS/CSS_Grid_Layout)
+
+<style>
+  li {
+    font-size: larger;
+    margin-top: 1rem;
+    list-style-type: disclosure-closed;
+  }
+</style>
+
+---
+layout: intro
+---
+
+# 来週学ぶこと
+<br />
+
+* 📝 簡単なポートフォリオを作ってみよう
+
+<style>
+  ul {
+    padding: 0 5rem;
+  }
+  li {
+    text-align: left;
+    font-size: larger;
+  }
+</style>
+
+---
+layout: statement
+---
+
+# おしまい

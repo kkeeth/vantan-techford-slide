@@ -10,7 +10,7 @@
     "@slidev/theme-bricks": "^0.0.2",
     "@slidev/theme-default": "*",
     "@slidev/theme-seriph": "*",
-    "slidev-theme-penguin": "^1.4.1"
+    "slidev-theme-penguin": "^2.1.0"
   },
   "name": "techford-javascript-slide",
   "devDependencies": {
