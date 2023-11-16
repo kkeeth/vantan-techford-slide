@@ -1,10 +1,11 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: 'Josefin Sans', sans-serif, Futura;
+  font-family: "Josefin Sans", Futura;
   color: #272343;
 }
 
@@ -38,7 +39,6 @@ header nav img {
   width: 100%;
   margin: 0;
 }
-
 
 /**
  * News
@@ -86,7 +86,6 @@ section.news .jump-icon i {
   border: none;
 }
 
-
 /**
  * Detail
  */
@@ -102,7 +101,7 @@ section.detail::before {
   position: absolute;
   content: "";
   filter: blur(6px);
-  opacity: .3;
+  opacity: 0.3;
   top: 0;
   right: 0;
   bottom: 0;
@@ -117,7 +116,6 @@ section.detail .container {
 section.detail .container .badge {
   text-transform: uppercase;
 }
-
 
 /**
  * Lists
@@ -134,7 +132,6 @@ section.list {
     padding: 1.2rem 5rem;
   }
 }
-
 
 section.list ul {
   list-style-type: none;
@@ -156,7 +153,7 @@ section.list li + li {
 }
 
 section.list li button {
-  padding: .4rem 1rem;
+  padding: 0.4rem 1rem;
   width: 96px;
   background-color: #272343;
   border: 2px solid #272343;
@@ -168,7 +165,7 @@ section.list li button {
     padding: 1.2rem 2.4rem;
   }
   section.list li button {
-    padding: .4rem .6rem;
+    padding: 0.4rem 0.6rem;
     max-width: 80px;
   }
 }
@@ -185,7 +182,7 @@ footer {
 
 :not(pre) > code {
   background-color: #e3e3e3;
-  color: #EB5757 !important;
+  color: #eb5757 !important;
 }
 
 pre {
