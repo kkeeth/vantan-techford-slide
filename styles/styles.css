@@ -185,7 +185,7 @@ footer {
   color: #eb5757 !important;
 }
 .slidev-layout :not(pre) > code {
-  font-size: 1rem !important;
+  font-size: inherit !important;
 }
 
 pre {
