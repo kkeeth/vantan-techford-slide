@@ -5,7 +5,7 @@ body {
 }
 
 body {
-  font-family: "Josefin Sans", Futura;
+  font-family: "Josefin Sans", sans-serif, Futura;
   color: #272343;
 }
 
@@ -183,6 +183,9 @@ footer {
 :not(pre) > code {
   background-color: #e3e3e3;
   color: #eb5757 !important;
+}
+.slidev-layout :not(pre) > code {
+  font-size: 1rem !important;
 }
 
 pre {
