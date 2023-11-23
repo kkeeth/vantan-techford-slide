@@ -8,8 +8,8 @@
   "dependencies": {
     "@slidev/cli": "^0.29.2",
     "@slidev/theme-bricks": "^0.0.2",
-    "@slidev/theme-default": "*",
-    "@slidev/theme-seriph": "*",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
     "slidev-theme-penguin": "^2.1.0"
   },
   "name": "techford-javascript-slide",
