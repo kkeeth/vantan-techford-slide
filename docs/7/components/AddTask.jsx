@@ -1,7 +1,7 @@
 const AddTask = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
-      Add Task :
+      Add Task
       <input
         value={props.inputTask}
         placeholder="Add New Task"

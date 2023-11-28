@@ -5,6 +5,7 @@ import TaskList from "./components/TaskList";
 import AddTask from "./components/AddTask";
 import Filter from "./components/Filter";
 
+const KEY = "TODO";
 const Todo = () => {
   const initialList = [
     {
@@ -23,7 +24,7 @@ const Todo = () => {
       isDone: false,
     },
   ];
-  const [taskList, setTaskList] = useState(initialList);
+  let taskList = JSON.parse(localStorage.getItem(KEY)) || initialList;
   const [inputTask, setInputTask] = useState("");
   const [filter, setFilter] = useState("ALL");
 
@@ -34,22 +35,23 @@ const Todo = () => {
       }
       return task;
     });
-    setTaskList(newTaskList);
+    localStorage.setItem(KEY, JSON.stringify(newTaskList));
   };
 
   const handleRemoveTask = (index) => {
     const newTaskList = [...taskList];
     newTaskList.splice(index, 1);
-    setTaskList(newTaskList);
+    localStorage.setItem(KEY, JSON.stringify(newTaskList));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputTask === "") return;
-    setTaskList((taskList) => [
+    taskList = [
       ...taskList,
       { id: taskList.length, title: inputTask, isDone: false },
-    ]);
+    ];
+    localStorage.setItem(KEY, JSON.stringify(taskList));
     setInputTask("");
   };
 
@@ -57,6 +59,9 @@ const Todo = () => {
     <>
       <h1>Todo List</h1>
       <Filter onChange={setFilter} value={filter} />
+
+      <hr />
+
       <AddTask
         inputTask={inputTask}
         handleSubmit={handleSubmit}
