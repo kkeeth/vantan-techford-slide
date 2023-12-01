@@ -1,13 +1,48 @@
-.Todo li {
-  text-align: start;
-  font-size: 1.5rem;
+/**
+  * form styles
+  */
+.todo-form {
+  padding: 0 1rem;
+}
+.todo-form form {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  margin: 0 0 1rem 0;
+}
+.todo-form input {
+  font-size: 85%;
+  padding: 0.4em;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+/**
+  * filter styles
+  */
+.todo-filter {
+  margin: 1rem 0 2rem 0;
+}
+/**
+  * todo list styles
+  */
+.todo-list ul {
+  padding: 0;
+}
+
+.todo-list li {
+  display: flex;
   list-style-type: none;
+  padding: 0.2em 0;
+  justify-content: space-between;
 }
-
-.Todo li.done {
+.todo-list li:hover {
+  background-color: #eee;
+}
+.todo-list li .completed {
   text-decoration: line-through;
+  color: #ccc;
 }
-
-#root a + a {
+.todo-list label {
+  font-size: 120%;
   margin-left: 1rem;
 }

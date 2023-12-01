@@ -5,7 +5,7 @@ const Filter = ({ value, onChange }) => {
 
   return (
     <>
-      <div>
+      <div className="todo-filter">
         <input
           type="radio"
           name="filter"

@@ -6,16 +6,20 @@ const taskList = ({ taskList, handleTaskChange, handleRemoveTask, filter }) => {
   });
 
   return (
-    <div className="Todo">
+    <div className="todo-list">
       {displayTasks.map(({ id, title, isDone }) => (
         <li key={id} className={isDone ? "done" : ""}>
-          <input
-            type="checkbox"
-            checked={isDone}
-            onChange={() => handleTaskChange(id)}
-          />
-          {title}
-          <button onClick={() => handleRemoveTask(id)}>✕</button>
+          <div>
+            <input
+              type="checkbox"
+              checked={isDone}
+              onChange={() => handleTaskChange(id)}
+            />
+            <label>{title}</label>
+          </div>
+          <button className="danger" onClick={() => handleRemoveTask(id)}>
+            ✕
+          </button>
         </li>
       ))}
     </div>
