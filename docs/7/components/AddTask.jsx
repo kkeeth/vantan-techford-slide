@@ -1,13 +1,13 @@
-const AddTask = (props) => {
+const AddTask = ({ inputTask, setInputTask, handleSubmit }) => {
   return (
     <div className="todo-form">
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
-          value={props.inputTask}
+          value={inputTask}
           placeholder="Add New Task"
-          onChange={(e) => props.setInputTask(e.target.value)}
+          onChange={(e) => setInputTask(e.target.value)}
         />
-        <button disabled={props.inputTask.length === 0}>submit</button>
+        <button disabled={inputTask.length === 0}>submit</button>
       </form>
     </div>
   );

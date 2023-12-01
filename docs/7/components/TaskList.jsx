@@ -1,9 +1,16 @@
-const taskList = ({ taskList, handleTaskChange, handleRemoveTask, filter }) => {
+const taskList = ({
+  taskList,
+  handleTaskChange,
+  handleRemoveTask,
+  handleAllRemoveTask,
+  filter,
+}) => {
   const displayTasks = taskList.filter(({ isDone }) => {
     if (filter === "ALL") return true;
     if (filter === "TODO") return !isDone;
     if (filter === "DONE") return isDone;
   });
+  const doneTasks = taskList.filter(({ isDone }) => isDone);
 
   return (
     <div className="todo-list">
@@ -22,6 +29,13 @@ const taskList = ({ taskList, handleTaskChange, handleRemoveTask, filter }) => {
           </button>
         </li>
       ))}
+      <button
+        className="danger delete"
+        disabled={doneTasks.length === 0 && "done"}
+        onClick={() => handleAllRemoveTask()}
+      >
+        delete all
+      </button>
     </div>
   );
 };
