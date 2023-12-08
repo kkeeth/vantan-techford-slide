@@ -31,6 +31,8 @@ const App = () => {
   const [inputTask, setInputTask] = useState("");
   const [filter, setFilter] = useState("ALL");
   const [id, setId] = useState(0);
+  const [isEdit, setIsEdit] = useState(false);
+  const [editTaskId, setEditTaskId] = useState("");
 
   useEffect(() => {
     if (taskList.length === 0) {
@@ -49,6 +51,9 @@ const App = () => {
     });
     setTaskList(newTaskList);
     localStorage.setItem(KEY, JSON.stringify(newTaskList));
+
+    setIsEdit(false);
+    setInputTask("");
   };
 
   const handleRemoveTask = (id) => {
@@ -62,17 +67,35 @@ const App = () => {
     localStorage.setItem(KEY, JSON.stringify([]));
   };
 
+  const handleEditTask = (id) => {
+    const task = taskList.filter((item) => item.id === id)[0];
+    setInputTask(task.title);
+    setIsEdit(true);
+    setEditTaskId(id);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputTask === "") return;
-    const newTaskList = [
-      ...taskList,
-      { id: id + 1, title: inputTask, isDone: false },
-    ];
-    setTaskList(newTaskList);
-    setId(id + 1);
-    localStorage.setItem(KEY, JSON.stringify(newTaskList));
+    if (isEdit) {
+      taskList.forEach((task) => {
+        if (task.id === editTaskId) {
+          task.title = inputTask;
+        }
+      });
+      localStorage.setItem(KEY, JSON.stringify(taskList));
+    } else {
+      const newTaskList = [
+        ...taskList,
+        { id: id + 1, title: inputTask, isDone: false },
+      ];
+      setTaskList(newTaskList);
+      setId(id + 1);
+      localStorage.setItem(KEY, JSON.stringify(newTaskList));
+    }
     setInputTask("");
+    setIsEdit(false);
+    setEditTaskId("");
   };
 
   return (
@@ -92,6 +115,7 @@ const App = () => {
         handleRemoveTask={handleRemoveTask}
         handleAllRemoveTask={handleAllRemoveTask}
         handleTaskChange={handleTaskChange}
+        handleEditTask={handleEditTask}
       />
     </article>
   );

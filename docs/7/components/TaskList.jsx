@@ -3,6 +3,7 @@ const taskList = ({
   handleTaskChange,
   handleRemoveTask,
   handleAllRemoveTask,
+  handleEditTask,
   filter,
 }) => {
   const displayTasks = taskList.filter(({ isDone }) => {
@@ -22,7 +23,7 @@ const taskList = ({
               checked={isDone}
               onChange={() => handleTaskChange(id)}
             />
-            <label>{title}</label>
+            <label onClick={() => handleEditTask(id)}>{title}</label>
           </div>
           <button className="danger" onClick={() => handleRemoveTask(id)}>
             ✕
