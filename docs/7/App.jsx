@@ -29,10 +29,10 @@ const App = () => {
     JSON.parse(localStorage.getItem(KEY)) || initialList
   );
   const [inputTask, setInputTask] = useState("");
-  const [filter, setFilter] = useState("ALL");
   const [id, setId] = useState(0);
   const [isEdit, setIsEdit] = useState(false);
   const [editTaskId, setEditTaskId] = useState("");
+  const [filter, setFilter] = useState("ALL");
 
   useEffect(() => {
     if (taskList.length === 0) {
@@ -40,7 +40,7 @@ const App = () => {
     } else {
       setId(taskList.slice(-1)[0].id + 1);
     }
-  }, []);
+  }, [taskList]);
 
   const handleTaskChange = (index) => {
     const newTaskList = taskList.map((task) => {
