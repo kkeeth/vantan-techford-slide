@@ -12,6 +12,7 @@ cp slides/7.md ./ && slidev build -o dist/7 --base /7/ 7.md && rm 7.md
 cp slides/8.md ./ && slidev build -o dist/8 --base /8/ 8.md && rm 8.md
 cp slides/9.md ./ && slidev build -o dist/9 --base /9/ 9.md && rm 9.md
 cp slides/10.md ./ && slidev build -o dist/10 --base /10/ 10.md && rm 10.md
+cp slides/11.md ./ && slidev build -o dist/11 --base /11/ 11.md && rm 11.md
 # slidev build -o dist/15 --base /15/ slides/15.md
 
 # TOP ページ用
