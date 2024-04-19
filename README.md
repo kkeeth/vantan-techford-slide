@@ -1,6 +1,6 @@
-# Welcome to KADOKAWA ドワンゴ情報工科学院, javascript class slides
+# Welcome to KADOKAWA ドワンゴ工科学院, javascript class slides
 
-このリポジトリでは、KADOKAWA ドワンゴ情報工科学院のjavascript / React 講義のスライドを管理しています。
+このリポジトリでは、KADOKAWA ドワンゴ工科学院のjavascript / React 講義のスライドを管理しています。
 
 複数のスライドを管理しています。`slides/`フォルダ内の各難易度、各会のスライドを作成してください。
 
