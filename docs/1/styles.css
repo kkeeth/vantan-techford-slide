@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+}
+
+header {
+  background: skyblue;
+  padding: 1rem 1.2rem;
+}
+
+nav {
+  background: pink;
+}
+
+nav ul {
+  display: flex;
+}
+
+nav li {
+  list-style-type: none;
+}
+
+nav li + li {
+  margin-left: 8px;
+}
+
+main {
+  background: lemonchiffon;
+  padding: 1rem;
+}
+
+main .two-column-box {
+  display: flex;
+}
+
+main .column-item {
+  background: lightgreen;
+  padding: .5rem;
+  min-width: 200px;
+}
+
+.column-item + .column-item {
+  margin-left: 4px;
+}
+
+main .items-box {
+  display: flex;
+  background: orange;
+}
+
+footer {
+  background: plum;
+  text-align: center;
+  font-size: 12px;
+  padding: 1rem 2rem;
+}
