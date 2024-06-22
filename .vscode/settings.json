@@ -3,12 +3,12 @@
   "[markdown]": {
     "editor.formatOnSave": false
   },
-  "github.copilot.inlineSuggest.enable": true,
   "github.copilot.enable": {
     "*": false,
     "html": true,
     "md": true
   },
   "vue.features.codeActions.enable": false,
-  "vue.codeActions.enabled": false
+  "vue.codeActions.enabled": false,
+  "github.copilot.editor.enableAutoCompletions": true
 }
