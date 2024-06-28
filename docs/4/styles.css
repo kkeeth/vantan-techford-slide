@@ -1,0 +1,199 @@
+/*--------------------
+共通
+---------------------*/
+section {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  margin-bottom: 120px;
+}
+.section-title {
+  text-transform: uppercase;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 60px;
+  text-align: center;
+  letter-spacing: 8px;
+  font-family: Josefin Sans;
+}
+
+/*--------------------
+ヘッダー
+---------------------*/
+header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 140px;
+  padding: 0 3rem;
+}
+header h1 {
+  display: flex;
+}
+header .logo img {
+  width: 40px;
+  height: 40px;
+}
+
+/*--------------------
+ナビゲーション
+---------------------*/
+.header-nav-items ul {
+  display: flex;
+  justify-content: flex-end;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+.header-nav-items {
+  margin-bottom: 6px;
+}
+.header-nav-items ul li + li {
+  margin-left: 50px;
+}
+
+/*--------------------
+メインビジュアル
+---------------------*/
+.main-visual {
+  margin-bottom: 120px;
+}
+.main-visual img {
+  width: 100%;
+  height: calc(100vh - 140px);
+  opacity: 0.3;
+  z-index: 1;
+}
+.main-visual .main-text {
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 8px;
+  width: 100%;
+  position: absolute;
+  top: calc(50% + 40px);
+}
+.main-visual .main-text h2 {
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+
+/*--------------------
+プロフィール
+---------------------*/
+#about .bio {
+  margin-bottom: 50px;
+}
+#about {
+  font-size: 14px;
+  line-height: 2;
+}
+.profile {
+  display: flex;
+  justify-content: space-between;
+}
+.profile .flex-box-left {
+  flex-basis: 20%;
+}
+.profile .flex-box-left img {
+  width: 160px;
+}
+.profile .flex-box-right {
+  flex-basis: 72%;
+}
+.profile .flex-box-right dl {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.profile .flex-box-right dt {
+  flex-basis: 20%;
+  font-weight: bold;
+}
+.profile .flex-box-right dd {
+  flex-basis: 80%;
+}
+
+/*--------------------
+実績
+---------------------*/
+.works-items {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.works-items .item img:hover {
+  opacity: 0.7;
+  transition: all 0.3s;
+}
+
+/*--------------------
+ニュース
+---------------------*/
+.news-items {
+  font-size: 0.9rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.news-items .item {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: solid 1px #c8c8c8;
+  padding: 1rem 2rem 1rem;
+}
+.news-items .item:last-child {
+  border-bottom: solid 1px #c8c8c8;
+}
+.news-items .item dt {
+  flex-basis: 25%;
+}
+
+/*--------------------
+リンク
+---------------------*/
+.link-items {
+  display: flex;
+  margin-top: 1.6rem;
+  gap: 32px;
+}
+.link-items img {
+  width: 24px;
+}
+
+/*--------------------
+フッター
+---------------------*/
+footer {
+  font-size: 1.5dvw;
+  background-color: #333333;
+  color: #fff;
+  padding: 3rem 1rem;
+  text-align: center;
+  letter-spacing: .5rem;
+}
+
+/*--------------------
+レスポンシブ
+---------------------*/
+@media screen and (max-width: 414px) {
+  header {
+    width: 100%;
+    height: 300px;
+  }
+
+  .header-nav-items {
+    font-size: 16px;
+    overflow: scroll;
+    justify-content: flex-start;
+    margin-right: 0;
+    padding: 0 16px;
+  }
+
+  .works-items {
+    justify-content: center;
+  }
+
+  .link-items {
+    gap: 30px;
+  }
+}
