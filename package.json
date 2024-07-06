@@ -6,10 +6,10 @@
     "build-all": "rimraf dist && sh build.sh"
   },
   "dependencies": {
+    "@slidev/theme-apple-basic": "^0.25.1",
     "@slidev/theme-bricks": "^0.0.2",
     "@slidev/theme-default": "latest",
-    "@slidev/theme-seriph": "^0.25.0",
-    "slidev-theme-penguin": "^2.1.0"
+    "@slidev/theme-seriph": "^0.25.0"
   },
   "name": "techford-javascript-slide",
   "devDependencies": {
