@@ -1,13 +1,13 @@
-const AddTask = ({ inputTask, setInputTask }) => {
+const AddTask = ({ inputTask, setInputTask, handleSubmit }) => {
   return (
     <div className="todo-form">
-      <form>
+      <form onSubmit={handleSubmit}>
         <input
           placeholder="Add New Task"
           value={inputTask}
           onChange={(e) => setInputTask(e.target.value)}
         />
-        <button>submit</button>
+        <button disabled={inputTask.length === 0}>submit</button>
       </form>
     </div>
   )

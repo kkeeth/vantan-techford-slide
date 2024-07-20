@@ -1,5 +1,7 @@
 #root {
-  font-family: "system-ui", Josefin Sans;
+  font-family:
+    'system-ui',
+    Josefin Sans;
 }
 
 h1 {
@@ -43,7 +45,7 @@ button.danger[disabled] {
   cursor: default;
 }
 
-input[type="checkbox"],
-input[type="radio"] {
+input[type='checkbox'],
+input[type='radio'] {
   cursor: pointer;
 }

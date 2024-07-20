@@ -8,3 +8,4 @@ dist-ssr
 logs
 *.log
 .DS_Store
+*.md

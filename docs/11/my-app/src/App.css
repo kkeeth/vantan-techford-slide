@@ -37,10 +37,6 @@
 /**
  * todo list styles
  */
-.todo-list {
-  width: 100%;
-}
-
 .todo-list li {
   display: flex;
   list-style-type: none;
