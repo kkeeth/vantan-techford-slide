@@ -1,34 +1,39 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import Title from './Title'
 import './App.css'
+import AddTask from "./components/AddTask"
+import TaskList from "./components/TaskList"
+import Filter from "./components/Filter"
 
-function App() {
-  const [count, setCount] = useState(0)
+const initialList = [
+  {
+    id: 0,
+    title: "aaaaa",
+    isDone: false,
+  },
+  {
+    id: 1,
+    title: "bbbbb",
+    isDone: true,
+  },
+  {
+    id: 2,
+    title: "ccccc",
+    isDone: false,
+  },
+]
+
+const App = () => {
+  const [inputTask, setInputTask] = useState("")
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className="todo">
+        <h1>Todo List</h1>
+        <AddTask inputTask={inputTask} setInputTask={setInputTask} />
+        <hr />
+        <Filter />
+        <TaskList taskList={initialList} />
       </div>
-      <Title str="Hello React!" />
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
