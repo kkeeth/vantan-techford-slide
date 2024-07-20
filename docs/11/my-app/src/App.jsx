@@ -24,6 +24,7 @@ const initialList = [
 
 const App = () => {
   const [inputTask, setInputTask] = useState("")
+  const [taskList, setTaskList] = useState(initialList)
 
   return (
     <>
@@ -32,7 +33,7 @@ const App = () => {
         <AddTask inputTask={inputTask} setInputTask={setInputTask} />
         <hr />
         <Filter />
-        <TaskList taskList={initialList} />
+        <TaskList taskList={taskList} />
       </div>
     </>
   )
