@@ -1,0 +1,23 @@
+.todo-list li {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-between;
+}
+
+.todo-list li + li {
+  margin-top: 0.5rem;
+}
+
+.todo-list li:hover {
+  background-color: #eee;
+}
+
+.todo-list li.done label {
+  text-decoration: line-through;
+  color: #ccc;
+}
+
+.todo-list label {
+  font-size: 120%;
+  margin-left: 1rem;
+}

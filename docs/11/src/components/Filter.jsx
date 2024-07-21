@@ -1,3 +1,5 @@
+import "./Filter.css"
+
 const Filter = ({ value, onChange }) => {
   const handleClick = (key) => {
     onChange(key)

@@ -1,3 +1,5 @@
+import "./TaskList.css"
+
 const TaskList = ({
   taskList,
   handleTaskChange,

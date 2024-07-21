@@ -1,3 +1,5 @@
+import "./AddTask.css"
+
 const AddTask = ({ inputTask, setInputTask, handleSubmit }) => {
   return (
     <div className="todo-form">
