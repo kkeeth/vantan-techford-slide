@@ -1,10 +1,17 @@
-const TaskList = ({ taskList }) => {
+const TaskList = ({ taskList, handleTaskChange }) => {
   return (
     <ul className="todo-list">
-      {taskList.map(({ id, title }) => (
-        <li key={id}>
+      {taskList.map(({ id, title, isDone }) => (
+        <li
+          key={id}
+          className={isDone ? 'done' : ''}
+        >
           <div>
-            <input type="checkbox" />
+            <input
+              type="checkbox"
+              checked={isDone}
+              onChange={() => handleTaskChange(id)}
+            />
             <label>{title}</label>
           </div>
           <button className="danger">✕</button>

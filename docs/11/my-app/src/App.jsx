@@ -24,19 +24,29 @@ const initialList = [
 
 const App = () => {
   const [inputTask, setInputTask] = useState('')
+  const [taskList, setTaskList] = useState(initialList)
   const [id, setId] = useState(initialList[initialList.length - 1].id)
-  const taskList = initialList
-
-  const addTaskList = (newTaskList) => {
-    taskList.push(newTaskList)
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
     if (inputTask === '') return
-    const newTaskList = { id: id + 1, title: inputTask, isDone: false }
-    addTaskList(newTaskList)
+    const newTaskList = [
+      ...taskList,
+      { id: id + 1, title: inputTask, isDone: false },
+    ]
+    setTaskList(newTaskList)
     setId(id + 1)
+    setInputTask('')
+  }
+
+  const handleTaskChange = (index) => {
+    const newTaskList = taskList.map((task) => {
+      if (task.id === index) {
+        task.isDone = !task.isDone
+      }
+      return task
+    })
+    setTaskList(newTaskList)
     setInputTask('')
   }
 
@@ -51,7 +61,10 @@ const App = () => {
         />
         <hr />
         <Filter />
-        <TaskList taskList={taskList} />
+        <TaskList
+          taskList={taskList}
+          handleTaskChange={handleTaskChange}
+        />
       </div>
     </>
   )
