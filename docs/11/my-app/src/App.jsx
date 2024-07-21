@@ -54,6 +54,11 @@ const App = () => {
     setTaskList(updatedTasks)
   }
 
+  const handleRemoveTask = (id) => {
+    const newTaskList = taskList.filter((task) => task.id !== id)
+    setTaskList(newTaskList)
+  }
+
   return (
     <>
       <div className="todo">
@@ -68,6 +73,7 @@ const App = () => {
         <TaskList
           taskList={taskList}
           handleTaskChange={handleTaskChange}
+          handleRemoveTask={handleRemoveTask}
           handleAllRemoveTask={handleAllRemoveTask}
         />
       </div>

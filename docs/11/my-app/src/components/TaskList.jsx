@@ -1,4 +1,9 @@
-const TaskList = ({ taskList, handleTaskChange, handleAllRemoveTask }) => {
+const TaskList = ({
+  taskList,
+  handleTaskChange,
+  handleRemoveTask,
+  handleAllRemoveTask,
+}) => {
   const todoTasks = taskList.filter(({ isDone }) => !isDone)
 
   return (
@@ -16,7 +21,12 @@ const TaskList = ({ taskList, handleTaskChange, handleAllRemoveTask }) => {
             />
             <label>{title}</label>
           </div>
-          <button className="danger">✕</button>
+          <button
+            className="danger"
+            onClick={() => handleRemoveTask(id)}
+          >
+            ✕
+          </button>
         </li>
       ))}
       <button
