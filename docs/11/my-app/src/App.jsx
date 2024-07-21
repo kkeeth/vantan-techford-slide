@@ -26,6 +26,7 @@ const App = () => {
   const [inputTask, setInputTask] = useState('')
   const [taskList, setTaskList] = useState(initialList)
   const [id, setId] = useState(initialList[initialList.length - 1].id)
+  const [filter, setFilter] = useState('ALL')
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -69,8 +70,12 @@ const App = () => {
           handleSubmit={handleSubmit}
         />
         <hr />
-        <Filter />
+        <Filter
+          onChange={setFilter}
+          value={filter}
+        />
         <TaskList
+          filter={filter}
           taskList={taskList}
           handleTaskChange={handleTaskChange}
           handleRemoveTask={handleRemoveTask}

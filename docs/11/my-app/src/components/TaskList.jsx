@@ -3,12 +3,18 @@ const TaskList = ({
   handleTaskChange,
   handleRemoveTask,
   handleAllRemoveTask,
+  filter,
 }) => {
   const todoTasks = taskList.filter(({ isDone }) => !isDone)
+  const displayTasks = taskList.filter(({ isDone }) => {
+    if (filter === 'ALL') return true
+    if (filter === 'TODO') return !isDone
+    if (filter === 'DONE') return isDone
+  })
 
   return (
     <ul className="todo-list">
-      {taskList.map(({ id, title, isDone }) => (
+      {displayTasks.map(({ id, title, isDone }) => (
         <li
           key={id}
           className={isDone ? 'done' : ''}
