@@ -1,4 +1,6 @@
-const TaskList = ({ taskList, handleTaskChange }) => {
+const TaskList = ({ taskList, handleTaskChange, handleAllRemoveTask }) => {
+  const todoTasks = taskList.filter(({ isDone }) => !isDone)
+
   return (
     <ul className="todo-list">
       {taskList.map(({ id, title, isDone }) => (
@@ -17,7 +19,13 @@ const TaskList = ({ taskList, handleTaskChange }) => {
           <button className="danger">✕</button>
         </li>
       ))}
-      <button className="danger delete">delete all</button>
+      <button
+        className="danger delete"
+        disabled={todoTasks.length === taskList.length && 'done'}
+        onClick={() => handleAllRemoveTask(todoTasks)}
+      >
+        delete all
+      </button>
     </ul>
   )
 }

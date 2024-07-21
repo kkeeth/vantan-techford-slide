@@ -50,6 +50,10 @@ const App = () => {
     setInputTask('')
   }
 
+  const handleAllRemoveTask = (updatedTasks) => {
+    setTaskList(updatedTasks)
+  }
+
   return (
     <>
       <div className="todo">
@@ -64,6 +68,7 @@ const App = () => {
         <TaskList
           taskList={taskList}
           handleTaskChange={handleTaskChange}
+          handleAllRemoveTask={handleAllRemoveTask}
         />
       </div>
     </>
