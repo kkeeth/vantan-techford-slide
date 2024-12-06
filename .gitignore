@@ -5,6 +5,5 @@ dist
 .remote-assets
 components.d.ts
 [0-9].md
-10.md
-11.md
-18.md
+1[0-9].md
+2[0-9].md
