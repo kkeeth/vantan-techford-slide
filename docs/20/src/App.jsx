@@ -8,7 +8,6 @@ import {
   Box,
   Card,
   CardContent,
-  CardMedia,
   CircularProgress,
   Alert,
 } from "@mui/material";
@@ -79,6 +78,7 @@ const App = () => {
       setPokemon(null);
     } finally {
       setLoading(false); // ローディング終了
+      setInput(""); // 入力の初期化
     }
   };
 
@@ -99,35 +99,26 @@ const App = () => {
         </Button>
       </Box>
       {loading && <CircularProgress />}
-      {error && (
-        <Alert severity="error" style={{ marginTop: "10px" }}>
-          {error}
-        </Alert>
-      )}
+      {error && <Alert severity="error" mt={2}>{error}</Alert>}
       {pokemon && (
-        <Card style={{ marginTop: "20px", textAlign: "center" }}>
-          <CardMedia
-            component="img"
-            image={pokemon.sprites.front_default}
-            alt={pokemon.name}
-          />
+        <Card sx={{ marginTop: 3}}>
+          <Box display="flex" justifyContent="center">
+            <img src={pokemon.sprites.front_default} alt="ポケモンの画像" />
+            <img src={pokemon.sprites.back_default} alt="ポケモンの画像" />
+          </Box>
+          <Box display="flex" justifyContent="center">
+            <img src={pokemon.sprites.front_shiny} alt="ポケモンの画像" />
+            <img src={pokemon.sprites.back_shiny} alt="ポケモンの画像" />
+          </Box>
           <CardContent>
-            <Typography variant="h5" component="div">
-              {pokemon.name.toUpperCase()}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              番号: {pokemon.id}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              タイプ:{" "}
+          <Typography className="poke-id" variant="h5" component="div">No.{pokemon.id}</Typography>
+            <Typography className="poke-name" mt={1} color="text.secondary">名前：{pokemon.name.toUpperCase()}</Typography>
+            <Typography className="poke-weight" color="text.secondary">重さ：{(pokemon.weight / 10).toFixed(1)} kg</Typography>
+            <Typography className="poke-type" color="text.secondary">
+              タイプ：
               {pokemon.types
-                .map(
-                  (type) => typeTranslations[type.type.name] || type.type.name,
-                )
+                .map((type) => typeTranslations[type.type.name] || type.type.name)
                 .join(", ")}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              重さ: {(pokemon.weight / 10).toFixed(1)} kg
             </Typography>
           </CardContent>
         </Card>
