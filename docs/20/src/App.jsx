@@ -59,9 +59,11 @@ const App = () => {
         endpoint = `https://pokeapi.co/api/v2/pokemon/${input}`;
       } else {
         // 入力が名前の場合（あいまい検索）
-        const speciesResponse = await axios.get("https://pokeapi.co/api/v2/pokemon-species?limit=10000");
+        const speciesResponse = await axios.get(
+          "https://pokeapi.co/api/v2/pokemon-species?limit=10000",
+        );
         const matchedSpecies = speciesResponse.data.results.find((species) =>
-          species.name.toLowerCase().includes(input.toLowerCase())
+          species.name.toLowerCase().includes(input.toLowerCase()),
         );
         if (!matchedSpecies) {
           throw new Error("ポケモンが見つかりません");
@@ -88,7 +90,6 @@ const App = () => {
       <Box display="flex" justifyContent="center" gap={2} mb={2}>
         <TextField
           label="ポケモンの名前または番号"
-          variant="outlined"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           fullWidth
@@ -120,7 +121,9 @@ const App = () => {
             <Typography variant="body2" color="text.secondary">
               タイプ:{" "}
               {pokemon.types
-                .map((type) => typeTranslations[type.type.name] || type.type.name)
+                .map(
+                  (type) => typeTranslations[type.type.name] || type.type.name,
+                )
                 .join(", ")}
             </Typography>
             <Typography variant="body2" color="text.secondary">
@@ -134,4 +137,3 @@ const App = () => {
 };
 
 export default App;
-
