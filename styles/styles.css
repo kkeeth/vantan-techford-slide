@@ -146,6 +146,7 @@ section.list li {
 
 section.list li > span {
   margin-right: 1rem;
+  flex-basis: 20%;
 }
 
 section.list li + li {
