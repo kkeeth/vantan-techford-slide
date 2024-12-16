@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { db, storage } from "./firebaseConfig";
-import { collection, addDoc, query, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc, query, onSnapshot } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { Container, TextField, Button, Box, Card, CardContent, Typography, Grid } from "@mui/material";
+import { Container, Stack, TextField, Button, Box, Card, CardActions, CardContent, Typography } from "@mui/material";
+import "./App.css";
 
 const App = () => {
   const [posts, setPosts] = useState([]);
@@ -25,9 +26,9 @@ const App = () => {
     const file = e.target.files[0];
     if (file) {
         setImage(file);
-        console.log("Selected file:", file);
     }
   };
+
   const handlePost = async () => {
     if (!content && !image) return;
 
@@ -53,94 +54,111 @@ const App = () => {
     }
   };
 
+  const deletePost = async (id) => {
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      try {
+        await deleteDoc(doc(db, "posts", id));
+        setPosts(posts.filter((post) => post.id !== id)); // ローカル状態を更新
+        console.log("Post deleted!");
+      } catch (error) {
+        console.error("Error deleting post: ", error);
+      }
+    }
+  };
+
   return (
     <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom align="center">
+      <Typography variant="h3" gutterBottom align="center">
         My Social App
       </Typography>
-
-      <Box component="form" noValidate autoComplete="off" sx={{ mb: 4 }}>
-        <TextField
-          fullWidth
-          label="What's on your mind?"
-          variant="outlined"
-          multiline
-          rows={3}
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          sx={{ mb: 2 }}
-        />
-        <Box display="flex" justifyContent="center">
-          <Button
-            variant="outlined"
-            component="label"
+      <Stack spacing={4}>
+        <Box component="form" noValidate autoComplete="off" sx={{ mb: 4 }}>
+          <TextField
             fullWidth
-            sx={{ mr: 2, height: 48 }}
-          >
-            Upload Image
-            <input
-              type="file"
-              hidden
-              onChange={(e) => handleSelectImage(e)}
-            />
-          </Button>
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handlePost}
-            sx={{ width: 160, height: 48 }}
-          >
-            Post
-          </Button>
-          {image && (
-            <Box
-              component="img"
-              src={URL.createObjectURL(image)}
-              alt="Preview"
-              sx={{
-                display: "block",
-                maxWidth: "100%",
-                maxHeight: "200px",
-                margin: "16px auto",
-                objectFit: "cover",
-                borderRadius: 4,
-                border: "1px solid #ddd",
-              }}
-            />
-          )}
+            label="What's on your mind?"
+            variant="outlined"
+            multiline
+            rows={3}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            sx={{ mb: 2 }}
+          />
+          <Box display="flex" justifyContent="center">
+            <Button
+              variant="outlined"
+              component="label"
+              fullWidth
+              sx={{ mr: 2, height: 48 }}
+            >
+              Upload Image
+              <input
+                type="file"
+                hidden
+                onChange={(e) => handleSelectImage(e)}
+              />
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handlePost}
+              sx={{ width: 160, height: 48 }}
+            >
+              Post
+            </Button>
+            {image && (
+              <Box
+                component="img"
+                src={URL.createObjectURL(image)}
+                alt="Preview"
+                sx={{
+                  display: "block",
+                  maxWidth: "100%",
+                  maxHeight: "200px",
+                  marginLeft: 2,
+                  objectFit: "cover",
+                  borderRadius: 4,
+                  border: "1px solid #ddd",
+                }}
+              />
+            )}
+          </Box>
+
         </Box>
 
-      </Box>
-
-      <Grid container spacing={2}>
         {posts.map((post) => (
-          <Grid item xs={12} key={post.id}>
-            <Card>
-              <CardContent>
-                <Typography variant="body1">{post.content}</Typography>
-                {post.imageUrl && (
-                  <Box
-                    component="img"
-                    src={post.imageUrl}
-                    alt="Post Image"
-                    sx={{
-                      width: "100%",
-                      maxHeight: "300px",
-                      objectFit: "contain",
-                      mt: 2
-                     }}
-                  />
-                )}
-                <Box component="div">
-                  <Typography variant="caption" color="textSecondary" sx={{ mt: 2 }}>
-                    Posted at: {post.createdAt?.toDate().toLocaleString()}
-                  </Typography>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+          <Card key={post.id}>
+            <CardContent>
+              <Typography variant="body1">{post.content}</Typography>
+              {post.imageUrl && (
+                <Box
+                  component="img"
+                  src={post.imageUrl}
+                  alt="Post Image"
+                  sx={{
+                    maxHeight: "300px",
+                    objectFit: "contain",
+                    mt: 2
+                    }}
+                />
+              )}
+              <Box component="div">
+                <Typography variant="caption" color="textSecondary" sx={{ mt: 2 }}>
+                  Posted at: {post.createdAt?.toDate().toLocaleString()}
+                </Typography>
+              </Box>
+            </CardContent>
+            <CardActions sx={{ justifyContent: "right"}}>
+              <Button
+                size="small"
+                color="error"
+                onClick={() => deletePost(post.id)}
+              >
+                  Delete
+              </Button>
+            </CardActions>
+          </Card>
         ))}
-      </Grid>
+      </Stack>
     </Container>
   );
 };
