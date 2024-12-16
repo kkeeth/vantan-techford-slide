@@ -21,6 +21,13 @@ const App = () => {
     return () => unsubscribe();
   }, []);
 
+  const handleSelectImage = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        setImage(file);
+        console.log("Selected file:", file);
+    }
+  };
   const handlePost = async () => {
     if (!content && !image) return;
 
@@ -68,23 +75,41 @@ const App = () => {
             variant="outlined"
             component="label"
             fullWidth
-            sx={{ mb: 2, mr: 2 }}
+            sx={{ mr: 2, height: 48 }}
           >
             Upload Image
             <input
               type="file"
               hidden
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={(e) => handleSelectImage(e)}
             />
           </Button>
           <Button
             variant="contained"
             color="primary"
             onClick={handlePost}
+            sx={{ width: 160, height: 48 }}
           >
             Post
           </Button>
+          {image && (
+            <Box
+              component="img"
+              src={URL.createObjectURL(image)}
+              alt="Preview"
+              sx={{
+                display: "block",
+                maxWidth: "100%",
+                maxHeight: "200px",
+                margin: "16px auto",
+                objectFit: "cover",
+                borderRadius: 4,
+                border: "1px solid #ddd",
+              }}
+            />
+          )}
         </Box>
+
       </Box>
 
       <Grid container spacing={2}>
@@ -97,13 +122,20 @@ const App = () => {
                   <Box
                     component="img"
                     src={post.imageUrl}
-                    alt="post"
-                    sx={{ width: "100%", mt: 2 }}
+                    alt="Post Image"
+                    sx={{
+                      width: "100%",
+                      maxHeight: "300px",
+                      objectFit: "contain",
+                      mt: 2
+                     }}
                   />
                 )}
-                <Typography variant="caption" color="textSecondary" sx={{ mt: 2 }}>
-                  Posted at: {post.createdAt?.toDate().toLocaleString()}
-                </Typography>
+                <Box component="div">
+                  <Typography variant="caption" color="textSecondary" sx={{ mt: 2 }}>
+                    Posted at: {post.createdAt?.toDate().toLocaleString()}
+                  </Typography>
+                </Box>
               </CardContent>
             </Card>
           </Grid>
