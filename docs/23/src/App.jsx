@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { db, storage } from "./firebaseConfig";
-import { collection, addDoc, doc, deleteDoc, query, onSnapshot } from "firebase/firestore";
+import { collection, addDoc, doc, deleteDoc, query, orderBy, onSnapshot } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { Container, Stack, TextField, Button, Box, Card, CardActions, CardContent, Typography } from "@mui/material";
 import "./App.css";
@@ -11,7 +11,7 @@ const App = () => {
   const [image, setImage] = useState(null);
 
   useEffect(() => {
-    const q = query(collection(db, "posts"));
+    const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const postsArray = querySnapshot.docs.map((doc) => ({
         id: doc.id,
