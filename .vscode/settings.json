@@ -8,7 +8,8 @@
     "html": true,
     "md": true
   },
-  "vue.features.codeActions.enable": false,
-  "vue.codeActions.enabled": false,
-  "github.copilot.editor.enableAutoCompletions": true
+  "github.copilot.editor.enableAutoCompletions": true,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
 }
