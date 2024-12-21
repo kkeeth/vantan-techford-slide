@@ -1,6 +1,7 @@
 node_modules
 .DS_Store
 dist
+!docs/20/dist
 *.local
 .remote-assets
 components.d.ts
