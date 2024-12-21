@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { useState } from 'react';
 import './App.css';
-import { Alert,Box,
+import {
+  Alert,
+  Box,
   Button,
   Card,
   CardContent,
@@ -48,9 +50,28 @@ function App() {
     try {
       setError('');
       setLoading(true);
-      const response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${input}`,
-      );
+
+      let endpoint;
+
+      if (!Number.isNaN(Number(input))) {
+        // 入力が番号の場合
+        endpoint = `https://pokeapi.co/api/v2/pokemon/${input}`;
+      } else {
+        const speciesResponse = await axios.get(
+          'https://pokeapi.co/api/v2/pokemon-species?limit=10000',
+        );
+        const matchedSpecies = speciesResponse.data.results.find((species) =>
+          species.name.toLowerCase().includes(input.toLowerCase()),
+        );
+
+        if (!matchedSpecies) {
+          throw new Error('ポケモンが見つかりません');
+        }
+
+        console.log(matchedSpecies);
+        endpoint = matchedSpecies.url.replace('pokemon-species', 'pokemon');
+      }
+      const response = await axios.get(endpoint);
       setPokemon(response.data);
     } catch (e) {
       console.log(e);
