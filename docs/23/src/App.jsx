@@ -43,7 +43,7 @@ const App = () => {
       await addDoc(collection(db, "posts"), {
         content,
         imageUrl,
-        createdAt: new Date(),
+        createdAt: new Date().toLocaleString(),
       });
 
       setContent("");
@@ -143,7 +143,7 @@ const App = () => {
               )}
               <Box component="div">
                 <Typography variant="caption" color="textSecondary" sx={{ mt: 2 }}>
-                  Posted at: {post.createdAt?.toDate().toLocaleString()}
+                  Posted at: {post.createdAt?}
                 </Typography>
               </Box>
             </CardContent>
