@@ -1,17 +1,35 @@
-import { useState, useEffect } from "react";
-import { db, storage } from "./firebaseConfig";
-import { collection, addDoc, doc, deleteDoc, query, orderBy, onSnapshot } from "firebase/firestore";
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { Container, Stack, TextField, Button, Box, Card, CardActions, CardContent, Typography } from "@mui/material";
-import "./App.css";
+import { useState, useEffect } from 'react';
+import { db, storage } from './firebaseConfig';
+import {
+  collection,
+  addDoc,
+  doc,
+  deleteDoc,
+  query,
+  orderBy,
+  onSnapshot,
+} from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import {
+  Container,
+  Stack,
+  TextField,
+  Button,
+  Box,
+  Card,
+  CardActions,
+  CardContent,
+  Typography,
+} from '@mui/material';
+import './App.css';
 
 const App = () => {
   const [posts, setPosts] = useState([]);
-  const [content, setContent] = useState("");
+  const [content, setContent] = useState('');
   const [image, setImage] = useState(null);
 
   useEffect(() => {
-    const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+    const q = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const postsArray = querySnapshot.docs.map((doc) => ({
         id: doc.id,
@@ -25,7 +43,7 @@ const App = () => {
   const handleSelectImage = (e) => {
     const file = e.target.files[0];
     if (file) {
-        setImage(file);
+      setImage(file);
     }
   };
 
@@ -33,35 +51,35 @@ const App = () => {
     if (!content && !image) return;
 
     try {
-      let imageUrl = "";
+      let imageUrl = '';
       if (image) {
         const imageRef = ref(storage, `images/${image.name}`);
         await uploadBytes(imageRef, image);
         imageUrl = await getDownloadURL(imageRef);
       }
 
-      await addDoc(collection(db, "posts"), {
+      await addDoc(collection(db, 'posts'), {
         content,
         imageUrl,
         createdAt: new Date().toLocaleString(),
       });
 
-      setContent("");
+      setContent('');
       setImage(null);
-      console.log("Post saved to Firestore!");
+      console.log('Post saved to Firestore!');
     } catch (error) {
-      console.error("Error writing to Firestore:", error);
+      console.error('Error writing to Firestore:', error);
     }
   };
 
   const deletePost = async (id) => {
-    if (window.confirm("Are you sure you want to delete this post?")) {
+    if (window.confirm('Are you sure you want to delete this post?')) {
       try {
-        await deleteDoc(doc(db, "posts", id));
+        await deleteDoc(doc(db, 'posts', id));
         setPosts(posts.filter((post) => post.id !== id)); // ローカル状態を更新
-        console.log("Post deleted!");
+        console.log('Post deleted!');
       } catch (error) {
-        console.error("Error deleting post: ", error);
+        console.error('Error deleting post: ', error);
       }
     }
   };
@@ -100,6 +118,7 @@ const App = () => {
             <Button
               variant="contained"
               color="primary"
+              disabled={!content}
               onClick={handlePost}
               sx={{ width: 160, height: 48 }}
             >
@@ -111,18 +130,17 @@ const App = () => {
                 src={URL.createObjectURL(image)}
                 alt="Preview"
                 sx={{
-                  display: "block",
-                  maxWidth: "100%",
-                  maxHeight: "200px",
+                  display: 'block',
+                  maxWidth: '100%',
+                  maxHeight: '200px',
                   marginLeft: 2,
-                  objectFit: "cover",
+                  objectFit: 'cover',
                   borderRadius: 4,
-                  border: "1px solid #ddd",
+                  border: '1px solid #ddd',
                 }}
               />
             )}
           </Box>
-
         </Box>
 
         {posts.map((post) => (
@@ -135,25 +153,29 @@ const App = () => {
                   src={post.imageUrl}
                   alt="Post Image"
                   sx={{
-                    maxHeight: "300px",
-                    objectFit: "contain",
-                    mt: 2
-                    }}
+                    maxHeight: '300px',
+                    objectFit: 'contain',
+                    mt: 2,
+                  }}
                 />
               )}
               <Box component="div">
-                <Typography variant="caption" color="textSecondary" sx={{ mt: 2 }}>
-                  Posted at: {post.createdAt?}
+                <Typography
+                  variant="caption"
+                  color="textSecondary"
+                  sx={{ mt: 2 }}
+                >
+                  Posted at: {post.createdAt.toDate().toLocaleString()}
                 </Typography>
               </Box>
             </CardContent>
-            <CardActions sx={{ justifyContent: "right"}}>
+            <CardActions sx={{ justifyContent: 'right' }}>
               <Button
                 size="small"
                 color="error"
                 onClick={() => deletePost(post.id)}
               >
-                  Delete
+                Delete
               </Button>
             </CardActions>
           </Card>
