@@ -117,7 +117,6 @@ const App = () => {
             </Button>
             <Button
               variant="contained"
-              color="primary"
               disabled={!content}
               onClick={handlePost}
               sx={{ width: 160, height: 48 }}
@@ -160,11 +159,7 @@ const App = () => {
                 />
               )}
               <Box component="div">
-                <Typography
-                  variant="caption"
-                  color="textSecondary"
-                  sx={{ mt: 2 }}
-                >
+                <Typography variant="caption" color="textSecondary">
                   Posted at: {post.createdAt.toDate().toLocaleString()}
                 </Typography>
               </Box>
