@@ -133,7 +133,6 @@ const App = () => {
                   maxWidth: '100%',
                   maxHeight: '200px',
                   marginLeft: 2,
-                  objectFit: 'cover',
                   borderRadius: 4,
                   border: '1px solid #ddd',
                 }}
