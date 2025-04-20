@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && rm -rf ../../docs/chat && mv dist ../../docs/chat",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.2.0",
     "@mui/material": "^6.2.0",
+    "dexie": "^4.0.11",
     "firebase": "^11.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
