@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && rm -rf ../../docs/poke-search && mv dist ../../docs/poke-search",
     "lint": "eslint . --fix",
     "preview": "vite preview"
   },

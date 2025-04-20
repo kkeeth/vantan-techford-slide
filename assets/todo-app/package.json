@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && rm -rf ../../docs/todo-app && mv dist ../../docs/todo-app",
     "lint": "eslint .",
     "preview": "vite preview"
   },
