@@ -21,8 +21,9 @@
         const css = document.createElement('link');
         css.setAttribute('rel', 'stylesheet');
         css.setAttribute('href', 'https://unpkg.com/mvp.css@1.12.0/mvp.css');
-        document.getElementsByTagName('head')[0].appendChild(css);
+        document.head.appendChild(css);
       }
+    </script>
     </script>
     <link rel="stylesheet" href="/styles/styles.css" />
     <title>KADOKAWAドワンゴ情報工科学院 専門部</title>
@@ -96,7 +97,7 @@
         >
           <span class="font-bold">#1</span>
 
-          <p class="w-3/5">Web アプリケーション基礎 / HTML / CSS</p>
+          <p class="w-3/5">開発環境セットアップと TypeScript 基礎</p>
           <a href="/1">
             <button
               type="button"
@@ -113,7 +114,7 @@
           <span class="font-bold">#2</span>
 
           <p class="w-3/5">
-            HTML 基礎② / CSS 基礎② HTML 基礎💁/よく使う HTML タグ💁
+            TypeScript 応用と型システム
           </p>
           <a href="/2">
             <button
@@ -130,8 +131,7 @@
           <span class="font-bold">#3</span>
 
           <p class="w-3/5">
-            HTML 基礎③ / CSS 基礎③ / ブロック|インライン要素 / CSS Grid /
-            レスポンシブ
+            React 入門とコンポーネント設計
           </p>
           <a href="/3">
             <button

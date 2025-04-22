@@ -1,10 +1,9 @@
 node_modules
 .DS_Store
 dist
-!docs/20/dist
 *.local
 .remote-assets
 components.d.ts
-[0-9].md
-1[0-9].md
-2[0-9].md
+[0-9]*.md
+1[0-9]*.md
+2[0-9]*.md
