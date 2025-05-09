@@ -1,182 +1,177 @@
-import { useState, useEffect } from 'react';
-import { db, storage } from './firebaseConfig';
+import { useEffect, useState } from "react";
+import Dexie from "dexie";
+import "./App.css";
 import {
-  collection,
-  addDoc,
-  doc,
-  deleteDoc,
-  query,
-  orderBy,
-  onSnapshot,
-} from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import {
-  Container,
-  Stack,
-  TextField,
-  Button,
-  Box,
-  Card,
-  CardActions,
-  CardContent,
-  Typography,
-} from '@mui/material';
-import './App.css';
+	Container,
+	Typography,
+	TextField,
+	Stack,
+	Button,
+	Card,
+	CardContent,
+	CardActions,
+	Box,
+} from "@mui/material";
 
-const App = () => {
-  const [posts, setPosts] = useState([]);
-  const [content, setContent] = useState('');
-  const [image, setImage] = useState(null);
+const db = new Dexie("SocialApp"); //データベース名
+db.version(1).stores({
+	posts: "++id, text, image, createdAt", // テーブル名，カラム
+});
 
-  useEffect(() => {
-    const q = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const postsArray = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setPosts(postsArray);
-    });
-    return () => unsubscribe();
-  }, []);
+function App() {
+	const [text, setText] = useState("");
+	const [posts, setPosts] = useState([]);
+	const [image, setImage] = useState(null);
 
-  const handleSelectImage = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(file);
-    }
-  };
+	useEffect(() => {
+		(async () => {
+			const allPosts = await db.posts.toArray();
+			setPosts(allPosts.reverse());
+		})();
+	}, []);
 
-  const handlePost = async () => {
-    if (!content && !image) return;
+	const handlePost = async (e) => {
+		e.preventDefault();
 
-    try {
-      let imageUrl = '';
-      if (image) {
-        const imageRef = ref(storage, `images/${image.name}`);
-        await uploadBytes(imageRef, image);
-        imageUrl = await getDownloadURL(imageRef);
-      }
+		const createdAt = new Date().toLocaleString();
+		let newPost;
 
-      await addDoc(collection(db, 'posts'), {
-        content,
-        imageUrl,
-        createdAt: new Date().toLocaleString(),
-      });
+		if (image) {
+			const reader = new FileReader();
+			reader.onload = async () => {
+				const imageData = reader.result;
 
-      setContent('');
-      setImage(null);
-      console.log('Post saved to Firestore!');
-    } catch (error) {
-      console.error('Error writing to Firestore:', error);
-    }
-  };
+				const id = await db.posts.add({
+					text,
+					image: imageData,
+					date: createdAt,
+				});
 
-  const deletePost = async (id) => {
-    if (window.confirm('Are you sure you want to delete this post?')) {
-      try {
-        await deleteDoc(doc(db, 'posts', id));
-        setPosts(posts.filter((post) => post.id !== id)); // ローカル状態を更新
-        console.log('Post deleted!');
-      } catch (error) {
-        console.error('Error deleting post: ', error);
-      }
-    }
-  };
+				newPost = { id, text, image: imageData, date: createdAt };
+				setPosts((prev) => [newPost, ...prev]);
+			};
 
-  return (
-    <Container maxWidth="sm" sx={{ mt: 4 }}>
-      <Typography variant="h3" gutterBottom align="center">
-        My Social App
-      </Typography>
-      <Stack spacing={4}>
-        <Box component="form" noValidate autoComplete="off" sx={{ mb: 4 }}>
-          <TextField
-            fullWidth
-            label="What's on your mind?"
-            variant="outlined"
-            multiline
-            rows={3}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            sx={{ mb: 2 }}
-          />
-          <Box display="flex" justifyContent="center">
-            <Button
-              variant="outlined"
-              component="label"
-              fullWidth
-              sx={{ mr: 2, height: 48 }}
-            >
-              Upload Image
-              <input
-                type="file"
-                hidden
-                onChange={(e) => handleSelectImage(e)}
-              />
-            </Button>
-            <Button
-              variant="contained"
-              disabled={!content}
-              onClick={handlePost}
-              sx={{ width: 160, height: 48 }}
-            >
-              Post
-            </Button>
-            {image && (
-              <Box
-                component="img"
-                src={URL.createObjectURL(image)}
-                alt="Preview"
-                sx={{
-                  display: 'block',
-                  maxWidth: '100%',
-                  maxHeight: '200px',
-                  marginLeft: 2,
-                  borderRadius: 4,
-                  border: '1px solid #ddd',
-                }}
-              />
-            )}
-          </Box>
-        </Box>
+			reader.readAsDataURL(image);
+		} else {
+			const id = await db.posts.add({
+				text,
+				image: null,
+				date: createdAt,
+			});
 
-        {posts.map((post) => (
-          <Card key={post.id}>
-            <CardContent>
-              <Typography variant="body1">{post.content}</Typography>
-              {post.imageUrl && (
-                <Box
-                  component="img"
-                  src={post.imageUrl}
-                  alt="Post Image"
-                  sx={{
-                    maxHeight: '300px',
-                    objectFit: 'contain',
-                    mt: 2,
-                  }}
-                />
-              )}
-              <Box component="div">
-                <Typography variant="caption" color="textSecondary">
-                  Posted at: {post.createdAt.toDate().toLocaleString()}
-                </Typography>
-              </Box>
-            </CardContent>
-            <CardActions sx={{ justifyContent: 'right' }}>
-              <Button
-                size="small"
-                color="error"
-                onClick={() => deletePost(post.id)}
-              >
-                Delete
-              </Button>
-            </CardActions>
-          </Card>
-        ))}
-      </Stack>
-    </Container>
-  );
-};
+			newPost = { id, text, image: null, date: createdAt };
+			setPosts((prev) => [newPost, ...prev]);
+		}
+
+		setImage(null);
+		setText("");
+	};
+
+	const deletePost = async (id) => {
+		if (window.confirm("本当に削除しても良ぇのん？")) {
+			await db.posts.delete(id);
+			setPosts((prev) => prev.filter((post) => post.id !== id));
+		}
+	};
+
+	const handleSelectImage = (e) => {
+		const file = e.target.files[0];
+		if (file) {
+			setImage(file);
+		}
+	};
+
+	return (
+		<Container>
+			<Typography variant="h2" gutterBottom align="center">
+				My SNS APP
+			</Typography>
+			<Stack spacing={2}>
+				<TextField
+					label="今の気分はいかがでしょうか？"
+					multiline
+					fullWidth
+					rows={4}
+					value={text}
+					onChange={(e) => setText(e.target.value)}
+				/>
+				<Box display="flex">
+					<Button
+						variant="outlined"
+						component="label"
+						fullWidth
+						sx={{ mr: 2, height: 48 }}
+					>
+						Upload Image
+						<input
+							type="file"
+							hidden
+							accept="image/png, image/jpg, image/gif"
+							onChange={(e) => handleSelectImage(e)}
+						/>
+					</Button>
+					<Button
+						variant="contained"
+						onClick={handlePost}
+						disabled={!text}
+						sx={{ width: 160, height: 48 }}
+					>
+						Post
+					</Button>
+					{image && (
+						<Box
+							component="img"
+							alt="Preview"
+							src={URL.createObjectURL(image)}
+							sx={{
+								maxWidth: "100%",
+								maxHeight: "200px",
+								marginLeft: 2,
+								borderRadius: 4,
+								border: "1px solid #ddd",
+							}}
+						/>
+					)}
+				</Box>
+
+				{posts.map((post) => (
+					<Card key={post.id} sx={{ padding: 1 }}>
+						<CardContent>
+							<Typography variant="h5" component="p">
+								{post.text}
+							</Typography>
+							{post.image && (
+								<Box
+									component="img"
+									src={post.image}
+									alt="Post Image"
+									sx={{
+										maxHeight: "200px",
+										objectFit: "contain",
+										mt: 2,
+									}}
+								/>
+							)}
+							<Box component="div">
+								<Typography variant="caption" color="primary">
+									{post.date}
+								</Typography>
+							</Box>
+						</CardContent>
+						<CardActions sx={{ justifyContent: "flex-end" }}>
+							<Button
+								size="small"
+								color="error"
+								onClick={() => deletePost(post.id)}
+							>
+								Delete
+							</Button>
+						</CardActions>
+					</Card>
+				))}
+			</Stack>
+		</Container>
+	);
+}
 
 export default App;
