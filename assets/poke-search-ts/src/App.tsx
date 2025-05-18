@@ -16,9 +16,17 @@ const App = () => {
     usePokemonSearch();
 
   // フォーム送信ハンドラ
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    searchPokemon(searchTerm, searchType);
+
+    // 現在の検索語を保存
+    const currentSearchTerm = searchTerm;
+
+    // 検索実行
+    await searchPokemon(currentSearchTerm, searchType);
+
+    // 検索が完了したら入力フォームをクリア
+    setSearchTerm('');
   };
 
   // 検索タイプが変更された時に入力をクリア
