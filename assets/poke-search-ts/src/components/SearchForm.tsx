@@ -22,8 +22,8 @@ const SearchForm: FC<SearchFormProps> = ({
 				type={searchType === "id" ? "number" : "text"}
 				placeholder={
 					searchType === "name"
-						? "Enter Pokémon name (e.g. pikachu)"
-						: "Enter Pokémon ID (e.g. 25)"
+						? "Enter name (e.g. pikachu)"
+						: "Enter ID (e.g. 25)"
 				}
 				value={searchTerm}
 				onChange={(e) => onSearchTermChange(e.target.value)}

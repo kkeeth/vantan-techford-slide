@@ -38,7 +38,7 @@ const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
 
 				<div className="pokemon-details">
 					<div className="detail-item">
-						<span className="detail-label">Height:{pokemon.height / 10}</span>
+						<span className="detail-label">Height:</span>
 						<span>{(pokemon.height / 10).toFixed(1)} m</span>
 					</div>
 					<div className="detail-item">

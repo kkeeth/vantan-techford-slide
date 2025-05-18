@@ -5,6 +5,7 @@ import type { SearchType } from "./types";
 import SearchTypeToggle from "./components/SearchTypeToggle";
 import SearchForm from "./components/SearchForm";
 import PokemonCard from "./components/PokemonCard";
+import SkeletonLoader from "./components/SkeletonLoader";
 import { usePokemonSearch } from "./hooks/usePokemonSearch";
 
 const App = () => {
@@ -48,7 +49,7 @@ const App = () => {
 
 			{error.isError && <div className="error-message">{error.message}</div>}
 
-			{isLoading && <div className="loading">Loading...</div>}
+			{isLoading && <SkeletonLoader />}
 
 			{pokemon && !isLoading && <PokemonCard pokemon={pokemon} />}
 		</div>

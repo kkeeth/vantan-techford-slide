@@ -10,7 +10,7 @@ body {
 
 .app {
 	max-width: 800px;
-	width: 95%;
+	width: 50dvw;
 	margin: 40px auto;
 	padding: 30px;
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -25,14 +25,13 @@ body {
 h1 {
 	text-align: center;
 	color: #e3350d;
-	margin-bottom: 5px;
 	font-size: 2.2rem;
 }
 
 .description {
 	text-align: center;
 	color: #666;
-	margin-bottom: 30px;
+	margin-bottom: 32px;
 }
 
 .search-section {
@@ -88,6 +87,7 @@ h1 {
 .search-form {
 	display: flex;
 	width: 100%;
+	max-width: 360px;
 }
 
 .search-form input {
@@ -136,6 +136,7 @@ h1 {
 	background-color: #ffe6e6;
 	color: #d32f2f;
 	border-radius: 8px;
+	margin-top: 16px;
 	margin-bottom: 20px;
 	text-align: center;
 	font-weight: bold;
@@ -158,6 +159,7 @@ h1 {
 	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 	transition: transform 0.3s;
 	width: 100%;
+	margin-top: 24px;
 }
 
 .pokemon-card:hover {
@@ -231,11 +233,11 @@ h1 {
 .detail-item {
 	margin-bottom: 12px;
 	font-size: 1rem;
+	color: #555;
 }
 
 .detail-label {
 	font-weight: bold;
-	color: #555;
 	margin-right: 8px;
 }
 
@@ -326,8 +328,8 @@ h1 {
 /* レスポンシブ対応強化 */
 @media (max-width: 768px) {
 	.app {
-		margin: 20px auto;
 		padding: 20px 15px;
+		margin: 20px auto;
 		width: 90%;
 	}
 
@@ -337,7 +339,7 @@ h1 {
 
 	.search-type-toggle button {
 		padding: 8px 0;
-		font-size: 14px;
+		font-size: 12px;
 	}
 
 	.search-form input {
@@ -346,8 +348,8 @@ h1 {
 	}
 
 	.search-form button {
-		padding: 10px 15px;
-		font-size: 14px;
+		padding: 10px;
+		font-size: 12px;
 	}
 }
 
@@ -393,14 +395,5 @@ h1 {
 
 	.pokemon-info {
 		padding: 15px;
-	}
-
-	.search-type-toggle button {
-		font-size: 12px;
-	}
-
-	.search-form button {
-		padding: 10px;
-		font-size: 12px;
 	}
 }
