@@ -1,7 +1,32 @@
 const SkeletonLoader = () => {
 	return (
 		<div className="skeleton-card">
-			<div className="skeleton-image" />
+			<div className="skeleton-image-grid">
+				<div className="image-container">
+					<div className="skeleton-sprite" />
+					<div className="sprite-label" style={{ visibility: "hidden" }}>
+						Placeholder
+					</div>
+				</div>
+				<div className="image-container">
+					<div className="skeleton-sprite" />
+					<div className="sprite-label" style={{ visibility: "hidden" }}>
+						Placeholder
+					</div>
+				</div>
+				<div className="image-container">
+					<div className="skeleton-sprite" />
+					<div className="sprite-label" style={{ visibility: "hidden" }}>
+						Placeholder
+					</div>
+				</div>
+				<div className="image-container">
+					<div className="skeleton-sprite" />
+					<div className="sprite-label" style={{ visibility: "hidden" }}>
+						Placeholder
+					</div>
+				</div>
+			</div>
 			<div className="skeleton-info">
 				<div className="skeleton-title" />
 				<div className="skeleton-types">

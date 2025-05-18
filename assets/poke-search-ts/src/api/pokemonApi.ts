@@ -1,28 +1,47 @@
-import type { Pokemon } from "../types";
+import type { Pokemon } from '../types';
+
+// 入力バリデーション用の正規表現
+const NUMERIC_REGEX = /^\d+$/;
+const NAME_REGEX = /^[a-zA-Z-]+$/;
 
 // PokeAPIからポケモンデータを取得する関数
 export const fetchPokemonByName = async (name: string): Promise<Pokemon> => {
-	const response = await fetch(
-		`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().trim()}`,
-	);
+  // 名前は英字とハイフンのみ許可
+  if (!NAME_REGEX.test(name)) {
+    throw new Error(
+      'Invalid name format. Only letters and hyphens are allowed.',
+    );
+  }
 
-	if (!response.ok) {
-		throw new Error("Pokémon not found. Please check the name.");
-	}
+  const response = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase().trim()}`,
+  );
 
-	return await response.json();
+  if (!response.ok) {
+    throw new Error('Pokémon not found. Please check the name.');
+  }
+
+  return await response.json();
 };
 
-export const fetchPokemonById = async (id: number): Promise<Pokemon> => {
-	if (id <= 0) {
-		throw new Error("Pokémon ID must be a positive number.");
-	}
+export const fetchPokemonById = async (id: string): Promise<Pokemon> => {
+  // IDは数字のみ許可
+  if (!NUMERIC_REGEX.test(id)) {
+    throw new Error('Invalid ID format. Only numbers are allowed.');
+  }
 
-	const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+  const numericId = Number.parseInt(id, 10);
+  if (numericId <= 0) {
+    throw new Error('Pokémon ID must be a positive number.');
+  }
 
-	if (!response.ok) {
-		throw new Error("Pokémon not found. Please check the ID.");
-	}
+  const response = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${numericId}`,
+  );
 
-	return await response.json();
+  if (!response.ok) {
+    throw new Error('Pokémon not found. Please check the ID.');
+  }
+
+  return await response.json();
 };

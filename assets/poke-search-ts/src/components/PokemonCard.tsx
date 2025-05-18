@@ -9,14 +9,39 @@ type PokemonCardProps = {
 const PokemonCard: FC<PokemonCardProps> = ({ pokemon }) => {
 	return (
 		<div className="pokemon-card">
-			<div className="pokemon-image">
-				<img
-					src={
-						pokemon.sprites.other["official-artwork"].front_default ||
-						pokemon.sprites.front_default
-					}
-					alt={pokemon.name}
-				/>
+			<div className="pokemon-image-grid">
+				<div className="image-container">
+					<img
+						src={pokemon.sprites.other.showdown.front_default}
+						alt={`${pokemon.name} front view`}
+						className="pokemon-sprite"
+					/>
+					<span className="sprite-label">Front Default</span>
+				</div>
+				<div className="image-container">
+					<img
+						src={pokemon.sprites.other.showdown.front_shiny}
+						alt={`${pokemon.name} front shiny`}
+						className="pokemon-sprite"
+					/>
+					<span className="sprite-label">Front Shiny</span>
+				</div>
+				<div className="image-container">
+					<img
+						src={pokemon.sprites.other.showdown.back_default}
+						alt={`${pokemon.name} back view`}
+						className="pokemon-sprite"
+					/>
+					<span className="sprite-label">Back Default</span>
+				</div>
+				<div className="image-container">
+					<img
+						src={pokemon.sprites.other.showdown.back_shiny}
+						alt={`${pokemon.name} back shiny`}
+						className="pokemon-sprite"
+					/>
+					<span className="sprite-label">Back Shiny</span>
+				</div>
 			</div>
 			<div className="pokemon-info">
 				<h2>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h2>
