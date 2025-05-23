@@ -5,7 +5,7 @@ body {
 }
 
 body {
-  font-family: "Josefin Sans", sans-serif, Futura;
+  font-family: 'Josefin Sans', sans-serif, Futura;
   color: #272343;
 }
 
@@ -19,6 +19,18 @@ a {
 
 section {
   padding: 0 2rem;
+}
+
+h1 {
+  margin-bottom: 2rem !important;
+  background-color: #2b90b6;
+  background-image: linear-gradient(45deg, #4ec5d4 10%, #146b8c 20%);
+  background-size: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
 }
 
 /**
@@ -99,7 +111,7 @@ section.detail::before {
   background-image: url(/styles/cover.png);
   background-size: contain;
   position: absolute;
-  content: "";
+  content: '';
   filter: blur(6px);
   opacity: 0.3;
   top: 0;
