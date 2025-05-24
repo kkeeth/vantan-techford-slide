@@ -33,6 +33,11 @@ h1 {
   -moz-text-fill-color: transparent;
 }
 
+h1 > code {
+  -webkit-text-fill-color: #eb5757;
+  -moz-text-fill-color: #eb5757;
+}
+
 /**
  * Header
  */
