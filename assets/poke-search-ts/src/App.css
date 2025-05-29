@@ -34,16 +34,6 @@ h1 {
   margin-bottom: 32px;
 }
 
-.search-section {
-  width: 100%;
-  max-width: 500px;
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  margin-bottom: 30px;
-}
-
 /* トグルボタンのスタイル更新 */
 .search-type-toggle {
   display: flex;
@@ -171,7 +161,7 @@ h1 {
   gap: 10px;
   flex: 0 0 40%;
   background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
-  padding: 15px;
+  padding: 16px;
 }
 
 .image-container {
@@ -191,7 +181,7 @@ h1 {
 }
 
 .pokemon-sprite {
-  max-width: 96px;
+  /* max-width: 96px; */
   height: auto;
   image-rendering: pixelated; /* ピクセルアートを鮮明に表示 */
 }
