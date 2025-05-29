@@ -2,7 +2,7 @@
 
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f5f5f5;
   padding: 0;
   box-sizing: border-box;
@@ -13,7 +13,7 @@ body {
   width: 50dvw;
   margin: 40px auto;
   padding: 30px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: white;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
@@ -110,9 +110,7 @@ h1 {
   color: white;
   border: none;
   border-radius: 0 5px 5px 0;
-  cursor: pointer;
   transition: background-color 0.3s;
-  font-size: 16px;
   font-weight: bold;
   white-space: nowrap;
 }
