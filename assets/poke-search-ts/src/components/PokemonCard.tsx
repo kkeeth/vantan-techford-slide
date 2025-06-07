@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import type { Pokemon } from "../types";
+import type { Pokemon } from "../types/pokemon";
 import { typeColors } from "../utils/typeColors";
 
 type PokemonCardProps = {

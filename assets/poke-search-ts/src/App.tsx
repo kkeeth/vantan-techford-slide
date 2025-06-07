@@ -1,7 +1,7 @@
 import type { FormEvent } from 'react';
 import { useState } from 'react';
 import './App.css';
-import type { SearchType } from './types';
+import type { SearchType } from './types/pokemon';
 import SearchTypeToggle from './components/SearchTypeToggle';
 import SearchForm from './components/SearchForm';
 import PokemonCard from './components/PokemonCard';

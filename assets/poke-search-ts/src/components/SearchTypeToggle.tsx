@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import type { SearchType } from "../types";
+import type { SearchType } from "../types/pokemon";
 
 type SearchTypeToggleProps = {
   searchType: SearchType;

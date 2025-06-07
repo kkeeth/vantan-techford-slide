@@ -1,4 +1,4 @@
-import type { Pokemon } from '../types';
+import type { Pokemon } from '../types/pokemon';
 
 // 入力バリデーション用の正規表現
 const NUMERIC_REGEX = /^\d+$/;

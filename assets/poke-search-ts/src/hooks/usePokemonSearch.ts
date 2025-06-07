@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Pokemon, SearchResult, SearchError, SearchType } from '../types';
+import type { Pokemon, SearchResult, SearchError, SearchType } from '../types/pokemon';
 import { fetchPokemonByName, fetchPokemonById } from '../api/pokemonApi';
 
 export const usePokemonSearch = () => {
