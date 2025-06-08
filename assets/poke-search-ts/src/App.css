@@ -156,7 +156,7 @@ h1 {
 
 .pokemon-image-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 120px);
   grid-template-rows: repeat(2, 1fr);
   gap: 10px;
   flex: 0 0 40%;
