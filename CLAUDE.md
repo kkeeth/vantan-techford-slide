@@ -57,11 +57,37 @@ Demo apps build with Vite and automatically move their `dist/` output to the cor
 ## File Organization
 
 - `slides/`: Source markdown files for presentations
-- `slides/2024_JS/`: Alternative curriculum slides
+- `slides/2024_JS/`: 古いカリキュラムのスライド
 - `assets/[number]/`: Images and resources for each lesson
 - `assets/[app-name]/`: Complete React demo applications
 - `docs/`: Compiled output for web deployment (slides + demo apps)
-- `typescript-react-curriculum.md`: Full curriculum overview
+- `typescript-react-curriculum.md`: 全てのカリキュラムの流れ（すでにこの流れは破綻しました）
+
+
+## Each Slide Rules
+
+1. 今のヘッダー(h1, h2, h3, h4）は変えない
+2. 型の定義はなるべく `type` で定義する
+   1. もし `interface` になっているものは書き換える
+3. コードブロックは22行くらいがPC画面の表示できる限界行数なので，超える場合は以下のように2カラムにする
+  ```md
+  <div grid="~ cols-2 gap-4">
+  <div>
+  ```
+  コードブロック1
+  ```
+
+  </div>
+  <div>
+
+  ```
+  コードブロック2
+  ```
+
+  </div>
+  </div>
+  ```
+4. コードは新しいものはそのまま書いてよいが，コードの対象が同じファイル（スライドを構成する `.md` ではなく，スライド内で作成中のアプリケーションのコードファイル）を変更する場合はなるべく `diff` 形式で書く
 
 ## Deployment
 
