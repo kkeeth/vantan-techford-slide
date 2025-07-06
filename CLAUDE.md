@@ -97,3 +97,9 @@ Demo apps build with Vite and automatically move their `dist/` output to the cor
 The project uses Vercel with redirects configured in `vercel.json` for proper routing to lesson-specific slide URLs.
 
 ## Others
+
+### TypeScript の型定義のルール
+* `React.FC` は使用しない
+  * 誤： `const Hoge: FC<FUGA> = ({ piyo })`
+  * 正： `const Hoge = ({ piyo }: FUGA)`
+* 配列は `Array<{...}>` ではなく， `{}[]` で定義
