@@ -74,7 +74,7 @@ Demo apps build with Vite and automatically move their `dist/` output to the cor
 4. 複雑なハンズオン部分には「目次」を含める
 
 ### コードブロックの規則
-5. コードブロックは22行くらいがPC画面の表示できる限界行数なので，超える場合は以下のように2カラムにする
+5. コードブロックは24行くらいがPC画面の表示できる限界行数なので，超える場合は以下のように2カラムにする
 
 <div grid="~ cols-2 gap-4">
 <div>
@@ -99,6 +99,7 @@ Demo apps build with Vite and automatically move their `dist/` output to the cor
 
 ### レイアウトと表示
 9. 2カラムレイアウトには `<div grid="~ cols-2 gap-4">` を使用する
+   1.  ただし，`<div grid="~ cols-2 gap-4">` が既に使われているブロックは追加で使用しなくて良い
 10. 左カラム：コード・図表，右カラム：説明という構成を基本とする
 11. 段階的な表示には `<v-clicks>` を使用する
 12. 各論理セクションを `<v-clicks>` で適切に囲む
@@ -124,4 +125,5 @@ The project uses Vercel with redirects configured in `vercel.json` for proper ro
   * 誤： `const Component = ({ prop1, prop2 }: { prop1: string; prop2: number }) => {}`
   * 正： `type ComponentProps = { prop1: string; prop2: number }; const Component = ({ prop1, prop2 }: ComponentProps) => {}`
 * アルファベット（e.g. `abc`）とマルチバイト文字（要は日本語のひらがな・カタカナ・漢字）の間には半角スペースを入れる
+  * アルファベットには，固有名詞も含まれる
   * 例： "React の基本", "TypeScript + React", "DOM の構造"
