@@ -67,10 +67,14 @@ Demo apps build with Vite and automatically move their `dist/` output to the cor
 
 ## Each Slide Rules
 
+### 基本構造
 1. 今のヘッダー(h1, h2, h3, h4）は変えない
-2. 型の定義はなるべく `type` で定義する
-   1. もし `interface` になっているものは書き換える
-3. コードブロックは22行くらいがPC画面の表示できる限界行数なので，超える場合は以下のように2カラムにする
+2. セクション区切りには `layout: section` を使用する
+3. ハンズオン部分は番号付きサブセクション（1.1, 1.2, etc.）で構成する
+4. 複雑なハンズオン部分には「目次」を含める
+
+### コードブロックの規則
+5. コードブロックは22行くらいがPC画面の表示できる限界行数なので，超える場合は以下のように2カラムにする
 
 <div grid="~ cols-2 gap-4">
 <div>
@@ -89,8 +93,19 @@ Demo apps build with Vite and automatically move their `dist/` output to the cor
 </div>
 </div>
 
+6. コードは，新しいものはそのまま書いてよいが，コードの対象が同じファイル（スライドを構成する `.md` ではなく，スライド内で作成中のアプリケーションのコードファイル）を変更する場合はなるべく `diff` 形式で書く
+7. diff ブロックでは必ず `+` (追加) と `-` (削除) を適切に使用する
+8. diff ブロックには変更箇所の前後2-3行のコンテキストを含める
 
-4. コードは，新しいものはそのまま書いてよいが，コードの対象が同じファイル（スライドを構成する `.md` ではなく，スライド内で作成中のアプリケーションのコードファイル）を変更する場合はなるべく `diff` 形式で書く
+### レイアウトと表示
+9. 2カラムレイアウトには `<div grid="~ cols-2 gap-4">` を使用する
+10. 左カラム：コード・図表，右カラム：説明という構成を基本とする
+11. 段階的な表示には `<v-clicks>` を使用する
+12. 各論理セクションを `<v-clicks>` で適切に囲む
+
+### プログレッシブ・ディスクロージャー
+13. コードブロックの段階的表示には `{all|1-2|4-5,11,17|7-16}` 構文を使用する
+14. `<v-clicks>` を使って概念の段階的説明を行う
 
 ## Deployment
 
@@ -102,4 +117,11 @@ The project uses Vercel with redirects configured in `vercel.json` for proper ro
 * `React.FC` は使用しない
   * 誤： `const Hoge: FC<FUGA> = ({ piyo })`
   * 正： `const Hoge = ({ piyo }: FUGA)`
+* 型の定義はなるべく `type` で定義する
+  * もし `interface` になっているものは書き換える
 * 配列は `Array<{...}>` ではなく， `{}[]` で定義
+* コンポーネントの props 型は別途定義する
+  * 誤： `const Component = ({ prop1, prop2 }: { prop1: string; prop2: number }) => {}`
+  * 正： `type ComponentProps = { prop1: string; prop2: number }; const Component = ({ prop1, prop2 }: ComponentProps) => {}`
+* アルファベット（e.g. `abc`）とマルチバイト文字（要は日本語のひらがな・カタカナ・漢字）の間には半角スペースを入れる
+  * 例： "React の基本", "TypeScript + React", "DOM の構造"
