@@ -1,58 +1,48 @@
-import { useState } from 'react';
-import type { Pokemon, SearchResult, SearchError, SearchType } from '../types/pokemon';
-import { fetchPokemonByName, fetchPokemonById } from '../api/pokemonApi';
+import { useState, useCallback } from 'react';
+import { fetchPokemon } from '../api/pokemonApi';
+import type { Pokemon, SearchType, AppError } from '../types/pokemon';
 
-export const usePokemonSearch = () => {
-  const [pokemon, setPokemon] = useState<SearchResult>(null);
+type UsePokemonSearchReturn = {
+  pokemon: Pokemon | null | AppError;
+  error: AppError | null;
+  isLoading: boolean;
+  searchPokemon: (query: string, type: SearchType) => Promise<void>;
+  clearResults: () => void;
+};
+
+export const usePokemonSearch = (): UsePokemonSearchReturn => {
+  const [pokemon, setPokemon] = useState<Pokemon | null | AppError>(null);
+  const [error, setError] = useState<AppError | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<SearchError>({
-    isError: false,
-    message: '',
-  });
 
-  const searchPokemon = async (searchTerm: string, searchType: SearchType) => {
-    // 空の検索語の場合は何もしない
-    if (!searchTerm.trim()) {
-      setError({
-        isError: true,
-        message: 'Please enter a Pokémon name or ID.',
-      });
-      return;
-    }
+  const searchPokemon = useCallback(
+    async (query: string, type: SearchType): Promise<void> => {
+      clearResults();
 
-    setIsLoading(true);
-    setError({ isError: false, message: '' });
-
-    try {
-      let data: Pokemon;
-
-      // 検索タイプに基づいて適切なAPI関数を呼び出す
-      if (searchType === 'name') {
-        data = await fetchPokemonByName(searchTerm.trim());
-      } else {
-        // searchType === 'id'
-        data = await fetchPokemonById(searchTerm.trim());
+      try {
+        setIsLoading(true);
+        const result = await fetchPokemon(query, type);
+        setPokemon(result);
+      } catch (err) {
+        const apiError = err as AppError;
+        setError(apiError);
+      } finally {
+        setIsLoading(false);
       }
+    },
+    [],
+  );
 
-      setPokemon(data);
-    } catch (err) {
-      setPokemon(null);
-      setError({
-        isError: true,
-        message:
-          err instanceof Error ? err.message : 'An unknown error occurred.',
-      });
-    } finally {
-      setIsLoading(false);
-    }
+  const clearResults = () => {
+    setPokemon(null);
+    setError(null);
   };
 
   return {
     pokemon,
-    isLoading,
     error,
+    isLoading,
     searchPokemon,
-    setPokemon,
-    setError,
+    clearResults,
   };
 };

@@ -1,0 +1,65 @@
+/* src/components/SearchForm/style.css */
+.search-form {
+  display: flex;
+  width: 100%;
+  max-width: 360px;
+}
+
+.search-form input {
+  /* 余白をよしなに埋める */
+  flex: 1;
+  /* 入力欄内部に余白をいれる */
+  padding: 12px 16px;
+  /* 枠線の色を決める */
+  border: 1px solid #ddd;
+  /* 左上，左下を角丸に */
+  border-radius: 8px 0 0 8px;
+  /* 入力欄のテキストサイズを決める */
+  font-size: 1rem;
+  /* アニメーションを設定 */
+  transition: border-color 0.3s;
+}
+
+.search-form input:focus {
+  /* ※アクセシビリティの観点で良いとは言えない */
+  outline: none;
+  border-color: #3b5ca8;
+}
+
+.search-form button {
+  /* ボタン内部の余白 */
+  padding: 12px 20px;
+  /* ボタンの背景色と文字色を設定 */
+  background-color: #e3350d;
+  color: white;
+  /* 枠線を消す */
+  border: none;
+  /* 右上，右下を角丸に */
+  border-radius: 0 8px 8px 0;
+  /* アニメーションを設定 */
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+/* マウスオーバーしたときのスタイル */
+.search-form button:hover {
+  background-color: #c62b09;
+}
+
+/* ボタンが非活性のときのスタイル */
+.search-form button:disabled {
+  background-color: #e38f7a;
+  cursor: not-allowed; /* マウスポインタも無効に */
+}
+
+@media (max-width: 768px) {
+  .search-form input {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+
+  .search-form button {
+    padding: 10px;
+    font-size: 12px;
+  }
+}

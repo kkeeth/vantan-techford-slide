@@ -1,122 +1,15 @@
-/* App.css のさらなる更新 */
-
-body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f5f5;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.app {
-  max-width: 800px;
-  width: 50dvw;
-  margin: 40px auto;
-  padding: 30px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: white;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+button {
+  cursor: pointer;
 }
 
 h1 {
-  text-align: center;
   color: #e3350d;
   font-size: 2.2rem;
 }
 
 .description {
-  text-align: center;
   color: #666;
   margin-bottom: 32px;
-}
-
-/* トグルボタンのスタイル更新 */
-.search-type-toggle {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-  width: 100%;
-  flex-direction: row; /* 明示的に横並びに */
-}
-
-.search-type-toggle button {
-  background-color: #f2f2f2;
-  border: 1px solid #ddd;
-  color: #333;
-  padding: 10px 0;
-  cursor: pointer;
-  transition: all 0.3s;
-  font-size: 15px;
-  flex: 1;
-  max-width: 180px;
-  text-align: center;
-}
-
-.search-type-toggle button:first-child {
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  border-right: none;
-}
-
-.search-type-toggle button:last-child {
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-.search-type-toggle button.active {
-  background-color: #3b5ca8;
-  color: white;
-  border-color: #3b5ca8;
-  font-weight: bold;
-}
-
-.search-form {
-  display: flex;
-  width: 100%;
-  max-width: 360px;
-}
-
-.search-form input {
-  flex: 1;
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px 0 0 5px;
-  font-size: 16px;
-  transition: border-color 0.3s;
-}
-
-.search-form input:focus {
-  outline: none;
-  border-color: #3b5ca8;
-}
-
-.search-form button {
-  padding: 12px 20px;
-  background-color: #e3350d;
-  color: white;
-  border: none;
-  border-radius: 0 5px 5px 0;
-  transition: background-color 0.3s;
-  font-weight: bold;
-  white-space: nowrap;
-}
-
-.search-form button:hover {
-  background-color: #c62b09;
-}
-
-.search-form button:disabled {
-  background-color: #e38f7a;
-  cursor: not-allowed;
-}
-
-.result-container {
-  width: 100%;
-  min-height: 200px; /* 最小の高さを確保 */
 }
 
 .error-message {
@@ -131,224 +24,21 @@ h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.loading {
-  text-align: center;
-  color: #666;
-  margin: 30px 0;
-  font-style: italic;
-}
+.app {
+  max-width: 800px;
+  width: 50dvw;
+  margin: 40px auto;
+  padding: 30px;
+  font-family: Josefin Sans, Helvetica, sans-serif;
+  background-color: white;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
 
-/* ポケモンカードの基本スタイル */
-.pokemon-card {
-  display: flex;
-  background-color: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s;
-  width: 100%;
-  margin-top: 24px;
-}
-
-.pokemon-card:hover {
-  transform: translateY(-5px);
-}
-
-.pokemon-image-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 120px);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 10px;
-  flex: 0 0 40%;
-  background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
-  padding: 16px;
-}
-
-.image-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 10px;
-  background-color: rgba(255, 255, 255, 0.7);
-  border-radius: 8px;
-  transition: transform 0.2s;
 }
 
-.image-container:hover {
-  transform: scale(1.05);
-  background-color: rgba(255, 255, 255, 0.9);
-}
-
-.pokemon-sprite {
-  /* max-width: 96px; */
-  height: auto;
-  image-rendering: pixelated; /* ピクセルアートを鮮明に表示 */
-}
-
-.sprite-label {
-  margin-top: 5px;
-  font-size: 0.8rem;
-  color: #666;
-  text-align: center;
-}
-
-.pokemon-info {
-  flex: 1;
-  padding: 25px;
-  background: linear-gradient(135deg, #ffffff 0%, #f7f7f7 100%);
-  min-height: 220px; /* 最小の高さを確保 */
-}
-
-.pokemon-info h2 {
-  margin-top: 0;
-  color: #333;
-  display: inline-block;
-  margin-right: 10px;
-  font-size: 1.8rem;
-}
-
-.pokemon-id {
-  display: inline-block;
-  color: #777;
-  font-size: 1.4rem;
-  margin-top: 0;
-  font-weight: bold;
-}
-
-.pokemon-types {
-  margin: 20px 0;
-}
-
-.type-badge {
-  display: inline-block;
-  padding: 7px 14px;
-  color: white;
-  border-radius: 20px;
-  margin-right: 8px;
-  margin-bottom: 8px; /* 複数行になったときの余白 */
-  font-size: 0.9rem;
-  text-transform: capitalize;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.pokemon-details {
-  margin-top: 25px;
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-}
-
-.detail-item {
-  margin-bottom: 12px;
-  font-size: 1rem;
-  color: #555;
-}
-
-.detail-label {
-  font-weight: bold;
-  margin-right: 8px;
-}
-
-/* スケルトンローディングスタイル */
-.skeleton-card {
-  display: flex;
-  background-color: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  min-height: 300px;
-}
-
-.skeleton-image-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 10px;
-  flex: 0 0 40%;
-  background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
-  padding: 15px;
-}
-
-.skeleton-sprite {
-  height: 96px;
-  width: 96px;
-  background-color: #f0f0f0;
-  border-radius: 8px;
-  animation: pulse 1.5s infinite ease-in-out;
-}
-
-.skeleton-info {
-  flex: 1;
-  padding: 25px;
-}
-
-.skeleton-title {
-  height: 32px;
-  width: 70%;
-  background-color: #f0f0f0;
-  border-radius: 4px;
-  margin-bottom: 20px;
-  animation: pulse 1.5s infinite ease-in-out;
-}
-
-.skeleton-types {
-  display: flex;
-  margin: 20px 0;
-}
-
-.skeleton-badge {
-  height: 30px;
-  width: 80px;
-  background-color: #f0f0f0;
-  border-radius: 20px;
-  margin-right: 10px;
-  animation: pulse 1.5s infinite ease-in-out;
-}
-
-.skeleton-details {
-  margin-top: 25px;
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-}
-
-.skeleton-detail {
-  height: 20px;
-  background-color: #f0f0f0;
-  border-radius: 4px;
-  margin-bottom: 12px;
-  animation: pulse 1.5s infinite ease-in-out;
-}
-
-.skeleton-detail:nth-child(1) {
-  width: 100%;
-}
-
-.skeleton-detail:nth-child(2) {
-  width: 90%;
-}
-
-.skeleton-detail:nth-child(3) {
-  width: 80%;
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.6;
-  }
-}
-
-/* レスポンシブ対応強化 */
 @media (max-width: 768px) {
   .app {
     padding: 20px 15px;
@@ -358,61 +48,6 @@ h1 {
 
   h1 {
     font-size: 1.8rem;
-  }
-
-  .search-type-toggle button {
-    padding: 8px 0;
-    font-size: 12px;
-  }
-
-  .search-form input {
-    padding: 10px 12px;
-    font-size: 14px;
-  }
-
-  .search-form button {
-    padding: 10px;
-    font-size: 12px;
-  }
-
-  .pokemon-sprite {
-    max-width: 80px;
-  }
-
-  .sprite-label {
-    font-size: 0.7rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .pokemon-card,
-  .skeleton-card {
-    flex-direction: column;
-  }
-
-  .pokemon-image-grid {
-    flex: 0 0 auto;
-    width: 100%;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, auto);
-  }
-
-  .pokemon-info h2 {
-    padding: 15px;
-    font-size: 1.5rem;
-  }
-
-  .pokemon-id {
-    font-size: 1.2rem;
-  }
-
-  .type-badge {
-    padding: 5px 10px;
-    font-size: 0.8rem;
-  }
-
-  .detail-item {
-    font-size: 0.9rem;
   }
 }
 
@@ -424,26 +59,5 @@ h1 {
 
   h1 {
     font-size: 1.5rem;
-  }
-
-  .pokemon-image-grid {
-    gap: 5px;
-    padding: 10px;
-  }
-
-  .image-container {
-    padding: 5px;
-  }
-
-  .pokemon-sprite {
-    max-width: 60px;
-  }
-
-  .sprite-label {
-    font-size: 0.6rem;
-  }
-
-  .pokemon-info {
-    padding: 15px;
   }
 }

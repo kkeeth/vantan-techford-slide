@@ -1,38 +1,35 @@
 export type Pokemon = {
-	id: number;
-	name: string;
-	sprites: {
-		other: {
-			// "official-artwork": {
-			// 	front_default: string;
-			// };
-			showdown: {
-				front_default: string;
-				front_shiny: string;
-				back_default: string;
-				back_shiny: string;
-			};
-		};
-	};
-	types: {
-		type: {
-			name: string;
-		};
-	}[];
-	height: number;
-	weight: number;
-	abilities: {
-		ability: {
-			name: string;
-		};
-	}[];
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  sprites: {
+    other: {
+      showdown: {
+        front_default: string | undefined;
+        back_default: string | undefined;
+        front_shiny: string | undefined;
+        back_shiny: string | undefined;
+      };
+    };
+  };
+  types: {
+    type: {
+      name: string;
+      url: string;
+    };
+  }[];
+  abilities: {
+    ability: {
+      name: string;
+      url: string;
+    };
+  }[];
 };
 
-export type SearchResult = Pokemon | null;
+export type SearchType = 'name' | 'id';
 
-export type SearchError = {
-	isError: boolean;
-	message: string;
+export type AppError = {
+  message: string;
+  status: number | undefined;
 };
-
-export type SearchType = "name" | "id";

@@ -1,5 +1,6 @@
-import type { FormEvent, FC } from 'react';
-import type { SearchType } from '../types/pokemon';
+import type { FormEvent, ChangeEvent } from 'react';
+import './style.css';
+import type { SearchType } from '../../types/pokemon';
 
 type SearchFormProps = {
   searchTerm: string;
@@ -9,13 +10,17 @@ type SearchFormProps = {
   onSubmit: (e: FormEvent) => void;
 };
 
-const SearchForm: FC<SearchFormProps> = ({
+const SearchForm = ({
   searchTerm,
   searchType,
   isLoading,
   onSearchTermChange,
   onSubmit,
-}) => {
+}: SearchFormProps) => {
+  const handleTermChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onSearchTermChange(e.target.value);
+  };
+
   return (
     <form onSubmit={onSubmit} className="search-form">
       <input
@@ -26,7 +31,7 @@ const SearchForm: FC<SearchFormProps> = ({
             : 'Enter ID (e.g. 25)'
         }
         value={searchTerm}
-        onChange={(e) => onSearchTermChange(e.target.value)}
+        onChange={handleTermChange}
         min={searchType === 'id' ? 1 : undefined}
       />
       <button type="submit" disabled={isLoading}>

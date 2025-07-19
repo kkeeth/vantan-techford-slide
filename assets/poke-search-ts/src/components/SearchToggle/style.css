@@ -1,0 +1,43 @@
+.search-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.search-toggle button {
+  background-color: #f2f2f2;
+  border: none;
+  color: #333;
+  padding: 10px 0;
+  transition: all 0.3s;
+  font-size: 1rem;
+  flex: 1;
+  max-width: 180px;
+}
+
+/* それぞれボタンの角丸を設定 */
+.search-toggle button:first-child {
+  border-radius: 8px 0 0 8px;
+  border-right: none;
+}
+
+.search-toggle button:last-child {
+  border-radius: 0 8px 8px 0;
+  border-left: none;
+}
+
+/* ボタンがクリックされたときに適用するスタイル */
+.search-toggle button.active {
+  background-color: #3b5ca8;
+  color: white;
+  border-color: #3b5ca8;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .search-toggle button {
+    padding: 8px 0;
+    font-size: 12px;
+  }
+}
