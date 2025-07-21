@@ -1,6 +1,7 @@
 import './style.css';
 import type { Pokemon } from '../../types/pokemon';
 import { typeColors } from '../../utils/typeColors';
+import { formatPokemonName } from '../../utils/formatName';
 
 type PokemonCardProps = {
   pokemon: Pokemon;
@@ -44,7 +45,7 @@ const PokemonCard = ({ pokemon }: PokemonCardProps) => {
         </div>
       </div>
       <div className="pokemon-info">
-        <h2>{pokemon.name}</h2>
+        <h2>{formatPokemonName(pokemon.name)}</h2>
         <p className="pokemon-id">#{pokemon.id}</p>
         <div className="pokemon-types">
           {pokemon.types.map((typeInfo, index) => (

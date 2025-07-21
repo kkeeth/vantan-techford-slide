@@ -13,14 +13,9 @@ type ValidationResult = {
 
 const validateInput = (query: string, type: SearchType): ValidationResult => {
   if (!query) {
-    return {
-      isValid: false,
-      errorMessage:
-        type === 'name'
-          ? 'ポケモン名を入力してください'
-          : 'ポケモン ID を入力してください',
-    };
+    return { isValid: false, errorMessage: '検索語を入力してください' };
   }
+
   if (type === 'name') {
     if (query.length < 2) {
       return { isValid: false, errorMessage: '2文字以上で入力してください' };
@@ -37,19 +32,20 @@ const validateInput = (query: string, type: SearchType): ValidationResult => {
   return { isValid: true, errorMessage: '' };
 };
 
-// PokeAPIからポケモンデータを取得する関数
+const createAppError = (message: string, status: number): AppError => ({
+  message,
+  status,
+});
+
 export const fetchPokemon = async (
   query: string,
   type: SearchType,
-): Promise<Pokemon> => {
+): Promise<Pokemon | AppError> => {
   const trimmedQuery = query.trim();
   const validation = validateInput(trimmedQuery, type);
+
   if (!validation.isValid) {
-    const validationError: AppError = {
-      message: validation.errorMessage,
-      status: 400,
-    };
-    throw validationError;
+    return createAppError(validation.errorMessage, 400);
   }
 
   try {
@@ -59,15 +55,13 @@ export const fetchPokemon = async (
     return response.data;
   } catch (error) {
     if (error instanceof AxiosError) {
-      const apiError: AppError = {
-        message:
-          error.response?.status === 404
-            ? `ポケモン "${query}" が見つかりません`
-            : 'APIエラーが発生しました',
-        status: error.response?.status,
-      };
-      throw apiError;
+      return createAppError(
+        error.response?.status === 404
+          ? `ポケモン "${query}" が見つかりません`
+          : `APIエラーが発生しました (${error.response?.status})`,
+        error.response?.status || 500,
+      );
     }
-    throw error;
+    return createAppError('予期しないエラーが発生しました', 500);
   }
 };

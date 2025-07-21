@@ -3,7 +3,7 @@ import { fetchPokemon } from '../api/pokemonApi';
 import type { Pokemon, SearchType, AppError } from '../types/pokemon';
 
 type UsePokemonSearchReturn = {
-  pokemon: Pokemon | null | AppError;
+  pokemon: Pokemon | null;
   error: AppError | null;
   isLoading: boolean;
   searchPokemon: (query: string, type: SearchType) => Promise<void>;
@@ -11,7 +11,7 @@ type UsePokemonSearchReturn = {
 };
 
 export const usePokemonSearch = (): UsePokemonSearchReturn => {
-  const [pokemon, setPokemon] = useState<Pokemon | null | AppError>(null);
+  const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [error, setError] = useState<AppError | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -22,10 +22,19 @@ export const usePokemonSearch = (): UsePokemonSearchReturn => {
       try {
         setIsLoading(true);
         const result = await fetchPokemon(query, type);
-        setPokemon(result);
+
+        if ('status' in result && 'message' in result) {
+          setError(result);
+        } else {
+          setPokemon(result);
+        }
       } catch (err) {
-        const apiError = err as AppError;
-        setError(apiError);
+        const appErr = err as AppError;
+        // 予期しないエラーの場合
+        setError({
+          message: appErr.message || '予期しないエラーが発生しました',
+          status: appErr.status || 500,
+        });
       } finally {
         setIsLoading(false);
       }
