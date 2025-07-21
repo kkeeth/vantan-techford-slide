@@ -28,8 +28,8 @@ export const usePokemonSearch = (): UsePokemonSearchReturn => {
         } else {
           setPokemon(result);
         }
-      } catch (err) {
-        const appErr = err as AppError;
+      } catch (error) {
+        const appErr = error as AppError;
         // 予期しないエラーの場合
         setError({
           message: appErr.message || '予期しないエラーが発生しました',

@@ -1,7 +1,6 @@
 import axios, { AxiosError } from 'axios';
 import type { Pokemon, AppError, SearchType } from '../types/pokemon';
 
-// 入力バリデーション用の正規表現
 const NUMERIC_REGEX = /^\d+$/;
 const NAME_REGEX = /^[a-zA-Z-]+$/;
 const BASE_URL = 'https://pokeapi.co/api/v2';
@@ -13,7 +12,13 @@ type ValidationResult = {
 
 const validateInput = (query: string, type: SearchType): ValidationResult => {
   if (!query) {
-    return { isValid: false, errorMessage: '検索語を入力してください' };
+    return {
+      isValid: false,
+      errorMessage:
+        type === 'name'
+          ? 'ポケモン名を入力してください'
+          : 'ポケモン ID を入力してください',
+    };
   }
 
   if (type === 'name') {
