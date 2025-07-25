@@ -206,6 +206,7 @@ footer {
   font-size: inherit !important;
 }
 
+.slidev-layout code,
 code[class*='language-'] {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     'Liberation Mono', 'Courier New', monospace;
