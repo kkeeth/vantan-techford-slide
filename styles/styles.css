@@ -206,7 +206,7 @@ footer {
   font-size: inherit !important;
 }
 
-/* pre {
-  border: 1px solid #ccc;
-  border-radius: 4px;
-} */
+code[class*='language-'] {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+}
