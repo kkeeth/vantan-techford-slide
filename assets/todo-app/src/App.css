@@ -1,8 +1,26 @@
+#root {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .todo {
   display: block;
+  width: 70%;
   max-width: 480px;
   margin: 5% auto;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 427px) {
+  .todo {
+    width: 80%;
+  }
+
+  button {
+    max-width: 80px;
+  }
 }
