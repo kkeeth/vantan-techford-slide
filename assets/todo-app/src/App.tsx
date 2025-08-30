@@ -4,23 +4,32 @@ import Title from './Title';
 import AddTask from './components/AddTask';
 import TaskList from './components/TaskList';
 import Filter from './components/Filter';
-import { Task, FilterType } from './types';
+import { Task, FilterType, Priority, Category } from './types';
 
 const initialList: Task[] = [
   {
     id: 1,
     name: 'タスク1',
     isDone: true,
+    priority: 'medium' as Priority,
+    category: 'work' as Category,
+    createdAt: new Date(),
   },
   {
     id: 2,
     name: 'タスク2',
     isDone: true,
+    priority: 'low' as Priority,
+    category: 'personal' as Category,
+    createdAt: new Date(),
   },
   {
     id: 3,
     name: 'タスク3',
     isDone: true,
+    priority: 'high' as Priority,
+    category: 'shopping' as Category,
+    createdAt: new Date(),
   },
 ];
 
@@ -30,12 +39,18 @@ function App() {
   const [id, setId] = useState(initialList[initialList.length - 1].id);
   const [filter, setFilter] = useState<FilterType>('ALL');
   const [error, setError] = useState<string>('');
+  const [priority, setPriority] = useState<Priority>('medium');
+  const [category, setCategory] = useState<Category>('work');
 
   useEffect(() => {
     const items = localStorage.getItem('taskList');
+    const currentId = localStorage.getItem('currentId');
     if (items) {
       const parsedItems: Task[] = JSON.parse(items);
       setTaskList(parsedItems);
+    }
+    if (currentId) {
+      setId(Number(currentId));
     }
   }, []);
 
@@ -48,19 +63,29 @@ function App() {
       (task) => task.name === inputTask,
     )[0];
     if (duplicatedTask?.name) {
-      setError('同じ名前のタスクが存在します．');
+      setError('There exists a task with the same name.');
       return;
     } else {
       setError('');
     }
     const newTaskList = [
       ...taskList,
-      { id: id + 1, name: inputTask, isDone: false },
+      {
+        id: id + 1,
+        name: inputTask,
+        isDone: false,
+        priority,
+        category,
+        createdAt: new Date(),
+      },
     ];
 
     updateTasks(newTaskList);
     setId(id + 1);
     setInputTask('');
+    setPriority('medium');
+    setCategory('work');
+    localStorage.setItem('currentId', String(id + 1));
   };
 
   const handleTaskChange = (index: number) => {
@@ -102,6 +127,10 @@ function App() {
           handleSubmit={handleSubmit}
           setInputTask={setInputTask}
           error={error}
+          priority={priority}
+          setPriority={setPriority}
+          category={category}
+          setCategory={setCategory}
         />
         <hr />
         <Filter onChange={setFilter} value={filter} />

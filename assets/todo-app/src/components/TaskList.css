@@ -5,7 +5,8 @@
 .todo-list li {
   display: flex;
   list-style-type: none;
-  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .todo-list li + li {
@@ -16,14 +17,33 @@
   background-color: #eee;
 }
 
-.todo-list li.done label {
+.todo-list li.done .task-name {
   text-decoration: line-through;
   color: #ccc;
 }
 
-.todo-list label {
+.todo-list button {
+  min-height: 40px;
+}
+
+.priority-label {
+  font-weight: bold;
+  font-size: 0.9rem;
+  color: white;
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+}
+
+.task-name {
   font-size: 120%;
-  margin-left: 1rem;
+  flex: 1;
+}
+
+.category-label {
+  font-size: 0.9rem;
+  color: #666;
+  min-width: 4rem;
+  text-align: right;
 }
 
 .no-task {

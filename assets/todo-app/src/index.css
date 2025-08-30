@@ -28,6 +28,7 @@ button.danger {
 button.danger.delete {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 0 auto;
   margin-top: 1rem;
   border-radius: 0.5rem;

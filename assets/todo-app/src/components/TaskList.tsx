@@ -1,5 +1,11 @@
 import './TaskList.css';
-import { Task, FilterType } from '../types';
+import {
+  Task,
+  FilterType,
+  PRIORITY_LABELS,
+  CATEGORY_LABELS,
+  PRIORITY_COLORS,
+} from '../types';
 
 type TaskListProps = {
   taskList: Task[];
@@ -28,16 +34,21 @@ const TaskList = ({
       {displayTasks.length === 0 && filter === 'ALL' ? (
         <p className="no-task">タスクを追加してください</p>
       ) : (
-        displayTasks.map(({ id, name, isDone }) => (
+        displayTasks.map(({ id, name, isDone, priority, category }) => (
           <li key={id} className={isDone ? 'done' : ''}>
-            <div>
-              <input
-                type="checkbox"
-                checked={isDone}
-                onChange={() => handleTaskChange(id)}
-              />
-              <label>{name}</label>
-            </div>
+            <input
+              type="checkbox"
+              checked={isDone}
+              onChange={() => handleTaskChange(id)}
+            />
+            <span
+              className="priority-label"
+              style={{ backgroundColor: PRIORITY_COLORS[priority] }}
+            >
+              {PRIORITY_LABELS[priority]}
+            </span>
+            <label className="task-name">{name}</label>
+            <span className="category-label">{CATEGORY_LABELS[category]}</span>
             <button className="danger" onClick={() => handleRemoveTask(id)}>
               ×
             </button>
