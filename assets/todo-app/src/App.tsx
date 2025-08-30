@@ -4,14 +4,7 @@ import Title from './Title';
 import AddTask from './components/AddTask';
 import TaskList from './components/TaskList';
 import Filter from './components/Filter';
-
-type Task = {
-  id: number;
-  name: string;
-  isDone: boolean;
-};
-
-type FilterType = 'ALL' | 'TODO' | 'DONE';
+import { Task, FilterType } from './types';
 
 const initialList: Task[] = [
   {

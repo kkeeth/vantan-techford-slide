@@ -1,6 +1,5 @@
 import "./Filter.css";
-
-type FilterType = "ALL" | "TODO" | "DONE"
+import { FilterType } from '../types';
 
 type FilterProps = {
   value: FilterType

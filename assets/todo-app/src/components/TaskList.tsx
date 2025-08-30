@@ -1,12 +1,5 @@
 import './TaskList.css';
-
-type Task = {
-  id: number;
-  name: string;
-  isDone: boolean;
-};
-
-type FilterType = 'ALL' | 'TODO' | 'DONE';
+import { Task, FilterType } from '../types';
 
 type TaskListProps = {
   taskList: Task[];
