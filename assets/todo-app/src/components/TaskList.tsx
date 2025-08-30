@@ -32,7 +32,9 @@ const TaskList = ({
 
   return (
     <ul className="todo-list">
-      {displayTasks.length > 0 ? (
+      {displayTasks.length === 0 && filter === 'ALL' ? (
+        <p className="no-task">タスクを追加してください</p>
+      ) : (
         displayTasks.map(({ id, name, isDone }) => (
           <li key={id} className={isDone ? 'done' : ''}>
             <div>
@@ -48,8 +50,6 @@ const TaskList = ({
             </button>
           </li>
         ))
-      ) : (
-        <p className="no-task">タスクを追加してください</p>
       )}
       <button
         className="danger delete"
