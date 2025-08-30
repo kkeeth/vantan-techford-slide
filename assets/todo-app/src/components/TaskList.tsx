@@ -41,7 +41,7 @@ const TaskList = ({ taskList, handleTaskChange, handleRemoveTask, handleAllRemov
 			))}
 			<button
 				className="danger delete"
-				disabled={todoTasks.length === taskList.length && "done"}
+				disabled={todoTasks.length === taskList.length}
 				onClick={() => handleAllRemoveTask(todoTasks)}
 			>
 				delete all
