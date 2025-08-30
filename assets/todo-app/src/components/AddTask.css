@@ -12,3 +12,10 @@
   padding-left: 1rem;
   border-radius: 4px;
 }
+
+.error-text {
+  color: #cb2431;
+  opacity: 0.8;
+  font-weight: bold;
+  text-align: center;
+}

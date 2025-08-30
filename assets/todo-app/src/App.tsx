@@ -29,6 +29,7 @@ function App() {
   const [taskList, setTaskList] = useState(initialList);
   const [id, setId] = useState(initialList[initialList.length - 1].id);
   const [filter, setFilter] = useState<FilterType>('ALL');
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     const items = localStorage.getItem('taskList');
@@ -42,6 +43,16 @@ function App() {
     e.preventDefault();
     if (inputTask === '') return;
 
+    // duplicate check
+    const duplicatedTask = taskList.filter(
+      (task) => task.name === inputTask,
+    )[0];
+    if (duplicatedTask?.name) {
+      setError('同じ名前のタスクが存在します．');
+      return;
+    } else {
+      setError('');
+    }
     const newTaskList = [
       ...taskList,
       { id: id + 1, name: inputTask, isDone: false },
@@ -90,6 +101,7 @@ function App() {
           inputTask={inputTask}
           handleSubmit={handleSubmit}
           setInputTask={setInputTask}
+          error={error}
         />
         <hr />
         <Filter onChange={setFilter} value={filter} />
