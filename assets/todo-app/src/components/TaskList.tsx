@@ -1,6 +1,22 @@
 import "./TaskList.css";
 
-const TaskList = ({ taskList, handleTaskChange, handleRemoveTask, handleAllRemoveTask, filter }) => {
+type Task = {
+  id: number
+  name: string
+  isDone: boolean
+}
+
+type FilterType = "ALL" | "TODO" | "DONE"
+
+type TaskListProps = {
+  taskList: Task[]
+  handleTaskChange: (id: number) => void
+  handleRemoveTask: (id: number) => void
+  handleAllRemoveTask: (tasks: Task[]) => void
+  filter: FilterType
+}
+
+const TaskList = ({ taskList, handleTaskChange, handleRemoveTask, handleAllRemoveTask, filter }: TaskListProps) => {
 	const todoTasks = taskList.filter(({ isDone }) => !isDone);
 	const displayTasks = taskList.filter(({ isDone }) => {
 		if (filter === "ALL") return true

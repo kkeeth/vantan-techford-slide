@@ -1,7 +1,14 @@
 import "./Filter.css";
 
-const Filter = ({ value, onChange }) => {
-	const handleClick = (key) => {
+type FilterType = "ALL" | "TODO" | "DONE"
+
+type FilterProps = {
+  value: FilterType
+  onChange: (filter: FilterType) => void
+}
+
+const Filter = ({ value, onChange }: FilterProps) => {
+	const handleClick = (key: FilterType) => {
 	  onChange(key)
 	}
 

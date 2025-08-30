@@ -1,6 +1,13 @@
 import './AddTask.css';
+import { FormEvent } from 'react';
 
-const AddTask = ({ inputTask, setInputTask, handleSubmit }) => {
+type AddTaskProps = {
+  inputTask: string
+  setInputTask: (task: string) => void
+  handleSubmit: (e: FormEvent<HTMLFormElement>) => void
+}
+
+const AddTask = ({ inputTask, setInputTask, handleSubmit }: AddTaskProps) => {
 
   return (
     <div className="todo-form">

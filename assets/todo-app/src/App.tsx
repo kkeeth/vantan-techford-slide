@@ -1,11 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, FormEvent } from 'react'
 import './App.css'
 import Title from './Title';
 import AddTask from './components/AddTask';
 import TaskList from './components/TaskList';
 import Filter from './components/Filter';
 
-const initialList = [
+type Task = {
+  id: number
+  name: string
+  isDone: boolean
+}
+
+type FilterType = "ALL" | "TODO" | "DONE"
+
+const initialList: Task[] = [
   {
     id: 1,
     name: 'タスク1',
@@ -27,18 +35,18 @@ function App() {
   const [inputTask, setInputTask] = useState("")
   const [taskList, setTaskList] = useState(initialList)
   const [id, setId] = useState(initialList[initialList.length - 1].id)
-  const [filter, setFilter] = useState("ALL")
+  const [filter, setFilter] = useState<FilterType>("ALL")
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("taskList"))
-    console.log(items)
+    const items = localStorage.getItem("taskList")
     if (items) {
-      setTaskList(items)
+      const parsedItems: Task[] = JSON.parse(items)
+      setTaskList(parsedItems)
     }
   }, [])
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (inputTask === "") return
 
@@ -52,7 +60,7 @@ function App() {
     setInputTask("")
   }
 
-  const handleTaskChange = (index) => {
+  const handleTaskChange = (index: number) => {
     const newTaskList = taskList.map((task) => {
       if (task.id === index) {
         task.isDone = !task.isDone
@@ -63,16 +71,16 @@ function App() {
     setInputTask("")
   }
 
-  const handleAllRemoveTask = (updatedTasks) => {
+  const handleAllRemoveTask = (updatedTasks: Task[]) => {
     updateTasks(updatedTasks)
   }
 
-  const handleRemoveTask = (id) => {
+  const handleRemoveTask = (id: number) => {
     const newTaskList = taskList.filter((task) => task.id !== id)
     updateTasks(newTaskList)
   }
 
-  const updateTasks = (newTaskList) => {
+  const updateTasks = (newTaskList: Task[]) => {
     localStorage.setItem("taskList", JSON.stringify(newTaskList))
     setTaskList(newTaskList)
   }

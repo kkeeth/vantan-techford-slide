@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && rm -rf ../../docs/todo-app && mv dist ../../docs/todo-app",
+    "build": "tsc && vite build && rm -rf ../../docs/todo-app && mv dist ../../docs/todo-app",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -23,6 +24,7 @@
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
     "globals": "^15.9.0",
+    "typescript": "^5.9.2",
     "vite": "^5.4.1"
   }
 }
