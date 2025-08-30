@@ -1,6 +1,6 @@
 import { useState, useEffect, FormEvent } from 'react';
 import './App.css';
-import Title from './Title';
+import Title from './components/Title';
 import AddTask from './components/AddTask';
 import TaskList from './components/TaskList';
 import Filter from './components/Filter';
