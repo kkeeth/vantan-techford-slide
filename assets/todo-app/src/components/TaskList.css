@@ -17,3 +17,15 @@
   font-size: 120%;
   margin-left: 1rem;
 }
+
+.no-task {
+  text-align: center;
+  color: #999;
+  font-size: 18px;
+  margin: 2rem 0;
+  padding: 2rem;
+  background: #f9f9f9;
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  font-style: italic;
+}
