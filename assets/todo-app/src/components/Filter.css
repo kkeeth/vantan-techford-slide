@@ -1,4 +1,12 @@
 .todo-filter {
-  text-align: center;
+  display: flex;
+  justify-content: center;
   margin: 1rem 0 1.2rem 0;
+  gap: 0.5rem;
+}
+
+.todo-filter label {
+  display: flex;
+  gap: 0.2rem;
+  cursor: pointer;
 }

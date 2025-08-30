@@ -35,7 +35,11 @@ const TaskList = ({
         <p className="no-task">タスクを追加してください</p>
       ) : (
         displayTasks.map(({ id, name, isDone, priority, category }) => (
-          <li key={id} className={isDone ? 'done' : ''}>
+          <li
+            key={id}
+            className={isDone ? 'done' : ''}
+            onClick={() => handleTaskChange(id)}
+          >
             <input
               type="checkbox"
               checked={isDone}
@@ -47,9 +51,15 @@ const TaskList = ({
             >
               {PRIORITY_LABELS[priority]}
             </span>
-            <label className="task-name">{name}</label>
+            <span className="task-name">{name}</span>
             <span className="category-label">{CATEGORY_LABELS[category]}</span>
-            <button className="danger" onClick={() => handleRemoveTask(id)}>
+            <button
+              className="danger"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleRemoveTask(id);
+              }}
+            >
               ×
             </button>
           </li>
