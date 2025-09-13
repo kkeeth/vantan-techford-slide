@@ -100,7 +100,7 @@ function App() {
         py: 2,
       }}
     >
-      <Container maxWidth="md">
+      <Container sx={{ maxWidth: '720px', width: '100%' }}>
         <Paper
           elevation={3}
           sx={{
@@ -182,16 +182,24 @@ function App() {
                   📸 画像プレビュー
                 </Typography>
                 <Box
-                  component="img"
-                  alt="Preview"
-                  src={URL.createObjectURL(image)}
                   sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
                     width: '100%',
-                    maxHeight: 200,
-                    objectFit: 'cover',
-                    borderRadius: 2,
                   }}
-                />
+                >
+                  <Box
+                    component="img"
+                    alt="Preview"
+                    src={URL.createObjectURL(image)}
+                    sx={{
+                      maxWidth: '80%',
+                      maxHeight: 200,
+                      objectFit: 'contain',
+                      borderRadius: 2,
+                    }}
+                  />
+                </Box>
               </Paper>
             )}
 
@@ -318,17 +326,26 @@ function App() {
 
                 {post.image && (
                   <Box
-                    component="img"
-                    src={post.image}
-                    alt="Post Image"
                     sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
                       width: '100%',
-                      maxHeight: 300,
-                      objectFit: 'cover',
-                      borderRadius: 2,
-                      boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                      mt: 2,
                     }}
-                  />
+                  >
+                    <Box
+                      component="img"
+                      src={post.image}
+                      alt="Post Image"
+                      sx={{
+                        maxWidth: '80%',
+                        maxHeight: 400,
+                        objectFit: 'contain',
+                        borderRadius: 2,
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                      }}
+                    />
+                  </Box>
                 )}
               </CardContent>
 
