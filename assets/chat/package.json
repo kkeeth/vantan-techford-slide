@@ -16,13 +16,13 @@
     "@mui/material": "^6.5.0",
     "dexie": "^4.2.0",
     "firebase": "^11.10.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
-    "@types/react": "^18.3.24",
-    "@types/react-dom": "^18.3.7",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^4.7.0",
     "eslint": "^9.35.0",
     "eslint-plugin-react": "^7.37.5",
