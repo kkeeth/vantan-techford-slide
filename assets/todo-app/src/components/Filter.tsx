@@ -1,5 +1,5 @@
 import './Filter.css';
-import { FilterType } from '../types';
+import type { FilterType } from '../types';
 
 type FilterProps = {
   value: FilterType;

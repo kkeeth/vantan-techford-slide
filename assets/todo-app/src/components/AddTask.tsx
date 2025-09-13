@@ -1,6 +1,7 @@
 import './AddTask.css';
-import { FormEvent } from 'react';
-import { Priority, Category, PRIORITY_LABELS, CATEGORY_LABELS } from '../types';
+import type { FormEvent } from 'react';
+import type { Priority, Category } from '../types';
+import { PRIORITY_LABELS, CATEGORY_LABELS } from '../types';
 
 type AddTaskProps = {
   inputTask: string;

@@ -1,7 +1,6 @@
 import './TaskList.css';
+import type { Task, FilterType } from '../types';
 import {
-  Task,
-  FilterType,
   PRIORITY_LABELS,
   CATEGORY_LABELS,
   PRIORITY_COLORS,
