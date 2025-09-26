@@ -158,7 +158,7 @@ const App = () => {
       <CssBaseline />
       <Box sx={{ minHeight: '100vh', overflow: 'hidden' }}>
         <Header />
-        <main style={{ paddingTop: 64, paddingLeft: 16, paddingRight: 16 }}>
+        <main style={{ paddingTop: 64 }}>
           <HeroSection />
           <AboutSection skills={skills} />
           <ServicesSection services={services} />
