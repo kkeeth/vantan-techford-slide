@@ -100,7 +100,7 @@ function App() {
         py: 2,
       }}
     >
-      <Container sx={{ maxWidth: '720px', width: '100%' }}>
+      <Container sx={{ maxWidth: '720px' }}>
         <Paper
           elevation={3}
           sx={{
