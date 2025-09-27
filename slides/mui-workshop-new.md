@@ -1,0 +1,1849 @@
+---
+theme: default
+background: https://source.unsplash.com/1920x1080/?gradient
+title: MUI Workshop - ポートフォリオサイト開発
+info: |
+  ## MUI を使ったポートフォリオサイト開発
+  段階的な実装で学ぶReact + TypeScript + Material-UI
+
+  KADOKAWA Dōwango Institute of Technology
+class: text-center
+highlighter: shiki
+lineNumbers: false
+drawings:
+  persist: false
+transition: slide-left
+css: unocss
+---
+
+# MUI を使ったポートフォリオサイト開発
+
+## 段階的な実装で学ぶReact + TypeScript + Material-UI
+
+<div class="pt-12">
+  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
+    始めよう <carbon:arrow-right class="inline"/>
+  </span>
+</div>
+
+<div class="abs-br m-6 flex gap-2">
+  <button @click="$slidev.nav.openInEditor()" title="Open in Editor" class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
+    <carbon:edit />
+  </button>
+  <a href="https://github.com/kkeeth/vantan-techford-slide" target="_blank" alt="GitHub"
+    class="text-xl slidev-icon-btn opacity-50 !border-none !hover:text-white">
+    <carbon-logo-github />
+  </a>
+</div>
+
+<!--
+この講義では，段階的にポートフォリオサイトを構築していきます．
+最初からすべてのコンポーネントを作るのではなく，現実的な開発フローに沿って進めていきます．
+-->
+
+---
+layout: center
+class: text-center
+---
+
+# 今日の目標
+
+## 現実的な開発フローでポートフォリオサイトを構築
+
+- **段階的な実装**: 各コンポーネントを順次追加
+- **動作確認**: 各段階でブラウザで確認
+- **TypeScript活用**: 型安全な開発体験
+- **Material-UI**: 美しいUIコンポーネント
+- **レスポンシブ対応**: モバイル・デスクトップ両対応
+
+---
+layout: section
+---
+
+# 1. プロジェクト初期設定
+
+---
+
+# 1.1 開発環境の準備
+
+<br>
+
+**プロジェクト作成**
+
+```bash
+npm create vite@latest portfolio-site -- --template react-ts
+cd portfolio-site
+npm install
+```
+
+**MUI のインストール**
+
+```bash
+npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/icons-material
+npm install @fontsource/roboto
+```
+
+**開発サーバー起動**
+
+```bash
+npm run dev
+```
+
+※初期設定は省略します．適宜変更してください．
+
+---
+
+## 1.2 最初のApp.tsx（超シンプル版）
+
+**src/App.tsx**
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+
+```tsx
+// 最初は必要最小限から開始
+import { Box, ThemeProvider, createTheme, CssBaseline } from '@mui/material'
+
+// 基本的なテーマ設定
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#5E35B1', // Deep Purple
+    },
+    secondary: {
+      main: '#FF7043', // Orange
+    },
+  },
+})
+```
+
+</div>
+<div>
+
+```tsx
+
+const App = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ minHeight: '100vh', p: 2 }}>
+        <h1>Portfolio Site</h1>
+      </Box>
+    </ThemeProvider>
+  )
+}
+
+export default App
+```
+
+</div>
+</div>
+
+---
+layout: section
+---
+
+# 2. 型定義ファイルの作成
+
+---
+
+## 2.1 型定義ファイルの作成
+
+**src/types.ts**
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+
+```typescript
+// スキル情報の型定義
+export type Skill = {
+  id: string
+  name: string
+  level: number // 1-5
+  category: 'frontend' | 'backend' | 'other'
+}
+
+// サービス情報の型定義
+export type Service = {
+  id: string
+  title: string
+  description: string
+  icon: string
+}
+```
+
+</div>
+<div>
+
+```ts
+// プロジェクト情報の型定義
+export type Project = {
+  id: string
+  title: string
+  description: string
+  image: string
+  tags: string[]
+  url?: string // オプショナル
+}
+
+// お問い合わせフォームの型定義
+export type ContactForm = {
+  name: string
+  email: string
+  message: string
+}
+```
+
+</div>
+</div>
+
+---
+layout: section
+---
+
+# 3. Header コンポーネントの<br/>段階的実装
+
+---
+
+## 3.1 最初のHeader（基本形）
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+**src/components/Header.tsx**
+
+```tsx
+// 最初は基本的なAppBarのみ
+import { AppBar, Toolbar, Typography } from '@mui/material'
+
+const Header = () => {
+  return (
+    <AppBar position="fixed">
+      <Toolbar>
+        <Typography variant="h6" component="div">
+          Portfolio
+        </Typography>
+      </Toolbar>
+    </AppBar>
+  )
+}
+
+export default Header
+```
+
+</div>
+<div>
+
+**App.tsx に追加**
+
+```diff
+  import { Box, ThemeProvider, createTheme, CssBaseline } from '@mui/material'
++ import Header from './components/Header' // ← 追加
+
+  const App = () => {
+    return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Box sx={{ minHeight: '100vh' }}>
++       <Header />
+          <main style={{ paddingTop: 64 }}>
+            <h1>Portfolio Site</h1>
+          </main>
+        </Box>
+      </ThemeProvider>
+    )
+  }
+```
+
+</div>
+</div>
+
+---
+
+## 3.2 ナビゲーションメニューの追加
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+
+```tsx
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Box
+} from '@mui/material'
+
+const menuItems = [
+  { id: 'about', label: 'About' },
+  { id: 'services', label: 'Services' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'contact', label: 'Contact' },
+]
+
+const Header = () => {
+  // スクロール機能
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    element?.scrollIntoView({ behavior: 'smooth' })
+  }
+```
+
+</div>
+<div>
+
+```tsx
+  return (
+    <AppBar
+      position="fixed"
+      sx={{
+        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(10px)',
+      }}
+    >
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 'bold' }}>
+          Portfolio
+        </Typography>
+
+        <Box sx={{ display: 'flex', gap: 2 }}>
+          {menuItems.map((item) => (
+            <Button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              sx={{ color: 'text.primary' }}
+            >
+              {item.label}
+            </Button>
+          ))}
+        </Box>
+      </Toolbar>
+    </AppBar>
+  )
+}
+```
+
+</div>
+</div>
+
+---
+
+## 3.3 レスポンシブ対応（モバイルメニュー）
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+
+```diff
++ import { useState } from 'react'
+  import {
+    AppBar,
+    Toolbar,
+    Typography,
+    Button,
+    Box,
++   IconButton,
++   Drawer,
++   List,
++   ListItem,
++   ListItemButton,
++   ListItemText
+  } from '@mui/material'
++ import MenuIcon from '@mui/icons-material/Menu'
+
+  const Header = () => {
++   const [open, setOpen] = useState(false)
+
+    const scrollToSection = (sectionId: string) => {
+      const element = document.getElementById(sectionId)
+      element?.scrollIntoView({ behavior: 'smooth' })
++     setOpen(false) // モバイルメニューを閉じる
+    }
+```
+
+</div>
+<div>
+
+```diff
+    const menuItems = [
+      // 中略
+    ]
+
+    return (
+      <AppBar position="fixed" sx={{
+        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+        backdropFilter: 'blur(10px)'
+      }}>
+        <Toolbar sx={{ justifyContent: 'space-between' }}>
+          <Typography variant="h6" sx={{ color: 'primary.main', fontWeight: 'bold'}}>
+            Portfolio
+          </Typography>
+
+          {/* デスクトップメニュー（md以上で表示） */}
+-         <Box sx={{ display: 'flex', gap: 2 }}>
++         <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 2 }}>
+            {menuItems.map((item) => (
+              // 中略
+            ))}
+          </Box>
+```
+
+</div>
+</div>
+
+---
+
+## 3.3 レスポンシブ対応（モバイルメニュー）
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+```tsx
+          {/* モバイルメニューボタン（xs～smで表示） */}
+          <IconButton
+            onClick={() => setOpen(true)}
+            sx={{ display: { xs: 'flex', md: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+
+        {/* モバイル用ドロワー */}
+        <Drawer
+          anchor="right"
+          open={open}
+          onClose={() => setOpen(false)}
+        >
+```
+
+</div>
+<div>
+
+```tsx
+          <Box sx={{ width: 240 }}>
+            <List>
+              {menuItems.map((item) => (
+                <ListItem key={item.id}>
+                  <ListItemButton
+                    onClick={() => scrollToSection(item.id)}
+                  >
+                    <ListItemText primary={item.label} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </Drawer>
+      </AppBar>
+    )
+  }
+```
+
+</div>
+</div>
+
+---
+layout: section
+---
+
+# 4. HeroSection コンポーネントの実装
+
+---
+
+## 4.1 基本的なHeroSection
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+**src/components/HeroSection.tsx**
+
+```tsx
+import { Box, Container, Typography } from '@mui/material'
+
+const HeroSection = () => {
+  return (
+    <Box
+      id="hero"
+      sx={{
+        minHeight: '100vh',
+        backgroundColor: 'primary.main',
+        display: 'flex',
+        alignItems: 'center',
+        position: 'relative',
+        color: 'white',
+      }}
+    >
+      <Container maxWidth="lg">
+        <Box sx={{ textAlign: 'center', py: 8 }}>
+```
+
+</div>
+<div>
+
+**続き**
+
+```tsx
+          <Typography
+            variant="h1"
+            sx={{
+              fontSize: { xs: '2.5rem', md: '4rem', lg: '5rem' },
+              mb: 3,
+              fontWeight: 700,
+              textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+            }}
+          >
+            Creative Developer
+          </Typography>
+
+          <Typography
+            variant="h5"
+            sx={{
+              mb: 4,
+              opacity: 0.9,
+              maxWidth: 600,
+              mx: 'auto',
+              lineHeight: 1.6,
+            }}
+          >
+            モダンな技術でユーザーに愛されるWebアプリケーションを作ります
+          </Typography>
+        </Box>
+      </Container>
+    </Box>
+  )
+}
+
+export default HeroSection
+```
+
+</div>
+</div>
+
+---
+
+## 4.1 基本的なHeroSection
+
+**App.tsx に追加**
+
+```diff
+  import { Box, ThemeProvider, createTheme, CssBaseline } from '@mui/material'
+  import Header from './components/Header'
++ import HeroSection from './components/HeroSection'
+
+// 中略
+
+  const App = () => {
+    return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Box sx={{ minHeight: '100vh' }}>
+          <Header />
+          <main style={{ paddingTop: 64 }}>
++         <HeroSection />
+          </main>
+        </Box>
+      </ThemeProvider>
+    )
+  }
+```
+
+---
+
+## 4.2 HeroSection にボタンを追加
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+
+```diff
+- import { Box, Container, Typography } from '@mui/material'
++ import {
++   Box,
++   Container,
++   Typography,
++   Button,
++   Stack
++ } from '@mui/material'
++ import { KeyboardArrowDown as ArrowDownIcon } from '@mui/icons-material'
+
+  const HeroSection = () => {
++   const scrollToAbout = () => {
++     const element = document.getElementById('about')
++     element?.scrollIntoView({ behavior: 'smooth' })
++   }
+```
+
+</div>
+<div>
+
+```tsx
+      <Container maxWidth="lg">
+        <Box sx={{ textAlign: 'center', py: 8 }}>
+          ...
+          <Stack
+            direction={{ xs: 'column', sm: 'row' }}
+            spacing={2}
+            justifyContent="center"
+            sx={{ mb: 6 }}
+          >
+            <Button
+              variant="contained"
+              size="large"
+              onClick={scrollToAbout}
+              sx={{
+                px: 4,
+                py: 1.5,
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                color: 'primary.main',
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 1)',
+                },
+              }}
+            >
+              About Me
+            </Button>
+```
+
+</div>
+</div>
+
+---
+
+## 4.2 HeroSection にボタンを追加
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+```tsx
+            <Button
+              variant="outlined"
+              size="large"
+              sx={{
+                px: 4,
+                py: 1.5,
+                borderColor: 'rgba(255, 255, 255, 0.5)',
+                color: 'white',
+                '&:hover': {
+                  borderColor: 'white',
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                },
+              }}
+            >
+              Get In Touch
+            </Button>
+          </Stack>
+        </Box>
+      </Container>
+```
+
+</div>
+<div>
+
+```tsx
+      {/* スクロールダウンアイコン */}
+      <Box
+        sx={{
+          position: 'absolute',
+          bottom: 30,
+          left: '50%',
+          transform: 'translateX(-50%)',
+          cursor: 'pointer',
+          animation: 'bounce 2s infinite',
+        }}
+        onClick={scrollToAbout}
+      >
+        <ArrowDownIcon sx={{ fontSize: 40, opacity: 0.7 }} />
+      </Box>
+    </Box>
+  )
+}
+```
+
+</div>
+</div>
+
+---
+layout: section
+---
+
+# 5. AboutSection <br/>コンポーネントの実装
+
+---
+
+## 5.1 基本的なAboutSection
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+**src/components/AboutSection.tsx**
+
+```tsx
+import { Box, Container, Typography } from '@mui/material'
+
+const AboutSection = () => {
+  return (
+    <Box
+      id="about"
+      sx={{
+        py: 10,
+        backgroundColor: 'background.paper'
+      }}
+    >
+      <Container maxWidth="lg">
+        <Typography
+          variant="h2"
+          textAlign="center"
+          sx={{ mb: 4 }}
+        >
+          About Me
+        </Typography>
+
+        <Typography
+          variant="body1"
+          textAlign="center"
+          color="text.secondary"
+          sx={{ mb: 8, fontSize: '1.1rem' }}
+        >
+          フロントエンド開発を中心に，ユーザーエクスペリエンスを重視した
+          Webアプリケーションの開発を行っています．
+        </Typography>
+      </Container>
+    </Box>
+  )
+}
+
+export default AboutSection
+```
+
+</div>
+<div>
+
+**App.tsx に追加**
+
+```diff
+  import { Box, ThemeProvider, createTheme, CssBaseline } from '@mui/material'
+  import Header from './components/Header'
+  import HeroSection from './components/HeroSection'
++ import AboutSection from './components/AboutSection'
+
+// 中略
+
+  const App = () => {
+    return (
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ minHeight: '100vh' }}>
+        <Header />
+          <main style={{ paddingTop: 64 }}>
+            <HeroSection />
++           <AboutSection />
+          </main>
+```
+
+</div>
+</div>
+
+---
+
+## 5.2 プロフィール情報の追加
+
+**AboutSection.tsx にプロフィール追加**
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+```tsx
+import {
+  Box,
+  Container,
+  Typography,
+  Avatar,
+  Chip
+} from '@mui/material'
+
+const AboutSection = () => {
+  return (
+    <Box id="about" sx={{ py: 10, backgroundColor: 'background.paper' }}>
+      <Container maxWidth="lg">
+        {/* プロフィールセクション */}
+        <Box
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', md: '1fr 2fr' },
+            gap: 6,
+            alignItems: 'center',
+            mb: 10
+          }}
+        >
+```
+
+</div>
+<div>
+
+```tsx
+          {/* 左側：アバターと基本情報 */}
+          <Box sx={{ textAlign: 'center' }}>
+            <Avatar
+              sx={{
+                width: 200,
+                height: 200,
+                mx: 'auto',
+                mb: 3,
+                fontSize: '4rem',
+                backgroundColor: 'primary.main',
+              }}
+            >
+              👨‍💻
+            </Avatar>
+            <Typography variant="h4" sx={{ fontWeight: 700, mb: 1 }}>
+              田中 太郎
+            </Typography>
+            <Typography variant="h6" color="primary.main" sx={{ mb: 2 }}>
+              Frontend Developer
+            </Typography>
+```
+
+</div>
+</div>
+
+---
+
+## 5.2 プロフィール情報の追加
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+
+```tsx
+            <Box sx={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: 1,
+              justifyContent: 'center'
+            }}>
+              <Chip label="React" size="small" color="primary" variant="outlined" />
+              <Chip label="TypeScript" size="small" color="primary" variant="outlined" />
+              <Chip label="Material-UI" size="small" color="primary" variant="outlined" />
+            </Box>
+          </Box>
+
+          {/* 右側：詳細説明 */}
+          <Box>
+            <Typography variant="h3" sx={{ mb: 3, fontWeight: 700 }}>
+              About Me
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7, fontSize: '1.1rem' }}>
+              // 任意のテキスト
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.7, fontSize: '1.1rem' }}>
+              // 任意のテキスト
+            </Typography>
+```
+
+</div>
+<div>
+
+```tsx
+
+            {/* 統計情報 */}
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mt: 3 }}>
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant="h4" sx={{ fontWeight: 700, color: 'primary.main' }}>
+                  50+
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  プロジェクト
+                </Typography>
+              </Box>
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant="h4" sx={{ fontWeight: 700, color: 'primary.main' }}>
+                  5+
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  年の経験
+                </Typography>
+              </Box>
+              <Box sx={{ textAlign: 'center' }}>
+                <Typography variant="h4" sx={{ fontWeight: 700, color: 'primary.main' }}>
+                  100%
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  満足度
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Container>
+    </Box>
+  )
+}
+```
+
+</div>
+</div>
+
+---
+
+## 5.3 スキルセクションの追加（App.tsx でのデータ管理）
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+**App.tsx でスキルデータを定義**
+
+```diff
+  import { useState } from 'react'
+  // 中略
++ import type { Skill } from './types'
+
++ // スキルデータを定義
++ const skills: Skill[] = [
++   { id: '1', name: 'React', level: 5, category: 'frontend' },
++   { id: '2', name: 'TypeScript', level: 4, category: 'frontend' },
++   { id: '3', name: 'Material-UI', level: 4, category: 'frontend' },
++   { id: '4', name: 'Node.js', level: 3, category: 'backend' },
++   { id: '5', name: 'Figma', level: 4, category: 'other' },
++ ]
+
+// 中略
+
+          <main style={{ paddingTop: 64 }}>
+            <HeroSection />
+-         <AboutSection />
++         <AboutSection skills={skills} />
+          </main>
+        </Box>
+```
+
+</div>
+<div>
+
+**AboutSection.tsx でスキル表示**
+
+```tsx
+import {
+  Box,
+  Container,
+  Typography,
+  Avatar,
+  Chip,
+  Card,
+  CardContent,
+  CardMedia
+} from '@mui/material'
+import type { Skill } from '../types'
+
+type AboutSectionProps = {
+  skills: Skill[]
+}
+
+const AboutSection = ({ skills }: AboutSectionProps) => {
+  return (
+    <Box id="about" sx={{ py: 10, backgroundColor: 'background.paper' }}>
+      <Container maxWidth="lg">
+        {/* 既存のプロフィールセクション */}
+        {/* ... 前のコードは省略 ... */}
+
+        {/* スキルセクション */}
+        <Box sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: '3fr 9fr' },
+          gap: 6
+        }}>
+          <Box>
+            <Typography variant="h2" component="h3" sx={{ mb: 2 }}>
+              Tech Stack
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              よく使う技術やツールの一覧です．
+            </Typography>
+          </Box>
+
+          <Box sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: '1fr',
+              sm: '1fr 1fr',
+              md: 'repeat(3, 1fr)'
+            },
+            gap: 4
+          }}>
+            {skills.map((skill) => (
+              <Card key={skill.id} elevation={0} sx={{
+                border: '1px solid',
+                borderColor: 'divider',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
+                },
+                transition: 'transform 0.25s ease',
+              }}>
+                <CardMedia
+                  component="div"
+                  sx={{
+                    height: 200,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background: skill.category === 'frontend'
+                      ? 'linear-gradient(135deg, #5E35B1 0%, #9575CD 100%)'
+                      : skill.category === 'backend'
+                        ? 'linear-gradient(135deg, #FF7043 0%, #FFA270 100%)'
+                        : 'linear-gradient(135deg, #4CAF50 0%, #81C784 100%)',
+                  }}
+                >
+                  <Typography variant="h3" sx={{
+                    color: 'white',
+                    fontWeight: 800,
+                    textShadow: '0 2px 4px rgba(0,0,0,0.3)',
+                  }}>
+                    {skill.name}
+                  </Typography>
+                </CardMedia>
+                <CardContent sx={{ p: 2 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+                    {skill.name}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {skill.category === 'frontend' ? 'フロントエンド'
+                      : skill.category === 'backend' ? 'バックエンド'
+                        : 'その他'} ・ レベル {skill.level}/5
+                  </Typography>
+                </CardContent>
+              </Card>
+            ))}
+          </Box>
+        </Box>
+      </Container>
+    </Box>
+  )
+}
+```
+
+</div>
+</div>
+
+---
+layout: section
+---
+
+# 6. Services セクションの実装
+
+---
+
+# 6.1 ServicesSection の基本実装
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+**src/components/ServicesSection.tsx**
+
+```tsx
+import {
+  Box,
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  CardMedia,
+  Icon
+} from '@mui/material'
+import type { Service } from '../types'
+
+type ServicesSectionProps = {
+  services: Service[]
+}
+
+const ServicesSection = ({ services }: ServicesSectionProps) => {
+  return (
+    <Box id="services" sx={{ py: 10, backgroundColor: 'white' }}>
+      <Container maxWidth="lg">
+        {/* 3:9 レイアウト */}
+        <Box sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: '3fr 9fr' },
+          columnGap: 6,
+          rowGap: 4,
+          alignItems: 'start',
+        }}>
+          {/* 左側：タイトルと説明 */}
+          <Box>
+            <Box sx={{ position: 'sticky', top: 96 }}>
+              <Typography variant="h2" sx={{ mb: 2 }}>
+                Services
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                お客様のニーズに合わせて最適なソリューションを提供します
+              </Typography>
+            </Box>
+          </Box>
+
+          {/* 右側：サービスカード */}
+          <Box sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: '1fr',
+              sm: '1fr 1fr',
+              md: 'repeat(3, 1fr)',
+            },
+            gap: 4,
+          }}>
+            {services.map((service, index) => (
+              <Card
+                key={service.id}
+                elevation={0}
+                sx={{
+                  height: '100%',
+                  transition: 'transform 0.25s ease',
+                  border: '1px solid',
+                  borderColor: 'divider',
+                  '&:hover': {
+                    transform: 'translateY(-4px)',
+                    boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
+                  },
+                }}
+              >
+                <CardMedia
+                  component="div"
+                  sx={{
+                    height: 200,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    background:
+                      index === 0
+                        ? 'linear-gradient(135deg, #5E35B1 0%, #9575CD 100%)'
+                        : index === 1
+                          ? 'linear-gradient(135deg, #FF7043 0%, #FFA270 100%)'
+                          : 'linear-gradient(135deg, #4CAF50 0%, #81C784 100%)',
+                  }}
+                >
+                  <Icon sx={{ color: 'white', fontSize: 64 }}>
+                    {service.icon}
+                  </Icon>
+                </CardMedia>
+                <CardContent sx={{ p: 2 }}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
+                    {service.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    {service.description}
+                  </Typography>
+                </CardContent>
+              </Card>
+            ))}
+          </Box>
+        </Box>
+      </Container>
+    </Box>
+  )
+}
+
+export default ServicesSection
+```
+
+</div>
+<div>
+
+**App.tsx にサービスデータとコンポーネント追加**
+
+```tsx
+// src/App.tsx
+import { useState } from 'react'
+import { Box, ThemeProvider, createTheme, CssBaseline } from '@mui/material'
+import Header from './components/Header'
+import HeroSection from './components/HeroSection'
+import AboutSection from './components/AboutSection'
+import ServicesSection from './components/ServicesSection' // ← 追加
+import type { Skill, Service } from './types' // ← Service型追加
+
+const theme = createTheme({
+  palette: {
+    primary: { main: '#5E35B1' },
+    secondary: { main: '#FF7043' },
+  },
+})
+
+const skills: Skill[] = [
+  { id: '1', name: 'React', level: 5, category: 'frontend' },
+  { id: '2', name: 'TypeScript', level: 4, category: 'frontend' },
+  { id: '3', name: 'Material-UI', level: 4, category: 'frontend' },
+  { id: '4', name: 'Node.js', level: 3, category: 'backend' },
+  { id: '5', name: 'Figma', level: 4, category: 'other' },
+]
+
+// サービスデータを追加
+const services: Service[] = [
+  {
+    id: '1',
+    title: 'Web Development',
+    description: 'モダンな技術を使用したWebアプリケーション開発',
+    icon: 'code',
+  },
+  {
+    id: '2',
+    title: 'UI/UX Design',
+    description: 'ユーザー中心のインターフェースデザイン',
+    icon: 'design_services',
+  },
+  {
+    id: '3',
+    title: 'Consulting',
+    description: 'プロジェクトの技術選定・アーキテクチャ設計',
+    icon: 'psychology',
+  },
+]
+
+const App = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ minHeight: '100vh' }}>
+        <Header />
+        <main style={{ paddingTop: 64 }}>
+          <HeroSection />
+          <AboutSection skills={skills} />
+          <ServicesSection services={services} /> {/* ← 追加 */}
+        </main>
+      </Box>
+    </ThemeProvider>
+  )
+}
+```
+
+**ポイント**
+- 3:9 グリッドレイアウト
+- Sticky サイドバー
+- インデックスベースの色分け
+
+</div>
+</div>
+
+---
+layout: section
+---
+
+# 7. Projects と Contact セクション
+
+---
+
+# 7.1 ProjectsSection の実装
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+**src/components/ProjectsSection.tsx**
+
+```tsx
+import {
+  Box,
+  Container,
+  Typography,
+  Card,
+  CardContent,
+  CardMedia,
+  CardActions,
+  Chip,
+  Button
+} from '@mui/material'
+import { Launch as LaunchIcon } from '@mui/icons-material'
+import type { Project } from '../types'
+
+type ProjectsSectionProps = {
+  projects: Project[]
+}
+
+const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
+  return (
+    <Box id="projects" sx={{ py: 10, backgroundColor: 'background.paper' }}>
+      <Container maxWidth="lg">
+        <Box sx={{
+          display: 'grid',
+          gridTemplateColumns: { xs: '1fr', md: '3fr 9fr' },
+          gap: 6
+        }}>
+          <Box>
+            <Typography variant="h2" sx={{ mb: 2 }}>
+              Projects
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              これまでに手がけたプロジェクトの一部をご紹介します
+            </Typography>
+          </Box>
+
+          <Box sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: '1fr',
+              sm: '1fr 1fr',
+              md: 'repeat(3, 1fr)'
+            },
+            gap: 4
+          }}>
+            {projects.map((project) => (
+              <Card key={project.id} elevation={0} sx={{
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                border: '1px solid',
+                borderColor: 'divider',
+                '&:hover': {
+                  transform: 'translateY(-4px)',
+                  boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
+                },
+                transition: 'transform 0.25s ease',
+              }}>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image={project.image}
+                  alt={project.title}
+                  sx={{ objectFit: 'cover' }}
+                />
+                <CardContent sx={{ p: 2, flexGrow: 1 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
+                    {project.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                    {project.description}
+                  </Typography>
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                    {project.tags.map((tag) => (
+                      <Chip
+                        key={tag}
+                        label={tag}
+                        size="small"
+                        variant="outlined"
+                        sx={{ fontSize: '0.75rem' }}
+                      />
+                    ))}
+                  </Box>
+                </CardContent>
+                {project.url && (
+                  <CardActions sx={{ p: 2, pt: 0 }}>
+                    <Button
+                      size="small"
+                      startIcon={<LaunchIcon />}
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Project
+                    </Button>
+                  </CardActions>
+                )}
+              </Card>
+            ))}
+          </Box>
+        </Box>
+      </Container>
+    </Box>
+  )
+}
+
+export default ProjectsSection
+```
+
+</div>
+<div>
+
+**App.tsx にプロジェクトデータ追加**
+
+```tsx
+// App.tsx にプロジェクトデータを追加
+const projects: Project[] = [
+  {
+    id: '1',
+    title: 'ECサイト',
+    description: 'React と TypeScript で構築された eコマースサイト',
+    image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=400&h=300',
+    tags: ['React', 'TypeScript', 'MUI'],
+    url: 'https://example.com',
+  },
+  {
+    id: '2',
+    title: 'ポートフォリオサイト',
+    description: 'デザイナー向けのポートフォリオサイト',
+    image: 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=400&h=300',
+    tags: ['React', 'MUI', 'Animation'],
+  },
+  {
+    id: '3',
+    title: 'タスク管理アプリ',
+    description: 'チーム向けのシンプルなタスク管理ツール',
+    image: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=400&h=300',
+    tags: ['React', 'TypeScript', 'Firebase'],
+  },
+]
+
+// App コンポーネントに追加
+const App = () => {
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ minHeight: '100vh' }}>
+        <Header />
+        <main style={{ paddingTop: 64 }}>
+          <HeroSection />
+          <AboutSection skills={skills} />
+          <ServicesSection services={services} />
+          <ProjectsSection projects={projects} /> {/* ← 追加 */}
+        </main>
+      </Box>
+    </ThemeProvider>
+  )
+}
+```
+
+**ポイント**
+- 外部画像（Unsplash）を使用
+- Chip でタグ表示
+- 条件付きでリンクボタン表示
+
+</div>
+</div>
+
+---
+
+# 7.2 ContactSection の実装（フォーム状態管理）
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+**src/components/ContactSection.tsx**
+
+```tsx
+import {
+  Box,
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Card,
+  CardContent
+} from '@mui/material'
+import { Send as SendIcon } from '@mui/icons-material'
+import type { ContactForm } from '../types'
+
+type ContactSectionProps = {
+  contactForm: ContactForm
+  onFormChange: (form: ContactForm) => void
+  onSubmit: (form: ContactForm) => void
+}
+
+const ContactSection = ({
+  contactForm,
+  onFormChange,
+  onSubmit
+}: ContactSectionProps) => {
+  const handleInputChange = (field: keyof ContactForm) => (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    onFormChange({
+      ...contactForm,
+      [field]: e.target.value
+    })
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+
+    if (!contactForm.name || !contactForm.email || !contactForm.message) {
+      alert('すべての項目を入力してください')
+      return
+    }
+
+    onSubmit(contactForm)
+  }
+
+  return (
+    <Box id="contact" sx={{ py: 10, backgroundColor: 'white' }}>
+      <Container maxWidth="md">
+        <Typography variant="h2" textAlign="center" sx={{ mb: 2 }}>
+          Contact
+        </Typography>
+        <Typography
+          variant="body1"
+          textAlign="center"
+          color="text.secondary"
+          sx={{ mb: 6 }}
+        >
+          プロジェクトのご相談やお問い合わせはこちらから
+        </Typography>
+
+        <Card elevation={3} sx={{ maxWidth: 600, mx: 'auto' }}>
+          <CardContent sx={{ p: 4 }}>
+            <Box component="form" onSubmit={handleSubmit}>
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+                <TextField
+                  fullWidth
+                  label="お名前"
+                  value={contactForm.name}
+                  onChange={handleInputChange('name')}
+                  required
+                />
+                <TextField
+                  fullWidth
+                  label="メールアドレス"
+                  type="email"
+                  value={contactForm.email}
+                  onChange={handleInputChange('email')}
+                  required
+                />
+                <TextField
+                  fullWidth
+                  label="メッセージ"
+                  multiline
+                  rows={6}
+                  value={contactForm.message}
+                  onChange={handleInputChange('message')}
+                  required
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  size="large"
+                  startIcon={<SendIcon />}
+                  sx={{ py: 1.5, mt: 2 }}
+                >
+                  送信する
+                </Button>
+              </Box>
+            </Box>
+          </CardContent>
+        </Card>
+      </Container>
+    </Box>
+  )
+}
+
+export default ContactSection
+```
+
+</div>
+<div>
+
+**App.tsx で状態管理**
+
+```tsx
+// App.tsx
+import { useState } from 'react'
+import { Box, ThemeProvider, createTheme, CssBaseline } from '@mui/material'
+import Header from './components/Header'
+import HeroSection from './components/HeroSection'
+import AboutSection from './components/AboutSection'
+import ServicesSection from './components/ServicesSection'
+import ProjectsSection from './components/ProjectsSection'
+import ContactSection from './components/ContactSection' // ← 追加
+import type { Skill, Service, Project, ContactForm } from './types'
+
+// ... 既存のデータ定義
+
+const App = () => {
+  // Contact フォームの状態管理
+  const [contactForm, setContactForm] = useState<ContactForm>({
+    name: '',
+    email: '',
+    message: '',
+  })
+
+  // フォーム送信処理
+  const handleContactSubmit = (formData: ContactForm) => {
+    console.log('お問い合わせを受け付けました:', formData)
+    alert('お問い合わせを受け付けました．')
+
+    // フォームリセット
+    setContactForm({ name: '', email: '', message: '' })
+  }
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ minHeight: '100vh' }}>
+        <Header />
+        <main style={{ paddingTop: 64 }}>
+          <HeroSection />
+          <AboutSection skills={skills} />
+          <ServicesSection services={services} />
+          <ProjectsSection projects={projects} />
+          <ContactSection
+            contactForm={contactForm}
+            onFormChange={setContactForm}
+            onSubmit={handleContactSubmit}
+          /> {/* ← 追加 */}
+        </main>
+      </Box>
+    </ThemeProvider>
+  )
+}
+```
+
+**ポイント**
+- React の useState でフォーム状態管理
+- バリデーション機能
+- 送信後のフォームリセット
+
+</div>
+</div>
+
+---
+layout: section
+---
+
+# 8. Footer の追加と最終統合
+
+---
+
+# 8.1 Footer コンポーネントと最終的な App.tsx
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+**src/components/Footer.tsx**
+
+```tsx
+import { Box, Container, Typography } from '@mui/material'
+
+const Footer = () => {
+  return (
+    <Box
+      component="footer"
+      sx={{
+        backgroundColor: 'background.default',
+        borderTop: '1px solid',
+        borderColor: 'divider',
+        py: 6,
+      }}
+    >
+      <Container maxWidth={false}>
+        <Typography variant="body2" textAlign="center" color="text.secondary">
+          © 2024 Portfolio. Built with React + Material-UI
+        </Typography>
+      </Container>
+    </Box>
+  )
+}
+
+export default Footer
+```
+
+</div>
+<div>
+
+**最終的な App.tsx**
+
+```tsx
+// src/App.tsx（完成版）
+import { useState } from 'react'
+import { Box, ThemeProvider, createTheme, CssBaseline } from '@mui/material'
+import Header from './components/Header'
+import HeroSection from './components/HeroSection'
+import AboutSection from './components/AboutSection'
+import ServicesSection from './components/ServicesSection'
+import ProjectsSection from './components/ProjectsSection'
+import ContactSection from './components/ContactSection'
+import Footer from './components/Footer' // ← 最後に追加
+import type { Skill, Service, Project, ContactForm } from './types'
+
+// 拡張されたテーマ設定
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#5E35B1',
+      light: '#9575CD',
+      dark: '#4527A0',
+    },
+    secondary: {
+      main: '#FF7043',
+      light: '#FFA270',
+      dark: '#D84315',
+    },
+    background: {
+      default: '#FAFAFB',
+      paper: '#FFFFFF',
+    },
+  },
+  typography: {
+    fontFamily: 'Inter, Roboto, Arial, sans-serif',
+    h1: { fontWeight: 800 },
+    h2: { fontWeight: 700 },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: { borderRadius: 999 },
+      },
+    },
+  },
+})
+
+// 全データ定義
+const skills: Skill[] = [...]
+const services: Service[] = [...]
+const projects: Project[] = [...]
+
+const App = () => {
+  const [contactForm, setContactForm] = useState<ContactForm>({
+    name: '',
+    email: '',
+    message: '',
+  })
+
+  const handleContactSubmit = (formData: ContactForm) => {
+    console.log('お問い合わせを受け付けました:', formData)
+    alert('お問い合わせを受け付けました．')
+    setContactForm({ name: '', email: '', message: '' })
+  }
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Box sx={{ minHeight: '100vh' }}>
+        <Header />
+        <main style={{ paddingTop: 64 }}>
+          <HeroSection />
+          <AboutSection skills={skills} />
+          <ServicesSection services={services} />
+          <ProjectsSection projects={projects} />
+          <ContactSection
+            contactForm={contactForm}
+            onFormChange={setContactForm}
+            onSubmit={handleContactSubmit}
+          />
+        </main>
+        <Footer /> {/* ← 最後に追加 */}
+      </Box>
+    </ThemeProvider>
+  )
+}
+
+export default App
+```
+
+</div>
+</div>
+
+---
+layout: section
+---
+
+# 完成！実装の振り返り
+
+---
+
+# 段階的実装の流れまとめ
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+**実装順序**
+
+1. **プロジェクト初期設定**
+   - Vite + React + TypeScript
+   - MUI インストール
+   - 基本的な App.tsx
+
+2. **型定義ファイル作成**
+   - データ構造の明確化
+   - TypeScript の恩恵
+
+3. **Header コンポーネント**
+   - 基本的な AppBar
+   - ナビゲーションメニュー
+   - レスポンシブ対応
+
+4. **HeroSection コンポーネント**
+   - 基本レイアウト
+   - ボタンとアニメーション
+
+5. **AboutSection コンポーネント**
+   - プロフィール情報
+   - スキルカード表示
+
+</div>
+<div>
+
+6. **ServicesSection コンポーネント**
+   - 3:9 グリッドレイアウト
+   - カードコンポーネント
+
+7. **ProjectsSection コンポーネント**
+   - 画像付きプロジェクトカード
+   - タグ表示
+
+8. **ContactSection コンポーネント**
+   - フォーム状態管理
+   - バリデーション
+
+9. **Footer コンポーネント**
+   - シンプルなフッター
+
+**重要な特徴**
+
+- **段階的実装**: 各コンポーネントを順次追加
+- **動作確認**: 各段階でブラウザ確認
+- **現実的**: 実際の開発フローに近い
+- **型安全**: TypeScript の活用
+
+</div>
+</div>
+
+---
+layout: center
+class: text-center
+---
+
+# お疲れさまでした！
+
+## 美しいポートフォリオサイトが完成しました
+
+<div class="pt-12">
+  <span class="text-6xl">🎉</span>
+</div>
+
+**主な学習内容**
+- 段階的な React + TypeScript 開発
+- Material-UI コンポーネント活用
+- レスポンシブデザイン実装
+- 状態管理とイベント処理
+
+<div class="pt-8">
+  <span class="text-xl">質問があれば気軽にお聞きください</span>
+</div>
+
+---
+layout: center
+---
+
+# リソース集
+
+<div grid="~ cols-2 gap-8">
+
+## 📚 公式ドキュメント
+- [MUI 公式サイト](https://mui.com/)
+- [React 公式ドキュメント](https://react.dev/)
+- [TypeScript ドキュメント](https://www.typescriptlang.org/)
+
+## 🛠 便利なツール
+- [MUI Theme Creator](https://zenoo.github.io/mui-theme-creator/)
+- [Material Design Icons](https://mui.com/material-ui/material-icons/)
+- [Color Tool](https://material.io/resources/color/)
+
+</div>
+
+<div grid="~ cols-2 gap-8" class="mt-8">
+
+## 📖 学習リソース
+- [MUI コンポーネント一覧](https://mui.com/material-ui/all-components/)
+- [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/)
+
+## 🎯 実践プロジェクト
+- [今日作成したコード](https://github.com/kkeeth/vantan-techford-slide/tree/main/assets/homepage)
+- [ポートフォリオサイトデモ](https://kkeeth.github.io/vantan-techford-slide/homepage)
+
+</div>
