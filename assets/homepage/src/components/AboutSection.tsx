@@ -83,17 +83,15 @@ const AboutSection = ({ skills }: AboutSectionProps) => {
                 variant="body1"
                 sx={{ mb: 3, lineHeight: 1.7, fontSize: '1.1rem' }}
               >
-                フロントエンド開発を中心に，ユーザーエクスペリエンスを重視したWebアプリケーションの開発を行っています．
-                React, TypeScript, Material-UI
-                などのモダンな技術スタックを使用して，
-                パフォーマンスとユーザビリティを兼ね備えたプロダクトを作ることを心がけています．
+                フロントエンド開発を中心に，ユーザーエクスペリエンスを重視したWebアプリケーションの開発を行っています．React,
+                TypeScript,
+                Material-UIなどのモダンな技術スタックを使用して，パフォーマンスとユーザビリティを兼ね備えたプロダクトを作ることを心がけています．
               </Typography>
               <Typography
                 variant="body1"
                 sx={{ mb: 3, lineHeight: 1.7, fontSize: '1.1rem' }}
               >
-                5年以上の開発経験を持ち，スタートアップから大企業まで様々な規模のプロジェクトに携わってきました．
-                常に最新の技術動向をキャッチアップし，チーム開発でのコミュニケーションを大切にしています．
+                5年以上の開発経験を持ち，スタートアップから大企業まで様々な規模のプロジェクトに携わってきました．常に最新の技術動向をキャッチアップし，チーム開発でのコミュニケーションを大切にしています．
               </Typography>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, mt: 3 }}>
                 <Box sx={{ textAlign: 'center' }}>
