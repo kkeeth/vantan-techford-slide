@@ -107,8 +107,7 @@ Demo apps build with Vite and automatically move their `dist/` output to the cor
 1. 2カラムレイアウトには `<div grid="~ cols-2 gap-4">` を使用する
     - ただし，`<div grid="~ cols-2 gap-4">` が既に使われているブロックは追加で使用しなくて良い
 2. 左カラム：コード・図表，右カラム：説明という構成を基本とする
-3. 段階的な表示には `<v-clicks>` を使用する
-4. 各論理セクションを `<v-clicks>` で適切に囲む
+
 
 ### プログレッシブ・ディスクロージャー
 * コードブロックの段階的表示には `{all|1-2|4-5,11,17|7-16}` 構文を使用する

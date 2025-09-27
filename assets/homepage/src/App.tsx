@@ -13,13 +13,13 @@ import type { Service, Skill, Project, ContactForm } from './types';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#5E35B1', // deep purple tone similar to Otis Kit vibes
+      main: '#5E35B1',
       light: '#9575CD',
       dark: '#4527A0',
       contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#FF7043', // warm accent
+      main: '#FF7043',
       light: '#FFA270',
       dark: '#D84315',
       contrastText: '#FFFFFF',

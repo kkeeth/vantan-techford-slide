@@ -11,14 +11,28 @@ const HeroSection = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        backgroundColor: 'primary.main',
+        backgroundImage:
+          'url("https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=2074&q=80")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
         display: 'flex',
         alignItems: 'center',
         position: 'relative',
         color: 'white',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          zIndex: 1,
+        },
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
         <Box sx={{ textAlign: 'center', py: 8 }}>
           <Typography
             variant="h1"
@@ -100,6 +114,7 @@ const HeroSection = () => {
           transform: 'translateX(-50%)',
           cursor: 'pointer',
           animation: 'bounce 2s infinite',
+          zIndex: 2,
         }}
         onClick={scrollToAbout}
       >

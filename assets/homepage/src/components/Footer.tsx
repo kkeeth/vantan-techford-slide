@@ -13,7 +13,7 @@ const Footer = () => {
     >
       <Container maxWidth={false}>
         <Typography variant="body2" textAlign="center" color="text.secondary">
-          © 2024 Portfolio. Built with React + Material-UI
+          © 2025 Portfolio. Built with React + Material-UI
         </Typography>
       </Container>
     </Box>
