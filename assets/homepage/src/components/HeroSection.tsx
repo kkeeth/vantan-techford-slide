@@ -11,8 +11,7 @@ const HeroSection = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        backgroundImage:
-          'url("https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=2074&q=80")',
+        backgroundImage: 'url("https://picsum.photos/1920/1080")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
