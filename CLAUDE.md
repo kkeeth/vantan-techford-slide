@@ -75,7 +75,7 @@ Demo apps build with Vite and automatically move their `dist/` output to the cor
 5. 句読点は基本的に半角の「.（ドット）」と「,（カンマ）」
 
 ### コードブロックの規則
-5. コードブロックは24行くらいがPC画面の表示できる限界行数なので，超える場合は以下のように2カラムにする
+5. コードブロックは23行くらいがPC画面の表示できる限界行数なので，超える場合は以下のように2カラムにする
 
 <div grid="~ cols-2 gap-4">
 <div>

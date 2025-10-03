@@ -9,10 +9,12 @@ cp slides/5.md ./ && slidev build -o dist/5 --base /5/ 5.md && rm 5.md
 cp slides/11.md ./ && slidev build -o dist/11 --base /11/ 11.md && rm 11.md
 cp slides/12.md ./ && slidev build -o dist/12 --base /12/ 12.md && rm 12.md
 cp slides/14.md ./ && slidev build -o dist/14 --base /14/ 14.md && rm 14.md
-# cp slides/8.md ./ && slidev build -o dist/8 --base /8/ 8.md && rm 8.md
-# cp slides/9.md ./ && slidev build -o dist/9 --base /9/ 9.md && rm 9.md
-# cp slides/10.md ./ && slidev build -o dist/10 --base /10/ 10.md && rm 10.md
-# cp slides/20.md ./ && slidev build -o dist/20 --base /20/ 20.md && rm 20.md
+cp slides/15.md ./ && slidev build -o dist/15 --base /15/ 15.md && rm 15.md
+cp slides/16.md ./ && slidev build -o dist/16 --base /16/ 16.md && rm 16.md
+cp slides/17.md ./ && slidev build -o dist/17 --base /17/ 17.md && rm 17.md
+cp slides/18.md ./ && slidev build -o dist/18 --base /18/ 18.md && rm 18.md
+cp slides/19.md ./ && slidev build -o dist/19 --base /19/ 19.md && rm 19.md
+cp slides/20.md ./ && slidev build -o dist/20 --base /20/ 20.md && rm 20.md
 # cp slides/23.md ./ && slidev build -o dist/23 --base /23/ 23.md && rm 23.md
 # slidev build -o dist/15 --base /15/ slides/15.md
 
