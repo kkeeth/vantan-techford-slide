@@ -11,7 +11,6 @@ import {
   CardContent,
   CardActions,
   Box,
-  Avatar,
   Fab,
   Paper,
   Divider,
@@ -21,13 +20,22 @@ import {
   Send as SendIcon,
   Image as ImageIcon,
   Delete as DeleteIcon,
-  Person as PersonIcon,
 } from '@mui/icons-material';
 
 const db = new Dexie('SocialApp'); //データベース名
 db.version(1).stores({
   posts: '++id, text, image, createdAt', // テーブル名，カラム
 });
+
+// Color palette
+const colors = {
+  primary: '#3B82F6', // Blue
+  secondary: '#10B981', // Emerald
+  gradient: 'linear-gradient(135deg, #3B82F6 0%, #10B981 100%)',
+  gradientHover: 'linear-gradient(135deg, #2563EB 0%, #059669 100%)',
+  surface: 'rgba(255, 255, 255, 0.95)',
+  background: 'linear-gradient(135deg, #F0F9FF 0%, #ECFDF5 100%)',
+};
 
 function App() {
   const [text, setText] = useState('');
@@ -96,33 +104,49 @@ function App() {
     <Box
       sx={{
         minHeight: '100vh',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        py: 2,
+        py: { xs: 1, sm: 2 },
+        px: { xs: 1, sm: 2 },
       }}
     >
-      <Container sx={{ maxWidth: '720px' }}>
+      <Container
+        sx={{ maxWidth: { xs: '100%', sm: '720px' }, px: { xs: 0, sm: 3 } }}
+      >
         <Paper
           elevation={3}
           sx={{
-            borderRadius: 4,
+            borderRadius: { xs: 0, sm: 4 },
             overflow: 'hidden',
-            mb: 3,
-            background: 'linear-gradient(145deg, #ffffff 0%, #f8f9ff 100%)',
+            mb: { xs: 2, sm: 3 },
+            background: colors.surface,
+            backdropFilter: 'blur(20px)',
           }}
         >
           <Box
             sx={{
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              background: colors.gradient,
               color: 'white',
-              py: 3,
-              px: 3,
+              py: { xs: 2, sm: 3 },
+              px: { xs: 2, sm: 3 },
               textAlign: 'center',
             }}
           >
-            <Typography variant="h3" sx={{ fontWeight: 600, mb: 1 }}>
-              💬 My SNS APP
+            <Typography
+              variant="h3"
+              sx={{
+                fontWeight: 600,
+                mb: 1,
+                fontSize: { xs: '1.8rem', sm: '3rem' },
+              }}
+            >
+              💬 チャットアプリ
             </Typography>
-            <Typography variant="subtitle1" sx={{ opacity: 0.9 }}>
+            <Typography
+              variant="subtitle1"
+              sx={{
+                opacity: 0.9,
+                fontSize: { xs: '0.9rem', sm: '1rem' },
+              }}
+            >
               今の気持ちをシェアしよう
             </Typography>
           </Box>
@@ -131,49 +155,50 @@ function App() {
         <Paper
           elevation={2}
           sx={{
-            borderRadius: 3,
-            p: 3,
-            mb: 3,
-            background: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(10px)',
+            borderRadius: { xs: 2, sm: 3 },
+            p: { xs: 2, sm: 3 },
+            mb: { xs: 2, sm: 3 },
+            background: colors.surface,
+            backdropFilter: 'blur(20px)',
+            border: '1px solid rgba(59, 130, 246, 0.1)',
           }}
         >
-          <Stack spacing={3}>
-            <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2 }}>
-              <Avatar
-                sx={{
-                  width: 48,
-                  height: 48,
-                  background:
-                    'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                }}
-              >
-                <PersonIcon />
-              </Avatar>
-              <TextField
-                label="今の気分はいかがでしょうか？"
-                multiline
-                fullWidth
-                rows={4}
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                variant="outlined"
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: 2,
-                    '&:hover fieldset': {
-                      borderColor: '#667eea',
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#667eea',
-                    },
+          <Stack spacing={{ xs: 2, sm: 3 }}>
+            <TextField
+              label="今の気分はいかがでしょうか？"
+              multiline
+              fullWidth
+              rows={4}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              variant="outlined"
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: 2,
+                  backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                  '&:hover fieldset': {
+                    borderColor: colors.primary,
                   },
-                }}
-              />
-            </Box>
+                  '&.Mui-focused fieldset': {
+                    borderColor: colors.primary,
+                  },
+                },
+                '& .MuiInputLabel-root.Mui-focused': {
+                  color: colors.primary,
+                },
+              }}
+            />
 
             {image && (
-              <Paper elevation={2} sx={{ p: 2, borderRadius: 2 }}>
+              <Paper
+                elevation={2}
+                sx={{
+                  p: 2,
+                  borderRadius: 2,
+                  background: 'rgba(255, 255, 255, 0.8)',
+                  border: '1px solid rgba(59, 130, 246, 0.1)',
+                }}
+              >
                 <Typography
                   variant="body2"
                   color="text.secondary"
@@ -203,20 +228,29 @@ function App() {
               </Paper>
             )}
 
-            <Box sx={{ display: 'flex', gap: 2, alignItems: 'center' }}>
+            <Box
+              sx={{
+                display: 'flex',
+                gap: 2,
+                alignItems: 'center',
+                flexDirection: { xs: 'column', sm: 'row' },
+              }}
+            >
               <Button
                 variant="outlined"
                 component="label"
                 startIcon={<ImageIcon />}
                 sx={{
                   flex: 1,
+                  width: { xs: '100%', sm: 'auto' },
                   height: 48,
                   borderRadius: 2,
-                  borderColor: '#667eea',
-                  color: '#667eea',
+                  borderColor: colors.primary,
+                  color: colors.primary,
+                  backgroundColor: 'rgba(255, 255, 255, 0.8)',
                   '&:hover': {
-                    borderColor: '#764ba2',
-                    backgroundColor: 'rgba(102, 126, 234, 0.04)',
+                    borderColor: colors.secondary,
+                    backgroundColor: 'rgba(59, 130, 246, 0.04)',
                   },
                 }}
               >
@@ -235,14 +269,12 @@ function App() {
                 disabled={!text}
                 size="large"
                 sx={{
-                  background: text
-                    ? 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
-                    : undefined,
+                  background: text ? colors.gradient : undefined,
                   '&:hover': {
-                    background: text
-                      ? 'linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%)'
-                      : undefined,
+                    background: text ? colors.gradientHover : undefined,
                   },
+                  transition: 'all 0.3s ease',
+                  transform: text ? 'scale(1.05)' : 'scale(1)',
                 }}
               >
                 <SendIcon />
@@ -251,74 +283,49 @@ function App() {
           </Stack>
         </Paper>
 
-        <Stack spacing={3}>
+        <Stack spacing={{ xs: 2, sm: 3 }}>
           {posts.map((post) => (
             <Card
               key={post.id}
               elevation={3}
               sx={{
-                borderRadius: 3,
+                borderRadius: { xs: 2, sm: 3 },
                 overflow: 'hidden',
-                background: 'rgba(255, 255, 255, 0.95)',
-                backdropFilter: 'blur(10px)',
+                background: colors.surface,
+                backdropFilter: 'blur(20px)',
+                border: '1px solid rgba(59, 130, 246, 0.1)',
                 transition: 'all 0.3s ease',
                 '&:hover': {
-                  transform: 'translateY(-2px)',
-                  boxShadow: '0 8px 25px rgba(102, 126, 234, 0.15)',
+                  transform: 'translateY(-4px)',
+                  boxShadow: `0 12px 30px rgba(59, 130, 246, 0.15)`,
                 },
               }}
             >
-              <CardContent sx={{ p: 3 }}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: 2,
-                    mb: 2,
-                  }}
-                >
-                  <Avatar
+              <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
+                <Box sx={{ mb: 2 }}>
+                  <Chip
+                    label={post.date}
+                    size="small"
+                    variant="outlined"
                     sx={{
-                      width: 40,
-                      height: 40,
-                      background:
-                        'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                      height: 24,
+                      fontSize: '0.75rem',
+                      borderColor: colors.primary,
+                      color: colors.primary,
+                      backgroundColor: 'rgba(59, 130, 246, 0.05)',
                     }}
-                  >
-                    <PersonIcon fontSize="small" />
-                  </Avatar>
-                  <Box sx={{ flex: 1 }}>
-                    <Typography
-                      variant="subtitle2"
-                      sx={{
-                        fontWeight: 600,
-                        color: '#667eea',
-                        mb: 0.5,
-                      }}
-                    >
-                      あなた
-                    </Typography>
-                    <Chip
-                      label={post.date}
-                      size="small"
-                      variant="outlined"
-                      sx={{
-                        height: 20,
-                        fontSize: '0.75rem',
-                        borderColor: '#667eea',
-                        color: '#667eea',
-                      }}
-                    />
-                  </Box>
+                  />
                 </Box>
 
                 <Typography
                   variant="body1"
                   component="p"
                   sx={{
-                    lineHeight: 1.6,
-                    color: '#2d3748',
+                    lineHeight: 1.7,
+                    color: '#1f2937',
                     mb: post.image ? 2 : 0,
+                    fontSize: { xs: '0.95rem', sm: '1rem' },
+                    fontWeight: 400,
                   }}
                 >
                   {post.text}
@@ -338,20 +345,26 @@ function App() {
                       src={post.image}
                       alt="Post Image"
                       sx={{
-                        maxWidth: '80%',
+                        maxWidth: '100%',
                         maxHeight: 400,
                         objectFit: 'contain',
                         borderRadius: 2,
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                        boxShadow: '0 6px 20px rgba(0,0,0,0.1)',
+                        transition: 'transform 0.3s ease',
+                        '&:hover': {
+                          transform: 'scale(1.02)',
+                        },
                       }}
                     />
                   </Box>
                 )}
               </CardContent>
 
-              <Divider />
+              <Divider sx={{ borderColor: 'rgba(59, 130, 246, 0.1)' }} />
 
-              <CardActions sx={{ justifyContent: 'flex-end', p: 2 }}>
+              <CardActions
+                sx={{ justifyContent: 'flex-end', p: { xs: 1.5, sm: 2 } }}
+              >
                 <Button
                   size="small"
                   color="error"
@@ -359,6 +372,7 @@ function App() {
                   onClick={() => deletePost(post.id)}
                   sx={{
                     borderRadius: 2,
+                    fontSize: { xs: '0.8rem', sm: '0.875rem' },
                     '&:hover': {
                       backgroundColor: 'rgba(244, 67, 54, 0.08)',
                     },
