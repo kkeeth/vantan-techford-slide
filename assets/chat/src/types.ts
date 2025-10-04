@@ -7,14 +7,6 @@ export interface Message {
   createdAt?: Date;
 }
 
-export interface Colors {
-  primary: string;
-  secondary: string;
-  gradient: string;
-  gradientHover: string;
-  surface: string;
-  background: string;
-}
 
 export interface MessageFormData {
   text: string;

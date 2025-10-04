@@ -15,13 +15,14 @@ import {
   Paper,
   Divider,
   Chip,
+  useTheme,
 } from '@mui/material';
 import {
   Send as SendIcon,
   Image as ImageIcon,
   Delete as DeleteIcon,
 } from '@mui/icons-material';
-import { Message, Colors, MessageWithoutId } from './types';
+import { Message, MessageWithoutId } from './types';
 
 // データベースの設定
 const db = new Dexie('ChatApp');
@@ -29,24 +30,26 @@ db.version(1).stores({
   messages: '++id, text, image, date, createdAt',
 });
 
-// カラーパレット
-const colors: Colors = {
-  primary: '#3B82F6',
-  secondary: '#10B981',
-  gradient: 'linear-gradient(135deg, #3B82F6 0%, #10B981 100%)',
-  gradientHover: 'linear-gradient(135deg, #2563EB 0%, #059669 100%)',
-  surface: 'rgba(255, 255, 255, 0.95)',
-  background: 'linear-gradient(135deg, #F0F9FF 0%, #ECFDF5 100%)',
-};
 
 const MAX_MESSAGE_LENGTH = 500;
 
 const App: React.FC = () => {
+  const theme = useTheme();
   const [text, setText] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [image, setImage] = useState<File | null>(null);
   const [isPosting, setIsPosting] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  // テーマからカラーを取得
+  const colors = {
+    primary: theme.palette.primary.main,
+    secondary: theme.palette.secondary.main,
+    gradient: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+    gradientHover: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.secondary.dark} 100%)`,
+    surface: theme.palette.background.paper,
+    background: theme.palette.background.default,
+  };
 
   // メッセージ読み込み
   useEffect(() => {
