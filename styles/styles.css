@@ -23,8 +23,7 @@ section {
 
 h1 {
   line-height: 1.5 !important;
-  background-color: #2b90b6;
-  background-image: linear-gradient(45deg, #4ec5d4 10%, #146b8c 20%);
+  background-color: #fef4f4;
   background-size: 100%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -208,6 +207,7 @@ footer {
 
 .slidev-layout code,
 code[class*='language-'] {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    'Liberation Mono', 'Courier New', monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
 }
