@@ -30,7 +30,6 @@ db.version(1).stores({
   messages: '++id, text, image, date, createdAt',
 });
 
-
 const MAX_MESSAGE_LENGTH = 500;
 
 const App: React.FC = () => {
@@ -95,24 +94,29 @@ const App: React.FC = () => {
   };
 
   // ファイル選択
-  const handleSelectImage = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const error = validateFile(file);
-      if (error) {
-        alert(error);
-        event.target.value = '';
-        return;
+  const handleSelectImage = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>): void => {
+      const file = event.target.files?.[0];
+      if (file) {
+        const error = validateFile(file);
+        if (error) {
+          alert(error);
+          event.target.value = '';
+          return;
+        }
+        setImage(file);
       }
-      setImage(file);
-    }
-  }, []);
+    },
+    [],
+  );
 
   // 相対時間表示
   const formatRelativeTime = useCallback((date: string): string => {
     const now = new Date();
     const messageDate = new Date(date);
-    const diffInMinutes = Math.floor((now.getTime() - messageDate.getTime()) / (1000 * 60));
+    const diffInMinutes = Math.floor(
+      (now.getTime() - messageDate.getTime()) / (1000 * 60),
+    );
 
     if (diffInMinutes < 1) return 'たった今';
     if (diffInMinutes < 60) return `${diffInMinutes}分前`;
@@ -127,29 +131,49 @@ const App: React.FC = () => {
   }, []);
 
   // メッセージ投稿
-  const handlePost = useCallback(async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    event.preventDefault();
+  const handlePost = useCallback(
+    async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+      event.preventDefault();
 
-    const error = validateMessage(text);
-    if (error) {
-      alert(error);
-      return;
-    }
+      const error = validateMessage(text);
+      if (error) {
+        alert(error);
+        return;
+      }
 
-    setIsPosting(true);
+      setIsPosting(true);
 
-    try {
-      const createdAt = new Date();
-      const dateString = createdAt.toLocaleString();
+      try {
+        const createdAt = new Date();
+        const dateString = createdAt.toLocaleString();
 
-      if (image) {
-        const reader = new FileReader();
-        reader.onload = async () => {
-          const imageData = reader.result as string;
+        if (image) {
+          const reader = new FileReader();
+          reader.onload = async () => {
+            const imageData = reader.result as string;
 
+            const messageData: MessageWithoutId = {
+              text: text.trim(),
+              image: imageData,
+              date: dateString,
+              createdAt,
+            };
+
+            const id = await db.messages.add(messageData);
+
+            const newMessage: Message = {
+              id: id as number,
+              ...messageData,
+            };
+
+            setMessages((prev) => [newMessage, ...prev]);
+          };
+
+          reader.readAsDataURL(image);
+        } else {
           const messageData: MessageWithoutId = {
             text: text.trim(),
-            image: imageData,
+            image: undefined,
             date: dateString,
             createdAt,
           };
@@ -162,64 +186,54 @@ const App: React.FC = () => {
           };
 
           setMessages((prev) => [newMessage, ...prev]);
-        };
+        }
 
-        reader.readAsDataURL(image);
-      } else {
-        const messageData: MessageWithoutId = {
-          text: text.trim(),
-          image: undefined,
-          date: dateString,
-          createdAt,
-        };
-
-        const id = await db.messages.add(messageData);
-
-        const newMessage: Message = {
-          id: id as number,
-          ...messageData,
-        };
-
-        setMessages((prev) => [newMessage, ...prev]);
+        setImage(null);
+        setText('');
+      } catch (error) {
+        console.error('メッセージの保存に失敗しました:', error);
+        alert('メッセージの送信に失敗しました');
+      } finally {
+        setIsPosting(false);
       }
-
-      setImage(null);
-      setText('');
-    } catch (error) {
-      console.error('メッセージの保存に失敗しました:', error);
-      alert('メッセージの送信に失敗しました');
-    } finally {
-      setIsPosting(false);
-    }
-  }, [text, image]);
+    },
+    [text, image],
+  );
 
   // メッセージ削除
-  const deleteMessage = useCallback(async (id: number): Promise<void> => {
-    const message = messages.find((m) => m.id === id);
-    if (!message) return;
+  const deleteMessage = useCallback(
+    async (id: number): Promise<void> => {
+      const message = messages.find((m) => m.id === id);
+      if (!message) return;
 
-    const previewText = message.text.length > 20
-      ? message.text.substring(0, 20) + '...'
-      : message.text;
+      const previewText =
+        message.text.length > 20
+          ? message.text.substring(0, 20) + '...'
+          : message.text;
 
-    if (window.confirm(`「${previewText}」を削除しますか？`)) {
-      try {
-        await db.messages.delete(id);
-        setMessages((prev) => prev.filter((message) => message.id !== id));
-      } catch (error) {
-        console.error('削除に失敗しました:', error);
-        alert('削除に失敗しました');
+      if (window.confirm(`「${previewText}」を削除しますか？`)) {
+        try {
+          await db.messages.delete(id);
+          setMessages((prev) => prev.filter((message) => message.id !== id));
+        } catch (error) {
+          console.error('削除に失敗しました:', error);
+          alert('削除に失敗しました');
+        }
       }
-    }
-  }, [messages]);
+    },
+    [messages],
+  );
 
   // テキスト変更
-  const handleTextChange = useCallback((event: React.ChangeEvent<HTMLInputElement>): void => {
-    const newText = event.target.value;
-    if (newText.length <= MAX_MESSAGE_LENGTH) {
-      setText(newText);
-    }
-  }, []);
+  const handleTextChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>): void => {
+      const newText = event.target.value;
+      if (newText.length <= MAX_MESSAGE_LENGTH) {
+        setText(newText);
+      }
+    },
+    [],
+  );
 
   if (isLoading) {
     return (
@@ -246,7 +260,10 @@ const App: React.FC = () => {
         px: { xs: 1, sm: 2 },
       }}
     >
-      <Container sx={{ maxWidth: { xs: '100%', sm: '720px' }, px: { xs: 0, sm: 3 } }}>
+      <Container
+        maxWidth="md"
+        sx={{ maxWidth: { xs: '100%', sm: '720px' }, px: { xs: 0, sm: 3 } }}
+      >
         {/* ヘッダー */}
         <Paper
           elevation={3}
@@ -272,7 +289,7 @@ const App: React.FC = () => {
               sx={{
                 fontWeight: 600,
                 mb: 1,
-                fontSize: { xs: '1.8rem', sm: '3rem' }
+                fontSize: { xs: '1.5rem', sm: '2rem', md: '3rem' },
               }}
             >
               💬 チャットアプリ
@@ -281,7 +298,7 @@ const App: React.FC = () => {
               variant="subtitle1"
               sx={{
                 opacity: 0.9,
-                fontSize: { xs: '0.9rem', sm: '1rem' }
+                fontSize: { xs: '0.9rem', sm: '1rem' },
               }}
             >
               今の気持ちをシェアしよう
@@ -388,12 +405,14 @@ const App: React.FC = () => {
                 </Paper>
               )}
 
-              <Box sx={{
-                display: 'flex',
-                gap: 2,
-                alignItems: 'center',
-                flexDirection: { xs: 'column', sm: 'row' }
-              }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: 2,
+                  alignItems: 'center',
+                  flexDirection: { xs: 'column', sm: 'row' },
+                }}
+              >
                 <Button
                   variant="outlined"
                   component="label"
@@ -427,9 +446,13 @@ const App: React.FC = () => {
                   disabled={!text.trim() || isPosting}
                   size="large"
                   sx={{
-                    background: (text.trim() && !isPosting) ? colors.gradient : undefined,
+                    background:
+                      text.trim() && !isPosting ? colors.gradient : undefined,
                     '&:hover': {
-                      background: (text.trim() && !isPosting) ? colors.gradientHover : undefined,
+                      background:
+                        text.trim() && !isPosting
+                          ? colors.gradientHover
+                          : undefined,
                     },
                     transition: 'all 0.3s ease',
                     transform: text.trim() ? 'scale(1.05)' : 'scale(1)',
@@ -454,11 +477,7 @@ const App: React.FC = () => {
                 borderRadius: 3,
               }}
             >
-              <Typography
-                variant="h6"
-                color="text.secondary"
-                sx={{ mb: 1 }}
-              >
+              <Typography variant="h6" color="text.secondary" sx={{ mb: 1 }}>
                 📝 まだメッセージがありません
               </Typography>
               <Typography variant="body2" color="text.secondary">
@@ -552,7 +571,9 @@ const App: React.FC = () => {
 
                   <Divider sx={{ borderColor: 'rgba(59, 130, 246, 0.1)' }} />
 
-                  <CardActions sx={{ justifyContent: 'flex-end', p: { xs: 1.5, sm: 2 } }}>
+                  <CardActions
+                    sx={{ justifyContent: 'flex-end', p: { xs: 1.5, sm: 2 } }}
+                  >
                     <Button
                       size="small"
                       color="error"
