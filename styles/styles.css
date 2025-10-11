@@ -23,6 +23,8 @@ section {
 
 h1 {
   line-height: 1.5 !important;
+  background-color: #fef4f4;
+  background-image: none;
   background-size: 100%;
   background-clip: text;
   -webkit-background-clip: text;
