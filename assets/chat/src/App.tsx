@@ -279,8 +279,7 @@ const App: React.FC = () => {
             sx={{
               background: colors.gradient,
               color: 'white',
-              py: { xs: 2, sm: 3 },
-              px: { xs: 2, sm: 3 },
+              p: { xs: 2, sm: 3 },
               textAlign: 'center',
             }}
           >
