@@ -15,6 +15,10 @@
     { "source": "/13/:path", "destination": "/13/" },
     { "source": "/14/:path", "destination": "/14/" },
     { "source": "/15/:path", "destination": "/15/" },
-    { "source": "/16/:path", "destination": "/16/" }
+    { "source": "/16/:path", "destination": "/16/" },
+    { "source": "/17/:path", "destination": "/17/" },
+    { "source": "/18/:path", "destination": "/18/" },
+    { "source": "/19/:path", "destination": "/19/" },
+    { "source": "/20/:path", "destination": "/20/" }
   ]
 }

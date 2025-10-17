@@ -1,0 +1,13 @@
+# Spec Workflow MCP Server Configuration File
+
+# Project directory path
+projectDir = "/Users/kiyohito.kuwahara/src/github.com/kkeeth/vantan-techford-slide"
+
+# Dashboard port
+port = 3456
+
+# Auto-start dashboard
+autoStartDashboard = true
+
+# Language
+lang = "ja"
