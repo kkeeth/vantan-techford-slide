@@ -1,5 +1,7 @@
 # Technology Stack
 
+> **Note**: For comprehensive strategic decisions and rationale, see [main.md](./main.md) - the master steering document.
+
 ## Project Type
 教育用 Web アプリケーション（静的サイトジェネレーター + React デモアプリ）
 - Slidev ベースのスライドプレゼンテーションシステム

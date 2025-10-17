@@ -1,5 +1,7 @@
 # Project Structure
 
+> **Note**: For comprehensive strategic decisions and rationale, see [main.md](./main.md) - the master steering document.
+
 ## Directory Organization
 
 ```

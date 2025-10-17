@@ -1,5 +1,7 @@
 # Product Overview
 
+> **Note**: For comprehensive strategic decisions and rationale, see [main.md](./main.md) - the master steering document.
+
 ## Product Purpose
 このプロジェクトは，KADOKAWA ドワンゴ情報工科学院 専門部の TypeScript + React ハンズオン講座向けの教育用スライドプレゼンテーションシステムです．複数のレッスン用スライドと，実践的なデモアプリケーションを統合的に管理し，Web 上で公開することを目的としています．
 
