@@ -2,17 +2,17 @@ export type Priority = 'high' | 'medium' | 'low';
 export type Category = 'work' | 'personal' | 'shopping' | 'other';
 
 export type Task = {
-  id: number
-  name: string
-  isDone: boolean
-  priority: Priority
-  category: Category
-  createdAt: Date
-}
+  id: number;
+  name: string;
+  isDone: boolean;
+  priority: Priority;
+  category: Category;
+  createdAt: Date;
+};
 
 export type Tasks = Task[];
 
-export type FilterType = "ALL" | "TODO" | "DONE"
+export type FilterType = "ALL" | "TODO" | "DONE";
 
 // 表示用の定数
 export const PRIORITY_LABELS = {
