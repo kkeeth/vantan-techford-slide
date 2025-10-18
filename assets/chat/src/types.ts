@@ -1,21 +1,19 @@
 // src/types.ts
-export interface Message {
-  id: number;
+export type Message = {
+  id: string;
   text: string;
   image?: string;
   date: string;
   createdAt?: Date;
-}
-
-
-export interface MessageFormData {
-  text: string;
-  image: File | null;
-}
-
-export interface ValidationError {
-  field: string;
-  message: string;
-}
+};
 
 export type MessageWithoutId = Omit<Message, 'id'>;
+
+export type Colors = {
+  primary: string;
+  secondary: string;
+  surface: string;
+  gradient: string;
+  gradientHover: string;
+  background: string;
+};

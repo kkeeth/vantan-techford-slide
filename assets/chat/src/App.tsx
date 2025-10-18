@@ -22,7 +22,8 @@ import {
   Image as ImageIcon,
   Delete as DeleteIcon,
 } from '@mui/icons-material';
-import { Message, MessageWithoutId } from './types';
+import { v4 as uuidv4 } from 'uuid';
+import { Message, MessageWithoutId, Colors } from './types';
 
 // データベースの設定
 const db = new Dexie('ChatApp');
@@ -41,7 +42,7 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // テーマからカラーを取得
-  const colors = {
+  const colors: Colors = {
     primary: theme.palette.primary.main,
     secondary: theme.palette.secondary.main,
     gradient: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
@@ -159,10 +160,8 @@ const App: React.FC = () => {
               createdAt,
             };
 
-            const id = await db.messages.add(messageData);
-
             const newMessage: Message = {
-              id: id as number,
+              id: uuidv4(),
               ...messageData,
             };
 
