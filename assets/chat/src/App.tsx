@@ -177,10 +177,8 @@ const App: React.FC = () => {
             createdAt,
           };
 
-          const id = await db.messages.add(messageData);
-
           const newMessage: Message = {
-            id: id as number,
+            id: uuidv4(),
             ...messageData,
           };
 
