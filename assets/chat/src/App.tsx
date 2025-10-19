@@ -131,6 +131,16 @@ const App: React.FC = () => {
     return messageDate.toLocaleDateString();
   }, []);
 
+  // 画像を Base64 に変換
+  const readImageAsDataURL = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  };
+
   // メッセージ投稿
   const handlePost = useCallback(
     async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
@@ -147,44 +157,17 @@ const App: React.FC = () => {
       try {
         const createdAt = new Date();
         const dateString = createdAt.toLocaleString();
+        const imageData = image ? await readImageAsDataURL(image) : undefined;
 
-        if (image) {
-          const reader = new FileReader();
-          reader.onload = async () => {
-            const imageData = reader.result as string;
+        const newMessage: Message = {
+          id: uuidv4(),
+          text: text.trim(),
+          image: imageData,
+          date: dateString,
+          createdAt,
+        };
 
-            const messageData: MessageWithoutId = {
-              text: text.trim(),
-              image: imageData,
-              date: dateString,
-              createdAt,
-            };
-
-            const newMessage: Message = {
-              id: uuidv4(),
-              ...messageData,
-            };
-
-            setMessages((prev) => [newMessage, ...prev]);
-          };
-
-          reader.readAsDataURL(image);
-        } else {
-          const messageData: MessageWithoutId = {
-            text: text.trim(),
-            image: undefined,
-            date: dateString,
-            createdAt,
-          };
-
-          const newMessage: Message = {
-            id: uuidv4(),
-            ...messageData,
-          };
-
-          setMessages((prev) => [newMessage, ...prev]);
-        }
-
+        setMessages((prev) => [newMessage, ...prev]);
         setImage(null);
         setText('');
       } catch (error) {
@@ -418,13 +401,6 @@ const App: React.FC = () => {
                     width: { xs: '100%', sm: 'auto' },
                     height: 48,
                     borderRadius: 2,
-                    borderColor: colors.primary,
-                    color: colors.primary,
-                    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-                    '&:hover': {
-                      borderColor: colors.secondary,
-                      backgroundColor: 'rgba(59, 130, 246, 0.04)',
-                    },
                   }}
                 >
                   画像を追加
