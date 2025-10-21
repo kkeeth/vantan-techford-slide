@@ -4,10 +4,9 @@ export type Message = {
   text: string;
   image?: string;
   date: string;
-  createdAt?: Date;
+  createdAt: Date;
+  imageName?: string;
 };
-
-export type MessageWithoutId = Omit<Message, 'id'>;
 
 export type Colors = {
   primary: string;

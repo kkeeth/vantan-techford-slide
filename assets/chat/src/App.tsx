@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  type ChangeEvent,
+  type FormEvent,
+} from 'react';
 import Dexie from 'dexie';
 import './App.css';
 import {
@@ -23,12 +29,12 @@ import {
   Delete as DeleteIcon,
 } from '@mui/icons-material';
 import { v4 as uuidv4 } from 'uuid';
-import { Message, MessageWithoutId, Colors } from './types';
+import { Message, Colors } from './types';
 
 // データベースの設定
 const db = new Dexie('ChatApp');
 db.version(1).stores({
-  messages: '++id, text, image, date, createdAt',
+  messages: 'id, createdAt',
 });
 
 const MAX_MESSAGE_LENGTH = 500;
@@ -55,8 +61,11 @@ const App: React.FC = () => {
   useEffect(() => {
     const loadMessages = async (): Promise<void> => {
       try {
-        const allMessages = await db.messages.toArray();
-        setMessages(allMessages.reverse());
+        const allMessages = await db.messages
+          .orderBy('createdAt')
+          .reverse()
+          .toArray();
+        setMessages(allMessages);
       } catch (error) {
         console.error('メッセージの読み込みに失敗しました:', error);
       } finally {
@@ -143,7 +152,7 @@ const App: React.FC = () => {
 
   // メッセージ投稿
   const handlePost = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>): Promise<void> => {
+    async (event: FormEvent<HTMLFormElement>): Promise<void> => {
       event.preventDefault();
 
       const error = validateMessage(text);
@@ -163,9 +172,11 @@ const App: React.FC = () => {
           id: uuidv4(),
           text: text.trim(),
           image: imageData,
+          imageName: image?.name,
           date: dateString,
           createdAt,
         };
+        await db.messages.add(newMessage);
 
         setMessages((prev) => [newMessage, ...prev]);
         setImage(null);
@@ -181,7 +192,7 @@ const App: React.FC = () => {
   );
 
   // メッセージ削除
-  const deleteMessage = useCallback(
+  const handleDeleteMessage = useCallback(
     async (id: string): Promise<void> => {
       const message = messages.find((m) => m.id === id);
       if (!message) return;
@@ -206,7 +217,7 @@ const App: React.FC = () => {
 
   // テキスト変更
   const handleTextChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
+    (event: ChangeEvent<HTMLInputElement>): void => {
       const newText = event.target.value;
       if (newText.length <= MAX_MESSAGE_LENGTH) {
         setText(newText);
@@ -550,7 +561,7 @@ const App: React.FC = () => {
                       size="small"
                       color="error"
                       startIcon={<DeleteIcon />}
-                      onClick={() => deleteMessage(message.id)}
+                      onClick={() => handleDeleteMessage(message.id)}
                       sx={{
                         borderRadius: 2,
                         fontSize: { xs: '0.8rem', sm: '0.875rem' },
