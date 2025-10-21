@@ -182,7 +182,7 @@ const App: React.FC = () => {
 
   // メッセージ削除
   const deleteMessage = useCallback(
-    async (id: number): Promise<void> => {
+    async (id: string): Promise<void> => {
       const message = messages.find((m) => m.id === id);
       if (!message) return;
 
@@ -524,7 +524,7 @@ const App: React.FC = () => {
                         <Box
                           component="img"
                           src={message.image}
-                          alt="Post Image"
+                          alt={message.imageName}
                           sx={{
                             maxWidth: '100%',
                             maxHeight: 400,
