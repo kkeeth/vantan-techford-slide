@@ -38,6 +38,8 @@ db.version(1).stores({
 });
 
 const MAX_MESSAGE_LENGTH = 500;
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_FILENAME_LENGTH = 100;
 
 const App: React.FC = () => {
   const theme = useTheme();
@@ -91,13 +93,12 @@ const App: React.FC = () => {
       return 'JPEG、PNG、GIF ファイルのみアップロード可能です';
     }
 
-    const maxSize = 5 * 1024 * 1024; // 5MB
-    if (file.size > maxSize) {
-      return 'ファイルサイズが大きすぎます（5MB以下にしてください）';
+    if (file.size > MAX_FILE_SIZE) {
+      return `ファイルサイズが大きすぎます（${MAX_FILE_SIZE / (1024 * 1024)} MB 以下にしてください）`;
     }
 
-    if (file.name.length > 100) {
-      return 'ファイル名が長すぎます';
+    if (file.name.length > MAX_FILENAME_LENGTH) {
+      return `ファイル名が長すぎます（${MAX_FILENAME_LENGTH} 文字以内にしてください）`;
     }
 
     return null;
