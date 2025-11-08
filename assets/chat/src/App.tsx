@@ -529,7 +529,6 @@ const App: React.FC = () => {
                         sx={{
                           display: 'flex',
                           justifyContent: 'center',
-                          width: '100%',
                           mt: 2,
                         }}
                       >
