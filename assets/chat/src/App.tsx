@@ -6,21 +6,15 @@ import React, {
   type FormEvent,
 } from 'react';
 import Dexie from 'dexie';
-import './App.css';
 import {
   Container,
   Typography,
   TextField,
   Stack,
   Button,
-  Card,
-  CardContent,
-  CardActions,
   Box,
   Fab,
   Paper,
-  Divider,
-  Chip,
   useTheme,
 } from '@mui/material';
 import {
@@ -30,6 +24,8 @@ import {
 } from '@mui/icons-material';
 import { v4 as uuidv4 } from 'uuid';
 import { Message, Colors } from './types';
+import { MessageList } from './components/MessageList';
+import './App.css';
 
 // データベースの設定
 const db = new Dexie('ChatApp');
@@ -112,34 +108,14 @@ const App: React.FC = () => {
         const error = validateFile(file);
         if (error) {
           alert(error);
-          event.target.value = '';
           return;
         }
+        event.target.value = '';
         setImage(file);
       }
     },
     [],
   );
-
-  // 相対時間表示
-  const formatRelativeTime = useCallback((date: string): string => {
-    const now = new Date();
-    const messageDate = new Date(date);
-    const diffInMinutes = Math.floor(
-      (now.getTime() - messageDate.getTime()) / (1000 * 60),
-    );
-
-    if (diffInMinutes < 1) return 'たった今';
-    if (diffInMinutes < 60) return `${diffInMinutes}分前`;
-
-    const diffInHours = Math.floor(diffInMinutes / 60);
-    if (diffInHours < 24) return `${diffInHours}時間前`;
-
-    const diffInDays = Math.floor(diffInHours / 24);
-    if (diffInDays < 7) return `${diffInDays}日前`;
-
-    return messageDate.toLocaleDateString();
-  }, []);
 
   // 画像を Base64 に変換
   const readImageAsDataURL = (file: File): Promise<string> => {
@@ -450,134 +426,11 @@ const App: React.FC = () => {
         </Paper>
 
         {/* メッセージリスト */}
-        <Stack spacing={{ xs: 2, sm: 3 }}>
-          {messages.length === 0 ? (
-            <Paper
-              elevation={1}
-              sx={{
-                p: 4,
-                textAlign: 'center',
-                background: 'rgba(255, 255, 255, 0.7)',
-                borderRadius: 3,
-              }}
-            >
-              <Typography variant="h6" color="text.secondary" sx={{ mb: 1 }}>
-                📝 まだメッセージがありません
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                上のフォームから最初のメッセージを投稿してみましょう！
-              </Typography>
-            </Paper>
-          ) : (
-            <>
-              <Typography
-                variant="subtitle2"
-                color="text.secondary"
-                sx={{ mb: 2, textAlign: 'center' }}
-              >
-                {messages.length} 件のメッセージ
-              </Typography>
-              {messages.map((message) => (
-                <Card
-                  key={message.id}
-                  elevation={3}
-                  sx={{
-                    borderRadius: { xs: 2, sm: 3 },
-                    overflow: 'hidden',
-                    background: colors.surface,
-                    backdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(59, 130, 246, 0.1)',
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      transform: 'translateY(-4px)',
-                      boxShadow: '0 12px 30px rgba(59, 130, 246, 0.15)',
-                    },
-                  }}
-                >
-                  <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
-                    <Box sx={{ mb: 2 }}>
-                      <Chip
-                        label={formatRelativeTime(message.date)}
-                        size="small"
-                        variant="outlined"
-                        sx={{
-                          height: 24,
-                          fontSize: '0.75rem',
-                          borderColor: colors.primary,
-                          color: colors.primary,
-                          backgroundColor: 'rgba(59, 130, 246, 0.05)',
-                        }}
-                      />
-                    </Box>
-
-                    <Typography
-                      variant="body1"
-                      component="p"
-                      sx={{
-                        lineHeight: 1.7,
-                        color: '#1f2937',
-                        mb: message.image ? 2 : 0,
-                        fontSize: { xs: '0.95rem', sm: '1rem' },
-                        fontWeight: 400,
-                      }}
-                    >
-                      {message.text}
-                    </Typography>
-
-                    {message.image && (
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          justifyContent: 'center',
-                          mt: 2,
-                        }}
-                      >
-                        <Box
-                          component="img"
-                          src={message.image}
-                          alt={message.imageName}
-                          sx={{
-                            maxWidth: '100%',
-                            maxHeight: 400,
-                            objectFit: 'contain',
-                            borderRadius: 2,
-                            boxShadow: '0 6px 20px rgba(0,0,0,0.1)',
-                            transition: 'transform 0.3s ease',
-                            '&:hover': {
-                              transform: 'scale(1.02)',
-                            },
-                          }}
-                        />
-                      </Box>
-                    )}
-                  </CardContent>
-
-                  <Divider sx={{ borderColor: 'rgba(59, 130, 246, 0.1)' }} />
-
-                  <CardActions
-                    sx={{ justifyContent: 'flex-end', p: { xs: 1.5, sm: 2 } }}
-                  >
-                    <Button
-                      size="small"
-                      color="error"
-                      startIcon={<DeleteIcon />}
-                      onClick={() => handleDeleteMessage(message.id)}
-                      sx={{
-                        borderRadius: 2,
-                        fontSize: { xs: '0.8rem', sm: '0.875rem' },
-                        '&:hover': {
-                          backgroundColor: 'rgba(244, 67, 54, 0.08)',
-                        },
-                      }}
-                    >
-                      削除
-                    </Button>
-                  </CardActions>
-                </Card>
-              ))}
-            </>
-          )}
-        </Stack>
+        <MessageList
+          messages={messages}
+          colors={colors}
+          onDelete={handleDeleteMessage}
+        />
       </Container>
     </Box>
   );
