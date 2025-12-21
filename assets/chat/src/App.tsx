@@ -5,30 +5,19 @@ import React, {
   type ChangeEvent,
   type FormEvent,
 } from 'react';
-import Dexie from 'dexie';
-import {
-  Container,
-  Typography,
-  TextField,
-  Stack,
-  Button,
-  Box,
-  Fab,
-  Paper,
-  useTheme,
-} from '@mui/material';
-import {
-  Send as SendIcon,
-  Image as ImageIcon,
-  Delete as DeleteIcon,
-} from '@mui/icons-material';
+import Dexie, { EntityTable } from 'dexie';
+import { Container, Typography, Box, Paper, useTheme } from '@mui/material';
+
 import { v4 as uuidv4 } from 'uuid';
 import { Message, Colors } from './types';
 import { MessageList } from './components/MessageList';
+import { MessageForm } from './components/MessageForm';
 import './App.css';
 
 // データベースの設定
-const db = new Dexie('ChatApp');
+const db = new Dexie('ChatApp') as Dexie & {
+  messages: EntityTable<Message, 'id'>;
+};
 db.version(1).stores({
   messages: 'id, createdAt',
 });
@@ -274,12 +263,22 @@ const App: React.FC = () => {
         </Paper>
 
         {/* 入力フォーム */}
+        <MessageForm
+          text={text}
+          isPosting={isPosting}
+          image={image}
+          colors={colors}
+          onTextChange={handleTextChange}
+          onSubmit={handlePost}
+          onSelectImage={handleSelectImage}
+          onDeleteImage={() => setImage(null)}
+        />
 
         {/* メッセージリスト */}
         <MessageList
           messages={messages}
           colors={colors}
-          onDelete={handleDeleteMessage}
+          onDeleteMessage={handleDeleteMessage}
         />
       </Container>
     </Box>

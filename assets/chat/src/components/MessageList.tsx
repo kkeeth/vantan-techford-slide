@@ -5,13 +5,13 @@ import type { Message, Colors } from '../types';
 type MessageListProps = {
   messages: Message[];
   colors: Colors;
-  onDelete: (id: string) => void;
+  onDeleteMessage: (id: string) => void;
 };
 
 export const MessageList = ({
   messages,
   colors,
-  onDelete,
+  onDeleteMessage,
 }: MessageListProps) => {
   return (
     <Stack spacing={{ xs: 2, sm: 3 }}>
@@ -46,7 +46,7 @@ export const MessageList = ({
               key={message.id}
               message={message}
               colors={colors}
-              onDelete={onDelete}
+              onDeleteMessage={onDeleteMessage}
             />
           ))}
         </>

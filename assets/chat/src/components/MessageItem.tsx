@@ -14,13 +14,13 @@ import type { Message, Colors } from '../types';
 type MessageItemProps = {
   message: Message;
   colors: Colors;
-  onDelete: (id: string) => void;
+  onDeleteMessage: (id: string) => void;
 };
 
 export const MessageItem = ({
   message,
   colors,
-  onDelete,
+  onDeleteMessage,
 }: MessageItemProps) => {
   // 相対時間表示
   const formatRelativeTime = (date: string): string => {
@@ -124,7 +124,7 @@ export const MessageItem = ({
           size="small"
           color="error"
           startIcon={<DeleteIcon />}
-          onClick={() => onDelete(message.id)}
+          onClick={() => onDeleteMessage(message.id)}
           sx={{
             borderRadius: 2,
             fontSize: { xs: '0.8rem', sm: '0.875rem' },
