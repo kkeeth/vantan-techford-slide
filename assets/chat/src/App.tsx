@@ -1,4 +1,4 @@
-import React, {
+import {
   useEffect,
   useState,
   useCallback,
@@ -12,6 +12,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { Message, Colors } from './types';
 import { MessageList } from './components/MessageList';
 import { MessageForm } from './components/MessageForm';
+import { validateFile } from './utils/fileValidator';
 import './App.css';
 
 // データベースの設定
@@ -23,10 +24,8 @@ db.version(1).stores({
 });
 
 const MAX_MESSAGE_LENGTH = 500;
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-const MAX_FILENAME_LENGTH = 100;
 
-const App: React.FC = () => {
+const App = () => {
   const theme = useTheme();
   const [text, setText] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
@@ -69,23 +68,6 @@ const App: React.FC = () => {
     if (message.length > MAX_MESSAGE_LENGTH) {
       return `${MAX_MESSAGE_LENGTH}文字以内で入力してください`;
     }
-    return null;
-  };
-
-  const validateFile = (file: File): string | null => {
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
-    if (!allowedTypes.includes(file.type)) {
-      return 'JPEG、PNG、GIF ファイルのみアップロード可能です';
-    }
-
-    if (file.size > MAX_FILE_SIZE) {
-      return `ファイルサイズが大きすぎます（${MAX_FILE_SIZE / (1024 * 1024)} MB 以下にしてください）`;
-    }
-
-    if (file.name.length > MAX_FILENAME_LENGTH) {
-      return `ファイル名が長すぎます（${MAX_FILENAME_LENGTH} 文字以内にしてください）`;
-    }
-
     return null;
   };
 
