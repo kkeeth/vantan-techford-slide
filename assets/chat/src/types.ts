@@ -3,9 +3,10 @@ export type Message = {
   id: string;
   text: string;
   image?: string;
+  imageName?: string;
   date: string;
   createdAt: Date;
-  imageName?: string;
+  updatedAt?: Date;
 };
 
 export type Colors = {

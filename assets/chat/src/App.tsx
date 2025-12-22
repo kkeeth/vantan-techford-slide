@@ -10,6 +10,7 @@ import { Container, Typography, Box, Paper, useTheme } from '@mui/material';
 
 import { v4 as uuidv4 } from 'uuid';
 import { Message, Colors } from './types';
+import { MessageItem } from './components/MessageItem';
 import { MessageList } from './components/MessageList';
 import { MessageForm } from './components/MessageForm';
 import { validateFile } from './utils/fileValidator';
@@ -20,7 +21,7 @@ const db = new Dexie('ChatApp') as Dexie & {
   messages: EntityTable<Message, 'id'>;
 };
 db.version(1).stores({
-  messages: 'id, createdAt',
+  messages: 'id, createdAt, updatedAt',
 });
 
 const MAX_MESSAGE_LENGTH = 500;
@@ -31,7 +32,9 @@ const App = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [image, setImage] = useState<File | null>(null);
   const [isPosting, setIsPosting] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editingText, setEditingText] = useState('');
 
   // テーマからカラーを取得
   const colors: Colors = {
@@ -174,6 +177,42 @@ const App = () => {
     [],
   );
 
+  // 編集開始ハンドラ
+  const handleStartEdit = useCallback((id: string, currentText: string) => {
+    setEditingId(id);
+    setEditingText(currentText);
+  }, []);
+
+  // 編集保存ハンドラ
+  const handleSaveEdit = useCallback(async () => {
+    if (!editingId || !editingText.trim()) return;
+
+    try {
+      await db.messages.update(editingId, {
+        text: editingText,
+        updatedAt: new Date(),
+      });
+
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === editingId
+            ? { ...msg, text: editingText, updatedAt: new Date() }
+            : msg,
+        ),
+      );
+      setEditingId(null);
+      setEditingText('');
+    } catch (error) {
+      alert('編集に失敗しました');
+    }
+  }, [editingId, editingText]);
+
+  // 編集キャンセルハンドラ
+  const handleCancelEdit = useCallback(() => {
+    setEditingId(null);
+    setEditingText('');
+  }, []);
+
   if (isLoading) {
     return (
       <Box
@@ -189,6 +228,32 @@ const App = () => {
       </Box>
     );
   }
+
+  const messageItems = () => (
+    <>
+      <Typography
+        variant="subtitle2"
+        color="text.secondary"
+        sx={{ mb: 2, textAlign: 'center' }}
+      >
+        {messages.length} 件のメッセージ
+      </Typography>
+      {messages.map((message) => (
+        <MessageItem
+          key={message.id}
+          message={message}
+          colors={colors}
+          isEditing={editingId === message.id}
+          editText={editingText}
+          onEditTextChange={setEditingText}
+          onStartEdit={handleStartEdit}
+          onSaveEdit={handleSaveEdit}
+          onCancelEdit={handleCancelEdit}
+          onDeleteMessage={handleDeleteMessage}
+        />
+      ))}
+    </>
+  );
 
   return (
     <Box
@@ -257,11 +322,7 @@ const App = () => {
         />
 
         {/* メッセージリスト */}
-        <MessageList
-          messages={messages}
-          colors={colors}
-          onDeleteMessage={handleDeleteMessage}
-        />
+        <MessageList>{messageItems()}</MessageList>
       </Container>
     </Box>
   );
