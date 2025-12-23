@@ -14,6 +14,7 @@ import { MessageItem } from './components/MessageItem';
 import { MessageList } from './components/MessageList';
 import { MessageForm } from './components/MessageForm';
 import { validateFile } from './utils/fileValidator';
+import { SearchBar } from './components/SearchBar';
 import './App.css';
 
 // データベースの設定
@@ -35,6 +36,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingText, setEditingText] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   // テーマからカラーを取得
   const colors: Colors = {
@@ -214,6 +216,18 @@ const App = () => {
     setEditingText('');
   }, []);
 
+  // 検索フィルター関数
+  const getFilteredMessages = () => {
+    if (!searchTerm.trim()) {
+      return messages;
+    }
+
+    return messages.filter((message) =>
+      message.text.toLowerCase().includes(searchTerm.toLowerCase()),
+    );
+  };
+  const filteredMessages = getFilteredMessages();
+
   if (isLoading) {
     return (
       <Box
@@ -230,31 +244,20 @@ const App = () => {
     );
   }
 
-  const messageItems = () => (
-    <>
-      <Typography
-        variant="subtitle2"
-        color="text.secondary"
-        sx={{ mb: 2, textAlign: 'center' }}
-      >
-        {messages.length} 件のメッセージ
-      </Typography>
-      {messages.map((message) => (
-        <MessageItem
-          key={message.id}
-          message={message}
-          colors={colors}
-          isEditing={editingId === message.id}
-          editText={editingText}
-          onEditTextChange={setEditingText}
-          onStartEdit={handleStartEdit}
-          onSaveEdit={handleSaveEdit}
-          onCancelEdit={handleCancelEdit}
-          onDeleteMessage={handleDeleteMessage}
-        />
-      ))}
-    </>
-  );
+  const messageItems = filteredMessages.map((message) => (
+    <MessageItem
+      key={message.id}
+      message={message}
+      colors={colors}
+      isEditing={editingId === message.id}
+      editText={editingText}
+      onEditTextChange={setEditingText}
+      onStartEdit={handleStartEdit}
+      onSaveEdit={handleSaveEdit}
+      onCancelEdit={handleCancelEdit}
+      onDeleteMessage={handleDeleteMessage}
+    />
+  ));
 
   return (
     <Box
@@ -310,7 +313,7 @@ const App = () => {
           </Box>
         </Paper>
 
-        {/* 入力フォーム */}
+        {/* メッセージフォーム */}
         <MessageForm
           text={text}
           isPosting={isPosting}
@@ -322,8 +325,24 @@ const App = () => {
           onDeleteImage={() => setImage(null)}
         />
 
+        {/* 検索バー */}
+        <SearchBar
+          searchTerm={searchTerm}
+          colors={colors}
+          onSearchChange={setSearchTerm}
+        />
+
         {/* メッセージリスト */}
-        <MessageList>{messageItems()}</MessageList>
+        <MessageList>
+          <Typography
+            variant="subtitle2"
+            color="text.secondary"
+            sx={{ mb: 2, textAlign: 'center' }}
+          >
+            {filteredMessages.length} 件のメッセージ
+          </Typography>
+          {messageItems}
+        </MessageList>
       </Container>
     </Box>
   );
