@@ -126,6 +126,7 @@ const App = () => {
           imageName: image?.name,
           date: dateString,
           createdAt,
+          updatedAt: createdAt,
         };
         await db.messages.add(newMessage);
 

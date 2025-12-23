@@ -72,9 +72,6 @@ export const MessageItem = ({
               backgroundColor: 'rgba(59, 130, 246, 0.05)',
             }}
           />
-          <Typography variant="caption" color="text.secondary">
-            {message.updatedAt && ' (編集済み)'}
-          </Typography>
         </Box>
 
         {isEditing && (
@@ -110,6 +107,9 @@ export const MessageItem = ({
             }}
           >
             {message.text}
+            <Typography variant="caption" sx={{ color: 'gray' }}>
+              {message.updatedAt && '（編集済み）'}
+            </Typography>
           </Typography>
         )}
 
