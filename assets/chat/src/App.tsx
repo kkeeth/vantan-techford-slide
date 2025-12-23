@@ -251,6 +251,7 @@ const App = () => {
       colors={colors}
       isEditing={editingId === message.id}
       editText={editingText}
+      searchTerm={searchTerm}
       onEditTextChange={setEditingText}
       onStartEdit={handleStartEdit}
       onSaveEdit={handleSaveEdit}

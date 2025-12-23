@@ -18,12 +18,14 @@ import {
 } from '@mui/icons-material';
 import type { Message, Colors } from '../types';
 import { formatRelativeTime } from '../utils/dateFormatter';
+import { HighlightText } from './HighlightText';
 
 type MessageItemProps = {
   message: Message;
   colors: Colors;
   isEditing: boolean;
   editText: string;
+  searchTerm: string;
   onEditTextChange: (text: string) => void;
   onStartEdit: (id: string, text: string) => void;
   onSaveEdit: () => void;
@@ -36,6 +38,7 @@ export const MessageItem = ({
   colors,
   isEditing,
   editText,
+  searchTerm,
   onEditTextChange,
   onStartEdit,
   onSaveEdit,
@@ -106,7 +109,7 @@ export const MessageItem = ({
               fontWeight: 400,
             }}
           >
-            {message.text}
+            <HighlightText text={message.text} searchTerm={searchTerm} />
             <Typography variant="caption" sx={{ color: 'gray' }}>
               {message.updatedAt && '（編集済み）'}
             </Typography>
