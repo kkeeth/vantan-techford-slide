@@ -1,4 +1,3 @@
-// src/utils/dateFormatter.ts
 export const formatRelativeTime = (date: string): string => {
   const now = new Date();
   const messageDate = new Date(date);

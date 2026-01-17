@@ -1,15 +1,18 @@
-import type { ReactNode } from 'react';
+import { Children, type ReactNode } from 'react';
 import { Stack, Paper, Typography } from '@mui/material';
 
 type MessageListProps = {
   children: ReactNode;
+  showCount?: boolean;
 };
 
-export const MessageList = ({ children }: MessageListProps) => {
-  const isEmpty =
-    !children || (Array.isArray(children) && children.length === 0);
+export const MessageList = ({
+  children,
+  showCount = false,
+}: MessageListProps) => {
+  const count = Children.count(children);
 
-  if (isEmpty) {
+  if (count === 0) {
     return (
       <Paper
         elevation={1}
@@ -20,7 +23,6 @@ export const MessageList = ({ children }: MessageListProps) => {
           borderRadius: 3,
         }}
       >
-        {' '}
         <Typography variant="h6" color="text.secondary" sx={{ mb: 1 }}>
           📝 まだメッセージがありません
         </Typography>
@@ -30,5 +32,19 @@ export const MessageList = ({ children }: MessageListProps) => {
       </Paper>
     );
   }
-  return <Stack spacing={{ xs: 2, sm: 3 }}>{children}</Stack>;
+
+  return (
+    <Stack spacing={{ xs: 2, sm: 3 }}>
+      {showCount && (
+        <Typography
+          variant="subtitle2"
+          color="text.secondary"
+          sx={{ textAlign: 'center' }}
+        >
+          {count} 件のメッセージ
+        </Typography>
+      )}
+      {children}
+    </Stack>
+  );
 };

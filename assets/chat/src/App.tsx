@@ -7,44 +7,40 @@ import {
 } from 'react';
 import Dexie, { EntityTable } from 'dexie';
 import { Container, Typography, Box, Paper, useTheme } from '@mui/material';
-
 import { v4 as uuidv4 } from 'uuid';
-import { Message, Colors } from './types';
-import { MessageItem } from './components/MessageItem';
-import { MessageList } from './components/MessageList';
 import { MessageForm } from './components/MessageForm';
-import { validateFile } from './utils/fileValidator';
+import { MessageList } from './components/MessageList';
+import { MessageItem } from './components/MessageItem';
 import { SearchBar } from './components/SearchBar';
+import { validateMessage, validateFile } from './utils/validator';
+import type { Colors, Message } from './types';
 import './App.css';
 
-// データベースの設定
 const db = new Dexie('ChatApp') as Dexie & {
   messages: EntityTable<Message, 'id'>;
 };
 db.version(1).stores({
-  messages: 'id, createdAt, updatedAt',
+  messages: 'id, createdAt',
 });
-
-const MAX_MESSAGE_LENGTH = 500;
 
 const App = () => {
   const theme = useTheme();
   const [text, setText] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
-  const [image, setImage] = useState<File | null>(null);
   const [isPosting, setIsPosting] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [image, setImage] = useState<File | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [editingText, setEditingText] = useState('');
+  const [editingText, setEditingText] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState('');
 
   // テーマからカラーを取得
   const colors: Colors = {
     primary: theme.palette.primary.main,
     secondary: theme.palette.secondary.main,
+    surface: theme.palette.background.paper,
     gradient: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
     gradientHover: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.secondary.dark} 100%)`,
-    surface: theme.palette.background.paper,
     background: theme.palette.background.default,
   };
 
@@ -56,6 +52,7 @@ const App = () => {
           .orderBy('createdAt')
           .reverse()
           .toArray();
+
         setMessages(allMessages);
       } catch (error) {
         console.error('メッセージの読み込みに失敗しました:', error);
@@ -63,32 +60,12 @@ const App = () => {
         setIsLoading(false);
       }
     };
-
     loadMessages();
   }, []);
 
-  // バリデーション
-  const validateMessage = (message: string): string | null => {
-    if (!message.trim()) return '内容を入力してください';
-    if (message.length > MAX_MESSAGE_LENGTH) {
-      return `${MAX_MESSAGE_LENGTH}文字以内で入力してください`;
-    }
-    return null;
-  };
-
-  // ファイル選択
-  const handleSelectImage = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>): void => {
-      const file = event.target.files?.[0];
-      if (file) {
-        const error = validateFile(file);
-        if (error) {
-          alert(error);
-          return;
-        }
-        event.target.value = '';
-        setImage(file);
-      }
+  const handleTextChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>): void => {
+      setText(e.target.value);
     },
     [],
   );
@@ -98,7 +75,7 @@ const App = () => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result as string);
-      reader.onerror = reject;
+      reader.onerror = () => reject(reader.error);
       reader.readAsDataURL(file);
     });
   };
@@ -125,8 +102,8 @@ const App = () => {
           id: uuidv4(),
           text: text.trim(),
           image: imageData,
-          imageName: image?.name,
           date: dateString,
+          imageName: image?.name,
           createdAt,
           updatedAt: createdAt,
         };
@@ -169,24 +146,32 @@ const App = () => {
     [messages],
   );
 
-  // テキスト変更
-  const handleTextChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>): void => {
-      const newText = event.target.value;
-      if (newText.length <= MAX_MESSAGE_LENGTH) {
-        setText(newText);
+  const handleSelectImage = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>): void => {
+      const file = e.target.files?.[0];
+      if (file) {
+        const error = validateFile(file);
+        if (error) {
+          alert(error);
+          return;
+        }
+        setImage(file);
+        e.target.value = ''; // input をクリア
       }
     },
     [],
   );
 
-  // 編集開始ハンドラ
   const handleStartEdit = useCallback((id: string, currentText: string) => {
     setEditingId(id);
     setEditingText(currentText);
   }, []);
 
-  // 編集保存ハンドラ
+  const handleCancelEdit = useCallback(() => {
+    setEditingId(null);
+    setEditingText('');
+  }, []);
+
   const handleSaveEdit = useCallback(async () => {
     if (!editingId || !editingText.trim()) return;
 
@@ -210,39 +195,16 @@ const App = () => {
     }
   }, [editingId, editingText]);
 
-  // 編集キャンセルハンドラ
-  const handleCancelEdit = useCallback(() => {
-    setEditingId(null);
-    setEditingText('');
-  }, []);
-
   // 検索フィルター関数
   const getFilteredMessages = () => {
     if (!searchTerm.trim()) {
       return messages;
     }
-
     return messages.filter((message) =>
       message.text.toLowerCase().includes(searchTerm.toLowerCase()),
     );
   };
   const filteredMessages = getFilteredMessages();
-
-  if (isLoading) {
-    return (
-      <Box
-        sx={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: colors.background,
-        }}
-      >
-        <Typography variant="h6">読み込み中...</Typography>
-      </Box>
-    );
-  }
 
   const messageItems = filteredMessages.map((message) => (
     <MessageItem
@@ -260,6 +222,22 @@ const App = () => {
     />
   ));
 
+  if (isLoading) {
+    return (
+      <Box
+        sx={{
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: colors.background,
+        }}
+      >
+        <Typography variant="h6">読み込み中...</Typography>
+      </Box>
+    );
+  }
+
   return (
     <Box
       sx={{
@@ -271,7 +249,10 @@ const App = () => {
     >
       <Container
         maxWidth="md"
-        sx={{ maxWidth: { xs: '100%', sm: '720px' }, px: { xs: 0, sm: 3 } }}
+        sx={{
+          maxWidth: { xs: '100%', sm: '720px' },
+          px: { xs: 0, sm: 3 },
+        }}
       >
         {/* ヘッダー */}
         <Paper
@@ -286,30 +267,30 @@ const App = () => {
         >
           <Box
             sx={{
-              background: colors.gradient,
               color: 'white',
-              p: { xs: 2, sm: 3 },
+              background: colors.gradient,
               textAlign: 'center',
+              py: { xs: 2, sm: 3 },
+              px: { xs: 2, sm: 3 },
             }}
           >
             <Typography
               variant="h3"
+              component="h1"
+              gutterBottom
               sx={{
-                fontWeight: 600,
-                mb: 1,
                 fontSize: { xs: '1.5rem', sm: '2rem', md: '3rem' },
               }}
             >
-              💬 チャットアプリ
+              💬 My Chat App
             </Typography>
             <Typography
               variant="subtitle1"
               sx={{
-                opacity: 0.9,
-                fontSize: { xs: '0.9rem', sm: '1rem' },
+                fontSize: { xs: '0.875rem', md: '1rem' },
               }}
             >
-              今の気持ちをシェアしよう
+              TypeScript + React で作るチャットアプリ
             </Typography>
           </Box>
         </Paper>
@@ -334,16 +315,7 @@ const App = () => {
         />
 
         {/* メッセージリスト */}
-        <MessageList>
-          <Typography
-            variant="subtitle2"
-            color="text.secondary"
-            sx={{ mb: 2, textAlign: 'center' }}
-          >
-            {filteredMessages.length} 件のメッセージ
-          </Typography>
-          {messageItems}
-        </MessageList>
+        <MessageList showCount>{messageItems}</MessageList>
       </Container>
     </Box>
   );

@@ -1,14 +1,14 @@
 import {
-  Box,
-  Button,
   Card,
   CardContent,
   CardActions,
-  Chip,
-  Divider,
+  Typography,
+  Button,
   IconButton,
   TextField,
-  Typography,
+  Box,
+  Chip,
+  Divider,
 } from '@mui/material';
 import {
   Delete as DeleteIcon,
@@ -16,9 +16,9 @@ import {
   Check as CheckIcon,
   Cancel as CancelIcon,
 } from '@mui/icons-material';
-import type { Message, Colors } from '../types';
 import { formatRelativeTime } from '../utils/dateFormatter';
 import { HighlightText } from './HighlightText';
+import type { Message, Colors } from '../types';
 
 type MessageItemProps = {
   message: Message;
@@ -45,8 +45,15 @@ export const MessageItem = ({
   onCancelEdit,
   onDeleteMessage,
 }: MessageItemProps) => {
+  const handleDelete = (id: string) => {
+    if (id) {
+      onDeleteMessage(message.id);
+    }
+  };
+
   return (
     <Card
+      key={message.id}
       elevation={3}
       sx={{
         borderRadius: { xs: 2, sm: 3 },
@@ -62,6 +69,17 @@ export const MessageItem = ({
       }}
     >
       <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
+        {isEditing && (
+          <Box sx={{ display: 'flex', gap: 1, mb: 1 }}>
+            <IconButton onClick={onSaveEdit} size="small" color="primary">
+              <CheckIcon />
+            </IconButton>
+            <IconButton onClick={onCancelEdit} size="small">
+              <CancelIcon />
+            </IconButton>
+          </Box>
+        )}
+        {/* 日時表示 */}
         <Box sx={{ mb: 2 }}>
           <Chip
             label={formatRelativeTime(message.date)}
@@ -76,18 +94,7 @@ export const MessageItem = ({
             }}
           />
         </Box>
-
-        {isEditing && (
-          <Box sx={{ display: 'flex', gap: 1, mb: 1 }}>
-            <IconButton onClick={onSaveEdit} size="small" color="primary">
-              <CheckIcon />
-            </IconButton>
-            <IconButton onClick={onCancelEdit} size="small">
-              <CancelIcon />
-            </IconButton>
-          </Box>
-        )}
-
+        {/* テキスト表示 or 編集フィールド */}
         {isEditing ? (
           <TextField
             fullWidth
@@ -104,9 +111,9 @@ export const MessageItem = ({
             sx={{
               lineHeight: 1.7,
               color: '#1f2937',
-              mb: message.image ? 2 : 0,
               fontSize: { xs: '0.95rem', sm: '1rem' },
               fontWeight: 400,
+              mb: message.image ? 2 : 0,
             }}
           >
             <HighlightText text={message.text} searchTerm={searchTerm} />
@@ -116,11 +123,13 @@ export const MessageItem = ({
           </Typography>
         )}
 
+        {/* 画像表示 */}
         {message.image && (
           <Box
             sx={{
               display: 'flex',
               justifyContent: 'center',
+              width: '100%',
               mt: 2,
             }}
           >
@@ -135,14 +144,15 @@ export const MessageItem = ({
                 borderRadius: 2,
                 boxShadow: '0 6px 20px rgba(0,0,0,0.1)',
                 transition: 'transform 0.3s ease',
+                '&:hover': {
+                  transform: 'scale(1.02)',
+                },
               }}
             />
           </Box>
         )}
       </CardContent>
-
       <Divider sx={{ borderColor: 'rgba(59, 130, 246, 0.1)' }} />
-
       <CardActions sx={{ justifyContent: 'flex-end', p: { xs: 1.5, sm: 2 } }}>
         {!isEditing && (
           <Button
@@ -162,7 +172,7 @@ export const MessageItem = ({
           size="small"
           color="error"
           startIcon={<DeleteIcon />}
-          onClick={() => onDeleteMessage(message.id)}
+          onClick={() => handleDelete(message.id)}
           sx={{
             borderRadius: 2,
             fontSize: { xs: '0.8rem', sm: '0.875rem' },
