@@ -15,8 +15,7 @@ cp slides/17.md ./ && slidev build -o dist/17 --base /17/ 17.md && rm 17.md
 cp slides/18.md ./ && slidev build -o dist/18 --base /18/ 18.md && rm 18.md
 cp slides/19.md ./ && slidev build -o dist/19 --base /19/ 19.md && rm 19.md
 cp slides/20.md ./ && slidev build -o dist/20 --base /20/ 20.md && rm 20.md
-# cp slides/23.md ./ && slidev build -o dist/23 --base /23/ 23.md && rm 23.md
-# slidev build -o dist/15 --base /15/ slides/15.md
+cp slides/appendix.md ./ && slidev build -o dist/appendix --base /appendix/ appendix.md && rm appendix.md
 
 # TOP ページ用
 cp top.html dist/index.html
