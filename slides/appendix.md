@@ -6,7 +6,7 @@ highlighter: shiki
 lineNumbers: true
 info: |
   ## TypeScript + React ハンズオン講座
-  第20回：チャットアプリ開発（完成とデプロイ編）
+  Appendix：チャットアプリ開発（発展とデプロイ編）
 fonts:
   sans: "Josefin Sans"
   serif: "Noto Sans JP"
@@ -20,7 +20,7 @@ title: TypeScript/React 入門講義
 
 # TypeScript + React<br>ハンズオン講座
 
-## 第20回：チャットアプリ開発<br>完成とデプロイ編
+## Appendix：チャットアプリ開発<br>発展とデプロイ編
 
 <div class="pt-12">
   <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10">
@@ -61,13 +61,13 @@ h2 {
 }
 </style>
 
-## 👉️ TypeScript チャットアプリを完成させよう！
+## 👉️ チャットアプリをより作り込みましょう！
 
 ---
 layout: section
 ---
 
-# TypeScript チャットアプリの完成
+# チャットアプリの完成
 
 ---
 
