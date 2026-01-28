@@ -1,7 +1,7 @@
-import type { ChangeEvent, FormEvent } from 'react';
+import type { FormEvent, ChangeEvent } from 'react';
 import { Paper, Stack, TextField } from '@mui/material';
 import { ImageUploader } from './ImageUploader';
-import { Colors } from '../types';
+import type { Colors } from '../types';
 
 type MessageFormProps = {
   text: string;
@@ -43,11 +43,9 @@ export const MessageForm = ({
             multiline
             fullWidth
             rows={4}
+            variant="outlined"
             value={text}
             onChange={onTextChange}
-            variant="outlined"
-            error={text.length > 140}
-            helperText={`${text.length}/140文字`}
             sx={{
               '& .MuiOutlinedInput-root': {
                 borderRadius: 2,
@@ -64,15 +62,16 @@ export const MessageForm = ({
               },
             }}
           />
+
+          <ImageUploader
+            text={text}
+            isPosting={isPosting}
+            image={image}
+            colors={colors}
+            onSelectImage={onSelectImage}
+            onDeleteImage={onDeleteImage}
+          />
         </Stack>
-        <ImageUploader
-          text={text}
-          isPosting={isPosting}
-          image={image}
-          colors={colors}
-          onSelectImage={onSelectImage}
-          onDeleteImage={onDeleteImage}
-        />
       </form>
     </Paper>
   );

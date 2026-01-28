@@ -1,6 +1,6 @@
 import { Paper, TextField, InputAdornment, IconButton } from '@mui/material';
 import { Search as SearchIcon, Clear as ClearIcon } from '@mui/icons-material';
-import { Colors } from '../types';
+import type { Colors } from '../types';
 
 type SearchBarProps = {
   searchTerm: string;
@@ -16,12 +16,7 @@ export const SearchBar = ({
   return (
     <Paper
       elevation={2}
-      sx={{
-        p: 2,
-        mb: 3,
-        borderRadius: 2,
-        background: colors.gradient,
-      }}
+      sx={{ p: 2, mb: 3, background: colors.gradient, borderRadius: 2 }}
     >
       <TextField
         fullWidth
@@ -31,7 +26,7 @@ export const SearchBar = ({
         size="small"
         sx={{
           '& .MuiOutlinedInput-root': {
-            backgroundColor: 'white',
+            backgroundColor: colors.surface,
             borderRadius: 2,
           },
         }}

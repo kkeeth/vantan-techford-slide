@@ -2,10 +2,11 @@ import {
   useEffect,
   useState,
   useCallback,
+  useMemo,
   type ChangeEvent,
   type FormEvent,
 } from 'react';
-import Dexie, { EntityTable } from 'dexie';
+import Dexie, { type EntityTable } from 'dexie';
 import { Container, Typography, Box, Paper, useTheme } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 import { MessageForm } from './components/MessageForm';
@@ -24,7 +25,6 @@ db.version(1).stores({
 });
 
 const App = () => {
-  const theme = useTheme();
   const [text, setText] = useState<string>('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [isPosting, setIsPosting] = useState<boolean>(false);
@@ -34,17 +34,18 @@ const App = () => {
   const [editingText, setEditingText] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState('');
 
-  // テーマからカラーを取得
-  const colors: Colors = {
-    primary: theme.palette.primary.main,
-    secondary: theme.palette.secondary.main,
-    surface: theme.palette.background.paper,
-    gradient: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-    gradientHover: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.secondary.dark} 100%)`,
-    background: theme.palette.background.default,
-  };
+  const theme = useTheme();
+  const colors: Colors = useMemo(
+    () => ({
+      primary: theme.palette.primary.main,
+      surface: theme.palette.background.paper,
+      gradient: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+      gradientHover: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.secondary.dark} 100%)`,
+      background: theme.palette.background.default,
+    }),
+    [theme],
+  );
 
-  // メッセージ読み込み
   useEffect(() => {
     const loadMessages = async (): Promise<void> => {
       try {
@@ -70,7 +71,6 @@ const App = () => {
     [],
   );
 
-  // 画像を Base64 に変換
   const readImageAsDataURL = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -80,7 +80,6 @@ const App = () => {
     });
   };
 
-  // メッセージ投稿
   const handlePost = useCallback(
     async (event: FormEvent<HTMLFormElement>): Promise<void> => {
       event.preventDefault();
@@ -122,7 +121,6 @@ const App = () => {
     [text, image],
   );
 
-  // メッセージ削除
   const handleDeleteMessage = useCallback(
     async (id: string): Promise<void> => {
       const message = messages.find((m) => m.id === id);
@@ -195,32 +193,14 @@ const App = () => {
     }
   }, [editingId, editingText]);
 
-  // 検索フィルター関数
-  const getFilteredMessages = () => {
+  const filteredMessages = useMemo(() => {
     if (!searchTerm.trim()) {
       return messages;
     }
     return messages.filter((message) =>
       message.text.toLowerCase().includes(searchTerm.toLowerCase()),
     );
-  };
-  const filteredMessages = getFilteredMessages();
-
-  const messageItems = filteredMessages.map((message) => (
-    <MessageItem
-      key={message.id}
-      message={message}
-      colors={colors}
-      isEditing={editingId === message.id}
-      editText={editingText}
-      searchTerm={searchTerm}
-      onEditTextChange={setEditingText}
-      onStartEdit={handleStartEdit}
-      onSaveEdit={handleSaveEdit}
-      onCancelEdit={handleCancelEdit}
-      onDeleteMessage={handleDeleteMessage}
-    />
-  ));
+  }, [messages, searchTerm]);
 
   if (isLoading) {
     return (
@@ -237,6 +217,22 @@ const App = () => {
       </Box>
     );
   }
+
+  const messageItems = filteredMessages.map((message) => (
+    <MessageItem
+      key={message.id}
+      message={message}
+      colors={colors}
+      isEditing={editingId === message.id}
+      editText={editingText}
+      searchTerm={searchTerm}
+      onEditTextChange={setEditingText}
+      onStartEdit={handleStartEdit}
+      onSaveEdit={handleSaveEdit}
+      onCancelEdit={handleCancelEdit}
+      onDeleteMessage={handleDeleteMessage}
+    />
+  ));
 
   return (
     <Box
@@ -261,7 +257,7 @@ const App = () => {
             borderRadius: { xs: 0, sm: 4 },
             overflow: 'hidden',
             mb: { xs: 2, sm: 3 },
-            background: colors.surface,
+            background: '#008080',
             backdropFilter: 'blur(20px)',
           }}
         >

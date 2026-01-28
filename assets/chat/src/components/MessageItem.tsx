@@ -118,7 +118,9 @@ export const MessageItem = ({
           >
             <HighlightText text={message.text} searchTerm={searchTerm} />
             <Typography variant="caption" sx={{ color: 'gray' }}>
-              {message.updatedAt && '（編集済み）'}
+              {message.updatedAt &&
+                message.updatedAt !== message.createdAt &&
+                '（編集済み）'}
             </Typography>
           </Typography>
         )}

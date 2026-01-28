@@ -1,7 +1,7 @@
 import type { ChangeEvent } from 'react';
-import { Box, Button, Fab, Paper, Typography } from '@mui/material';
+import { Box, Button, Fab, Typography, Paper } from '@mui/material';
 import { Image as ImageIcon, Send as SendIcon } from '@mui/icons-material';
-import { Colors } from '../types';
+import type { Colors } from '../types';
 
 type ImageUploaderProps = {
   text: string;
@@ -52,6 +52,7 @@ export const ImageUploader = ({
                 maxHeight: 200,
                 objectFit: 'contain',
                 borderRadius: 2,
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
               }}
             />
           </Box>
@@ -66,14 +67,22 @@ export const ImageUploader = ({
             <Typography variant="caption" color="text.secondary">
               {image.name} ({Math.round(image.size / 1024)}KB)
             </Typography>
-            <Button size="small" color="error" onClick={onDeleteImage}>
+            <Button
+              size="small"
+              color="error"
+              onClick={onDeleteImage}
+              sx={{
+                minWidth: 'auto',
+                px: 1,
+              }}
+            >
               削除
             </Button>
           </Box>
         </Paper>
       )}
 
-      {/* 画像を追加ボタン */}
+      {/* 画像追加ボタン */}
       <Box
         sx={{
           display: 'flex',
@@ -101,12 +110,11 @@ export const ImageUploader = ({
             onChange={onSelectImage}
           />
         </Button>
-
         <Fab
           color="primary"
           type="submit"
-          disabled={!text.trim() || isPosting}
           size="large"
+          disabled={!text.trim() || isPosting}
           sx={{
             background: text.trim() && !isPosting ? colors.gradient : undefined,
             '&:hover': {

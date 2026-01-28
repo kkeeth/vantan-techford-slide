@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -14,12 +14,8 @@
 }
 
 body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
   background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 100%);
 }
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
