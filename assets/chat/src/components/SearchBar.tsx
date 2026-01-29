@@ -1,4 +1,4 @@
-import { Paper, TextField, InputAdornment, IconButton } from '@mui/material';
+import { Box, TextField, InputAdornment, IconButton } from '@mui/material';
 import { Search as SearchIcon, Clear as ClearIcon } from '@mui/icons-material';
 import type { Colors } from '../types';
 
@@ -8,16 +8,9 @@ type SearchBarProps = {
   onSearchChange: (term: string) => void;
 };
 
-export const SearchBar = ({
-  searchTerm,
-  colors,
-  onSearchChange,
-}: SearchBarProps) => {
+export const SearchBar = ({ searchTerm, onSearchChange }: SearchBarProps) => {
   return (
-    <Paper
-      elevation={2}
-      sx={{ p: 2, mb: 3, background: colors.gradient, borderRadius: 2 }}
-    >
+    <Box>
       <TextField
         fullWidth
         placeholder="メッセージを検索..."
@@ -26,15 +19,32 @@ export const SearchBar = ({
         size="small"
         sx={{
           '& .MuiOutlinedInput-root': {
-            backgroundColor: colors.surface,
-            borderRadius: 2,
+            backgroundColor: '#fff',
+            borderRadius: 1,
+            '& fieldset': {
+              borderColor: '#cbd5e1',
+              borderWidth: 1,
+            },
+            '&:hover fieldset': {
+              borderColor: '#94a3b8',
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#3b82f6',
+              borderWidth: 2,
+            },
+          },
+          '& .MuiOutlinedInput-input': {
+            '&::placeholder': {
+              color: '#64748b',
+              opacity: 1,
+            },
           },
         }}
         slotProps={{
           input: {
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon color="action" />
+                <SearchIcon sx={{ color: '#64748b' }} />
               </InputAdornment>
             ),
             endAdornment: searchTerm && (
@@ -43,7 +53,9 @@ export const SearchBar = ({
                   onClick={() => onSearchChange('')}
                   size="small"
                   sx={{
+                    color: '#64748b',
                     '&:hover': {
+                      color: '#1e293b',
                       backgroundColor: 'rgba(0, 0, 0, 0.04)',
                     },
                   }}
@@ -55,6 +67,6 @@ export const SearchBar = ({
           },
         }}
       />
-    </Paper>
+    </Box>
   );
 };

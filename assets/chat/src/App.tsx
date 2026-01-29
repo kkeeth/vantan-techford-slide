@@ -7,7 +7,14 @@ import {
   type FormEvent,
 } from 'react';
 import Dexie, { type EntityTable } from 'dexie';
-import { Container, Typography, Box, Paper, useTheme } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Box,
+  Paper,
+  Divider,
+  useTheme,
+} from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 import { MessageForm } from './components/MessageForm';
 import { MessageList } from './components/MessageList';
@@ -37,11 +44,11 @@ const App = () => {
   const theme = useTheme();
   const colors: Colors = useMemo(
     () => ({
-      primary: theme.palette.primary.main,
-      surface: theme.palette.background.paper,
-      gradient: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
-      gradientHover: `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.secondary.dark} 100%)`,
-      background: theme.palette.background.default,
+      primary: '#3b82f6',
+      surface: '#ffffff',
+      gradient: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+      gradientHover: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
+      background: '#f1f5f9',
     }),
     [theme],
   );
@@ -238,80 +245,89 @@ const App = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: colors.background,
-        py: { xs: 1, sm: 2 },
-        px: { xs: 1, sm: 2 },
+        background: '#f1f5f9',
+        py: { xs: 2, sm: 4 },
+        px: { xs: 2, sm: 2 },
       }}
     >
       <Container
         maxWidth="md"
         sx={{
-          maxWidth: { xs: '100%', sm: '720px' },
-          px: { xs: 0, sm: 3 },
+          maxWidth: { xs: '100%', sm: '600px' },
+          px: { xs: 0, sm: 0 },
         }}
       >
         {/* ヘッダー */}
-        <Paper
-          elevation={3}
+        <Box
           sx={{
-            borderRadius: { xs: 0, sm: 4 },
-            overflow: 'hidden',
-            mb: { xs: 2, sm: 3 },
-            background: '#008080',
-            backdropFilter: 'blur(20px)',
+            textAlign: 'center',
+            mb: 3,
           }}
         >
-          <Box
+          <Typography
+            variant="h4"
+            component="h1"
             sx={{
-              color: 'white',
-              background: colors.gradient,
-              textAlign: 'center',
-              py: { xs: 2, sm: 3 },
-              px: { xs: 2, sm: 3 },
+              fontSize: { xs: '1.5rem', sm: '1.75rem' },
+              fontWeight: 700,
+              color: '#1e293b',
+              mb: 0.5,
             }}
           >
-            <Typography
-              variant="h3"
-              component="h1"
-              gutterBottom
-              sx={{
-                fontSize: { xs: '1.5rem', sm: '2rem', md: '3rem' },
-              }}
-            >
-              💬 My Chat App
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              sx={{
-                fontSize: { xs: '0.875rem', md: '1rem' },
-              }}
-            >
-              TypeScript + React で作るチャットアプリ
-            </Typography>
+            My Chat App
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              color: '#64748b',
+            }}
+          >
+            TypeScript + React で作るチャットアプリ
+          </Typography>
+        </Box>
+
+        {/* メインコンテンツ */}
+        <Paper
+          elevation={0}
+          sx={{
+            borderRadius: 1,
+            overflow: 'hidden',
+            background: '#fff',
+            border: '1px solid #e2e8f0',
+          }}
+        >
+          {/* 投稿フォーム */}
+          <Box sx={{ p: { xs: 2, sm: 3 } }}>
+            <MessageForm
+              text={text}
+              isPosting={isPosting}
+              image={image}
+              colors={colors}
+              onTextChange={handleTextChange}
+              onSubmit={handlePost}
+              onSelectImage={handleSelectImage}
+              onDeleteImage={() => setImage(null)}
+            />
           </Box>
+
+          <Divider sx={{ borderColor: '#e2e8f0' }} />
+
+          {/* 検索バー */}
+          <Box sx={{ p: { xs: 2, sm: 3 }, backgroundColor: '#f8fafc' }}>
+            <SearchBar
+              searchTerm={searchTerm}
+              colors={colors}
+              onSearchChange={setSearchTerm}
+            />
+          </Box>
+
+          <Divider sx={{ borderColor: '#e2e8f0' }} />
+
+          {/* メッセージリスト */}
+          <MessageList showCount isSearching={searchTerm.trim().length > 0}>
+            {messageItems}
+          </MessageList>
         </Paper>
-
-        {/* メッセージフォーム */}
-        <MessageForm
-          text={text}
-          isPosting={isPosting}
-          image={image}
-          colors={colors}
-          onTextChange={handleTextChange}
-          onSubmit={handlePost}
-          onSelectImage={handleSelectImage}
-          onDeleteImage={() => setImage(null)}
-        />
-
-        {/* 検索バー */}
-        <SearchBar
-          searchTerm={searchTerm}
-          colors={colors}
-          onSearchChange={setSearchTerm}
-        />
-
-        {/* メッセージリスト */}
-        <MessageList showCount>{messageItems}</MessageList>
       </Container>
     </Box>
   );

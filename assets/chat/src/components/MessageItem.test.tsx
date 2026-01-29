@@ -44,31 +44,50 @@ describe('MessageItem', () => {
     expect(screen.getByText('テストメッセージ')).toBeInTheDocument();
   });
 
-  it('編集ボタンと削除ボタンが表示される', () => {
+  it('⋮メニューが表示され、クリックすると編集・削除オプションが表示される', async () => {
+    const user = userEvent.setup();
     render(<MessageItem {...defaultProps} />);
 
-    expect(screen.getByRole('button', { name: /編集/ })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /削除/ })).toBeInTheDocument();
+    // ⋮メニューボタンが表示される
+    const menuButton = screen.getByTestId('MoreVertIcon').closest('button');
+    expect(menuButton).toBeInTheDocument();
+
+    // メニューをクリック
+    await user.click(menuButton!);
+
+    // 編集と削除のメニューアイテムが表示される
+    expect(screen.getByText('編集')).toBeInTheDocument();
+    expect(screen.getByText('削除')).toBeInTheDocument();
   });
 
-  it('編集ボタンをクリックするとonStartEditが呼ばれる', async () => {
+  it('編集メニューをクリックするとonStartEditが呼ばれる', async () => {
     const user = userEvent.setup();
     const onStartEdit = vi.fn();
 
     render(<MessageItem {...defaultProps} onStartEdit={onStartEdit} />);
 
-    await user.click(screen.getByRole('button', { name: /編集/ }));
+    // ⋮メニューを開く
+    const menuButton = screen.getByTestId('MoreVertIcon').closest('button');
+    await user.click(menuButton!);
+
+    // 編集メニューをクリック
+    await user.click(screen.getByText('編集'));
 
     expect(onStartEdit).toHaveBeenCalledWith('1', 'テストメッセージ');
   });
 
-  it('削除ボタンをクリックするとonDeleteMessageが呼ばれる', async () => {
+  it('削除メニューをクリックするとonDeleteMessageが呼ばれる', async () => {
     const user = userEvent.setup();
     const onDeleteMessage = vi.fn();
 
     render(<MessageItem {...defaultProps} onDeleteMessage={onDeleteMessage} />);
 
-    await user.click(screen.getByRole('button', { name: /削除/ }));
+    // ⋮メニューを開く
+    const menuButton = screen.getByTestId('MoreVertIcon').closest('button');
+    await user.click(menuButton!);
+
+    // 削除メニューをクリック
+    await user.click(screen.getByText('削除'));
 
     expect(onDeleteMessage).toHaveBeenCalledWith('1');
   });
@@ -93,10 +112,10 @@ describe('MessageItem', () => {
     expect(screen.getByTestId('CancelIcon')).toBeInTheDocument();
   });
 
-  it('編集モードでは編集ボタンが非表示', () => {
+  it('編集モードでは⋮メニューが非表示', () => {
     render(<MessageItem {...defaultProps} isEditing={true} />);
 
-    expect(screen.queryByRole('button', { name: /編集/ })).toBeNull();
+    expect(screen.queryByTestId('MoreVertIcon')).toBeNull();
   });
 
   it('編集モードで入力するとonEditTextChangeが呼ばれる', async () => {

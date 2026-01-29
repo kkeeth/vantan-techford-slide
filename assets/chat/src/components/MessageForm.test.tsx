@@ -5,11 +5,11 @@ import { MessageForm } from './MessageForm';
 import type { Colors } from '../types';
 
 const mockColors: Colors = {
-  primary: '#1976d2',
+  primary: '#3b82f6',
   surface: '#ffffff',
-  gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-  gradientHover: 'linear-gradient(135deg, #764ba2 0%, #667eea 100%)',
-  background: '#f5f5f5',
+  gradient: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
+  gradientHover: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
+  background: '#f1f5f9',
 };
 
 const defaultProps = {
@@ -31,7 +31,7 @@ describe('MessageForm', () => {
   it('テキストフィールドが表示される', () => {
     render(<MessageForm {...defaultProps} />);
 
-    expect(screen.getByLabelText('今の気分はいかがでしょうか？'))
+    expect(screen.getByPlaceholderText('今の気分はいかがでしょうか？'))
       .toBeInTheDocument();
   });
 
@@ -41,7 +41,7 @@ describe('MessageForm', () => {
 
     render(<MessageForm {...defaultProps} onTextChange={onTextChange} />);
 
-    const input = screen.getByLabelText('今の気分はいかがでしょうか？');
+    const input = screen.getByPlaceholderText('今の気分はいかがでしょうか？');
     await user.type(input, 'テスト');
 
     expect(onTextChange).toHaveBeenCalled();
@@ -56,8 +56,7 @@ describe('MessageForm', () => {
   it('送信ボタンが表示される', () => {
     render(<MessageForm {...defaultProps} />);
 
-    // 送信ボタンは type="submit" の button
-    const submitButton = screen.getByRole('button', { name: '' });
+    const submitButton = screen.getByRole('button', { name: /投稿する/ });
     expect(submitButton).toHaveAttribute('type', 'submit');
   });
 

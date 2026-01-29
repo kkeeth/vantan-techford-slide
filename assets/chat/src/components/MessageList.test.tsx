@@ -5,9 +5,18 @@ describe('MessageList', () => {
   it('子要素がない場合は空メッセージを表示', () => {
     render(<MessageList>{[]}</MessageList>);
 
-    expect(screen.getByText('📝 まだメッセージがありません'))
+    expect(screen.getByText('まだメッセージがありません'))
       .toBeInTheDocument();
-    expect(screen.getByText('上のフォームから最初のメッセージを投稿してみましょう！'))
+    expect(screen.getByText('上のフォームから最初のメッセージを投稿してみましょう'))
+      .toBeInTheDocument();
+  });
+
+  it('検索中で結果がない場合は検索結果なしメッセージを表示', () => {
+    render(<MessageList isSearching={true}>{[]}</MessageList>);
+
+    expect(screen.getByText('検索結果がありません'))
+      .toBeInTheDocument();
+    expect(screen.getByText('別のキーワードで検索してみてください'))
       .toBeInTheDocument();
   });
 
