@@ -21,7 +21,7 @@ import { MessageList } from './components/MessageList';
 import { MessageItem } from './components/MessageItem';
 import { SearchBar } from './components/SearchBar';
 import { validateMessage, validateFile } from './utils/validator';
-import type { Colors, Message } from './types';
+import type { Message, Colors } from './types';
 import './App.css';
 
 const db = new Dexie('ChatApp') as Dexie & {
@@ -44,11 +44,17 @@ const App = () => {
   const theme = useTheme();
   const colors: Colors = useMemo(
     () => ({
-      primary: '#3b82f6',
-      surface: '#ffffff',
-      gradient: 'linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)',
-      gradientHover: 'linear-gradient(135deg, #2563eb 0%, #1e40af 100%)',
-      background: '#f1f5f9',
+      primary: theme.palette.primary.main,
+      primaryDark: theme.palette.primary.dark,
+      error: theme.palette.error.main,
+      background: theme.palette.background.default,
+      paper: theme.palette.background.paper,
+      border: theme.palette.border.main,
+      borderLight: theme.palette.border.light,
+      surface: theme.palette.surface.main,
+      textPrimary: theme.palette.textCustom.primary,
+      textSecondary: theme.palette.textCustom.secondary,
+      textMuted: theme.palette.textCustom.muted,
     }),
     [theme],
   );
@@ -245,7 +251,7 @@ const App = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        background: '#f1f5f9',
+        background: colors.background,
         py: { xs: 2, sm: 4 },
         px: { xs: 2, sm: 2 },
       }}
@@ -270,7 +276,7 @@ const App = () => {
             sx={{
               fontSize: { xs: '1.5rem', sm: '1.75rem' },
               fontWeight: 700,
-              color: '#1e293b',
+              color: colors.textPrimary,
               mb: 0.5,
             }}
           >
@@ -279,7 +285,7 @@ const App = () => {
           <Typography
             variant="body2"
             sx={{
-              color: '#64748b',
+              color: colors.textSecondary,
             }}
           >
             TypeScript + React で作るチャットアプリ
@@ -292,8 +298,8 @@ const App = () => {
           sx={{
             borderRadius: 1,
             overflow: 'hidden',
-            background: '#fff',
-            border: '1px solid #e2e8f0',
+            background: colors.paper,
+            border: `1px solid ${colors.border}`,
           }}
         >
           {/* 投稿フォーム */}
@@ -310,10 +316,15 @@ const App = () => {
             />
           </Box>
 
-          <Divider sx={{ borderColor: '#e2e8f0' }} />
+          <Divider sx={{ borderColor: colors.border }} />
 
           {/* 検索バー */}
-          <Box sx={{ p: { xs: 2, sm: 3 }, backgroundColor: '#f8fafc' }}>
+          <Box
+            sx={{
+              p: { xs: 2, sm: 3 },
+              backgroundColor: colors.surface,
+            }}
+          >
             <SearchBar
               searchTerm={searchTerm}
               colors={colors}
@@ -321,10 +332,14 @@ const App = () => {
             />
           </Box>
 
-          <Divider sx={{ borderColor: '#e2e8f0' }} />
+          <Divider sx={{ borderColor: colors.border }} />
 
           {/* メッセージリスト */}
-          <MessageList showCount isSearching={searchTerm.trim().length > 0}>
+          <MessageList
+            colors={colors}
+            showCount
+            isSearching={searchTerm.trim().length > 0}
+          >
             {messageItems}
           </MessageList>
         </Paper>

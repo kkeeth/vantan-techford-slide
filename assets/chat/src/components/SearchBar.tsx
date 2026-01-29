@@ -8,7 +8,11 @@ type SearchBarProps = {
   onSearchChange: (term: string) => void;
 };
 
-export const SearchBar = ({ searchTerm, onSearchChange }: SearchBarProps) => {
+export const SearchBar = ({
+  searchTerm,
+  colors,
+  onSearchChange,
+}: SearchBarProps) => {
   return (
     <Box>
       <TextField
@@ -19,23 +23,23 @@ export const SearchBar = ({ searchTerm, onSearchChange }: SearchBarProps) => {
         size="small"
         sx={{
           '& .MuiOutlinedInput-root': {
-            backgroundColor: '#fff',
+            backgroundColor: colors.paper,
             borderRadius: 1,
             '& fieldset': {
-              borderColor: '#cbd5e1',
+              borderColor: colors.borderLight,
               borderWidth: 1,
             },
             '&:hover fieldset': {
-              borderColor: '#94a3b8',
+              borderColor: colors.textMuted,
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#3b82f6',
+              borderColor: colors.primary,
               borderWidth: 2,
             },
           },
           '& .MuiOutlinedInput-input': {
             '&::placeholder': {
-              color: '#64748b',
+              color: colors.textSecondary,
               opacity: 1,
             },
           },
@@ -44,7 +48,7 @@ export const SearchBar = ({ searchTerm, onSearchChange }: SearchBarProps) => {
           input: {
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon sx={{ color: '#64748b' }} />
+                <SearchIcon sx={{ color: colors.textSecondary }} />
               </InputAdornment>
             ),
             endAdornment: searchTerm && (
@@ -53,9 +57,9 @@ export const SearchBar = ({ searchTerm, onSearchChange }: SearchBarProps) => {
                   onClick={() => onSearchChange('')}
                   size="small"
                   sx={{
-                    color: '#64748b',
+                    color: colors.textSecondary,
                     '&:hover': {
-                      color: '#1e293b',
+                      color: colors.textPrimary,
                       backgroundColor: 'rgba(0, 0, 0, 0.04)',
                     },
                   }}

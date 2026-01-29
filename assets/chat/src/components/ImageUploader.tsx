@@ -33,8 +33,8 @@ export const ImageUploader = ({
           sx={{
             p: 2,
             borderRadius: 1,
-            background: '#f8fafc',
-            border: '1px solid #e2e8f0',
+            background: colors.surface,
+            border: `1px solid ${colors.border}`,
           }}
         >
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
@@ -56,7 +56,7 @@ export const ImageUploader = ({
                   maxWidth: '80%',
                   maxHeight: 200,
                   objectFit: 'contain',
-                  border: '1px solid #e2e8f0',
+                  border: `1px solid ${colors.border}`,
                   borderRadius: 2,
                 }}
               />
@@ -67,16 +67,15 @@ export const ImageUploader = ({
                   position: 'absolute',
                   top: -12,
                   right: 52,
-                  backgroundColor: '#fff',
-                  // border: 'none',
-                  border: '1px solid #e2e8f0',
-                  color: '#94a3b8',
+                  backgroundColor: colors.paper,
+                  border: `1px solid ${colors.border}`,
+                  color: colors.textMuted,
                   width: 24,
                   height: 24,
                   '&:hover': {
-                    color: '#64748b',
+                    color: colors.textSecondary,
                     borderColor: colors.primary,
-                    backgroundColor: '#e2e8f0',
+                    backgroundColor: colors.border,
                   },
                 }}
               >
@@ -110,8 +109,8 @@ export const ImageUploader = ({
           sx={{
             height: 44,
             borderRadius: 6,
-            borderColor: '#e2e8f0',
-            color: '#64748b',
+            borderColor: colors.border,
+            color: colors.textSecondary,
             '&:hover': {
               borderColor: colors.primary,
               backgroundColor: 'rgba(59, 130, 246, 0.04)',
@@ -135,17 +134,17 @@ export const ImageUploader = ({
             height: 44,
             px: 3,
             borderRadius: 6,
-            backgroundColor: '#3b82f6',
+            backgroundColor: colors.primary,
             textTransform: 'none',
             fontWeight: 600,
             boxShadow: 'none',
             '&:hover': {
-              backgroundColor: '#2563eb',
+              backgroundColor: colors.primaryDark,
               boxShadow: 'none',
             },
             '&:disabled': {
-              backgroundColor: '#e2e8f0',
-              color: '#94a3b8',
+              backgroundColor: colors.border,
+              color: colors.textMuted,
             },
           }}
         >

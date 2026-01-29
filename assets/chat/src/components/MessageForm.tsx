@@ -39,21 +39,21 @@ export const MessageForm = ({
             sx={{
               '& .MuiOutlinedInput-root': {
                 borderRadius: 1,
-                backgroundColor: '#fff',
+                backgroundColor: colors.paper,
                 '& fieldset': {
-                  borderColor: '#e2e8f0',
+                  borderColor: colors.border,
                 },
                 '&:hover fieldset': {
-                  borderColor: '#cbd5e1',
+                  borderColor: colors.borderLight,
                 },
                 '&.Mui-focused fieldset': {
-                  borderColor: '#3b82f6',
+                  borderColor: colors.primary,
                   borderWidth: 1,
                 },
               },
               '& .MuiOutlinedInput-input': {
                 '&::placeholder': {
-                  color: '#94a3b8',
+                  color: colors.textMuted,
                   opacity: 1,
                 },
               },

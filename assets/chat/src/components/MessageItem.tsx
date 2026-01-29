@@ -71,7 +71,7 @@ export const MessageItem = ({
       sx={{
         py: 2,
         px: { xs: 2, sm: 3 },
-        borderBottom: '1px solid #e2e8f0',
+        borderBottom: `1px solid ${colors.border}`,
         '&:last-child': {
           borderBottom: 'none',
         },
@@ -89,7 +89,7 @@ export const MessageItem = ({
         <Typography
           variant="caption"
           sx={{
-            color: '#64748b',
+            color: colors.textSecondary,
             fontSize: '0.75rem',
           }}
         >
@@ -103,10 +103,10 @@ export const MessageItem = ({
               size="small"
               onClick={handleMenuOpen}
               sx={{
-                color: '#94a3b8',
+                color: colors.textMuted,
                 padding: 0.5,
                 '&:hover': {
-                  color: '#64748b',
+                  color: colors.textSecondary,
                   backgroundColor: 'transparent',
                 },
               }}
@@ -130,7 +130,7 @@ export const MessageItem = ({
                 sx: {
                   minWidth: 120,
                   borderRadius: 1,
-                  border: '1px solid #e2e8f0',
+                  border: `1px solid ${colors.border}`,
                   mt: 0.5,
                 },
               }}
@@ -139,12 +139,16 @@ export const MessageItem = ({
                 onClick={handleEdit}
                 sx={{ gap: 1.5, fontSize: '0.875rem' }}
               >
-                <EditIcon fontSize="small" sx={{ color: '#3b82f6' }} />
+                <EditIcon fontSize="small" sx={{ color: colors.primary }} />
                 編集
               </MenuItem>
               <MenuItem
                 onClick={handleDelete}
-                sx={{ gap: 1.5, fontSize: '0.875rem', color: '#ef4444' }}
+                sx={{
+                  gap: 1.5,
+                  fontSize: '0.875rem',
+                  color: colors.error,
+                }}
               >
                 <DeleteIcon fontSize="small" />
                 削除
@@ -160,14 +164,14 @@ export const MessageItem = ({
           <IconButton
             onClick={onSaveEdit}
             size="small"
-            sx={{ color: '#3b82f6' }}
+            sx={{ color: colors.primary }}
           >
             <CheckIcon />
           </IconButton>
           <IconButton
             onClick={onCancelEdit}
             size="small"
-            sx={{ color: '#64748b' }}
+            sx={{ color: colors.textSecondary }}
           >
             <CancelIcon />
           </IconButton>
@@ -186,12 +190,12 @@ export const MessageItem = ({
           sx={{
             '& .MuiOutlinedInput-root': {
               borderRadius: 1,
-              backgroundColor: '#fff',
+              backgroundColor: colors.paper,
               '& fieldset': {
-                borderColor: '#e2e8f0',
+                borderColor: colors.border,
               },
               '&.Mui-focused fieldset': {
-                borderColor: '#3b82f6',
+                borderColor: colors.primary,
                 borderWidth: 1,
               },
             },
@@ -203,22 +207,21 @@ export const MessageItem = ({
           component="p"
           sx={{
             lineHeight: 1.6,
-            color: '#1e293b',
+            color: colors.textPrimary,
             fontSize: '0.9375rem',
             mb: message.image ? 2 : 0,
           }}
         >
           <HighlightText text={message.text} searchTerm={searchTerm} />
-          {message.updatedAt &&
-            message.updatedAt !== message.createdAt && (
-              <Typography
-                component="span"
-                variant="caption"
-                sx={{ color: '#94a3b8', ml: 1 }}
-              >
-                （編集済み）
-              </Typography>
-            )}
+          {message.updatedAt && message.updatedAt !== message.createdAt && (
+            <Typography
+              component="span"
+              variant="caption"
+              sx={{ color: colors.textMuted, ml: 1 }}
+            >
+              （編集済み）
+            </Typography>
+          )}
         </Typography>
       )}
 

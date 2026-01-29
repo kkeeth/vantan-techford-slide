@@ -10,8 +10,14 @@ export type Message = {
 
 export type Colors = {
   primary: string;
-  surface: string;
-  gradient: string;
-  gradientHover: string;
+  primaryDark: string;
+  error: string;
   background: string;
+  paper: string;
+  border: string;
+  borderLight: string;
+  surface: string;
+  textPrimary: string;
+  textSecondary: string;
+  textMuted: string;
 };
