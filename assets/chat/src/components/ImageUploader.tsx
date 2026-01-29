@@ -1,6 +1,10 @@
 import type { ChangeEvent } from 'react';
-import { Box, Button, Typography, Paper } from '@mui/material';
-import { Image as ImageIcon, Send as SendIcon } from '@mui/icons-material';
+import { Box, Button, Typography, Paper, IconButton } from '@mui/material';
+import {
+  Image as ImageIcon,
+  Send as SendIcon,
+  Close as CloseIcon,
+} from '@mui/icons-material';
 import type { Colors } from '../types';
 
 type ImageUploaderProps = {
@@ -43,41 +47,50 @@ export const ImageUploader = ({
               width: '100%',
             }}
           >
-            <Box
-              component="img"
-              alt="Preview"
-              src={URL.createObjectURL(image)}
-              sx={{
-                maxWidth: '80%',
-                maxHeight: 200,
-                objectFit: 'contain',
-                borderRadius: 2,
-              }}
-            />
+            <Box sx={{ position: 'relative', display: 'inline-block' }}>
+              <Box
+                component="img"
+                alt="Preview"
+                src={URL.createObjectURL(image)}
+                sx={{
+                  maxWidth: '80%',
+                  maxHeight: 200,
+                  objectFit: 'contain',
+                  border: '1px solid #e2e8f0',
+                  borderRadius: 2,
+                }}
+              />
+              <IconButton
+                size="small"
+                onClick={onDeleteImage}
+                sx={{
+                  position: 'absolute',
+                  top: -12,
+                  right: 52,
+                  backgroundColor: '#fff',
+                  // border: 'none',
+                  border: '1px solid #e2e8f0',
+                  color: '#94a3b8',
+                  width: 24,
+                  height: 24,
+                  '&:hover': {
+                    color: '#64748b',
+                    borderColor: colors.primary,
+                    backgroundColor: '#e2e8f0',
+                  },
+                }}
+              >
+                <CloseIcon sx={{ fontSize: 16 }} />
+              </IconButton>
+            </Box>
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              mt: 2,
-            }}
+          <Typography
+            variant="caption"
+            color="text.secondary"
+            sx={{ mt: 1, display: 'block', textAlign: 'center' }}
           >
-            <Typography variant="caption" color="text.secondary">
-              {image.name} ({Math.round(image.size / 1024)}KB)
-            </Typography>
-            <Button
-              size="small"
-              color="error"
-              onClick={onDeleteImage}
-              sx={{
-                minWidth: 'auto',
-                px: 1,
-              }}
-            >
-              削除
-            </Button>
-          </Box>
+            {image.name} ({Math.round(image.size / 1024)}KB)
+          </Typography>
         </Paper>
       )}
 
