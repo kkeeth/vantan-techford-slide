@@ -58,10 +58,11 @@ describe('validateFile', () => {
     );
   });
 
-  it('ファイルサイズが大きい場合はエラーを返す', () => {});
-  expect(validateFile(overSizedImage)).toBe(
-    'ファイルサイズが大きすぎます（最大5MB）',
-  );
+  it('ファイルサイズが大きい場合はエラーを返す', () => {
+    expect(validateFile(overSizedImage)).toBe(
+      'ファイルサイズが大きすぎます（最大5MB）',
+    );
+  });
 
   it('ファイル名が長すぎる場合はエラーを返す', () => {
     expect(validateFile(longNameImage)).toBe('ファイル名が長すぎます');
