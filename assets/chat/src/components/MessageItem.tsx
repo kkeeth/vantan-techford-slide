@@ -1,20 +1,18 @@
+import { useState } from 'react';
 import {
-  Card,
-  CardContent,
-  CardActions,
   Typography,
-  Button,
   IconButton,
   TextField,
   Box,
-  Chip,
-  Divider,
+  Menu,
+  MenuItem,
 } from '@mui/material';
 import {
   Delete as DeleteIcon,
   Edit as EditIcon,
   Check as CheckIcon,
   Cancel as CancelIcon,
+  MoreVert as MoreVertIcon,
 } from '@mui/icons-material';
 import { formatRelativeTime } from '../utils/dateFormatter';
 import { HighlightText } from './HighlightText';
@@ -45,145 +43,211 @@ export const MessageItem = ({
   onCancelEdit,
   onDeleteMessage,
 }: MessageItemProps) => {
-  const handleDelete = (id: string) => {
-    if (id) {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleEdit = () => {
+    onStartEdit(message.id, message.text);
+    handleMenuClose();
+  };
+
+  const handleDelete = () => {
+    if (message.id) {
       onDeleteMessage(message.id);
     }
+    handleMenuClose();
   };
 
   return (
-    <Card
-      key={message.id}
-      elevation={3}
+    <Box
       sx={{
-        borderRadius: { xs: 2, sm: 3 },
-        overflow: 'hidden',
-        background: colors.surface,
-        backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(59, 130, 246, 0.1)',
-        transition: 'all 0.3s ease',
-        '&:hover': {
-          transform: 'translateY(-4px)',
-          boxShadow: '0 12px 30px rgba(59, 130, 246, 0.15)',
+        py: 2,
+        px: { xs: 2, sm: 3 },
+        borderBottom: `1px solid ${colors.border}`,
+        '&:last-child': {
+          borderBottom: 'none',
         },
       }}
     >
-      <CardContent sx={{ p: { xs: 2, sm: 3 } }}>
-        {isEditing && (
-          <Box sx={{ display: 'flex', gap: 1, mb: 1 }}>
-            <IconButton onClick={onSaveEdit} size="small" color="primary">
-              <CheckIcon />
+      {/* ヘッダー: 日時と⋮メニュー */}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mb: 1,
+        }}
+      >
+        <Typography
+          variant="caption"
+          sx={{
+            color: colors.textSecondary,
+            fontSize: '0.75rem',
+          }}
+        >
+          {formatRelativeTime(message.date)}
+        </Typography>
+
+        {/* ⋮メニュー */}
+        {!isEditing && (
+          <>
+            <IconButton
+              size="small"
+              onClick={handleMenuOpen}
+              sx={{
+                color: colors.textMuted,
+                padding: 0.5,
+                '&:hover': {
+                  color: colors.textSecondary,
+                  backgroundColor: 'transparent',
+                },
+              }}
+            >
+              <MoreVertIcon fontSize="small" />
             </IconButton>
-            <IconButton onClick={onCancelEdit} size="small">
-              <CancelIcon />
-            </IconButton>
-          </Box>
+            <Menu
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleMenuClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'right',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              PaperProps={{
+                elevation: 2,
+                sx: {
+                  minWidth: 120,
+                  borderRadius: 1,
+                  border: `1px solid ${colors.border}`,
+                  mt: 0.5,
+                },
+              }}
+            >
+              <MenuItem
+                onClick={handleEdit}
+                sx={{ gap: 1.5, fontSize: '0.875rem' }}
+              >
+                <EditIcon fontSize="small" sx={{ color: colors.primary }} />
+                編集
+              </MenuItem>
+              <MenuItem
+                onClick={handleDelete}
+                sx={{
+                  gap: 1.5,
+                  fontSize: '0.875rem',
+                  color: colors.error,
+                }}
+              >
+                <DeleteIcon fontSize="small" />
+                削除
+              </MenuItem>
+            </Menu>
+          </>
         )}
-        {/* 日時表示 */}
-        <Box sx={{ mb: 2 }}>
-          <Chip
-            label={formatRelativeTime(message.date)}
+      </Box>
+
+      {/* 編集中のアクションボタン */}
+      {isEditing && (
+        <Box sx={{ display: 'flex', gap: 1, mb: 1.5 }}>
+          <IconButton
+            onClick={onSaveEdit}
             size="small"
-            variant="outlined"
+            sx={{ color: colors.primary }}
+          >
+            <CheckIcon />
+          </IconButton>
+          <IconButton
+            onClick={onCancelEdit}
+            size="small"
+            sx={{ color: colors.textSecondary }}
+          >
+            <CancelIcon />
+          </IconButton>
+        </Box>
+      )}
+
+      {/* テキスト表示 or 編集フィールド */}
+      {isEditing ? (
+        <TextField
+          fullWidth
+          multiline
+          minRows={2}
+          value={editText}
+          onChange={(e) => onEditTextChange(e.target.value)}
+          autoFocus
+          sx={{
+            '& .MuiOutlinedInput-root': {
+              borderRadius: 1,
+              backgroundColor: colors.paper,
+              '& fieldset': {
+                borderColor: colors.border,
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: colors.primary,
+                borderWidth: 1,
+              },
+            },
+          }}
+        />
+      ) : (
+        <Typography
+          variant="body1"
+          component="p"
+          sx={{
+            lineHeight: 1.6,
+            color: colors.textPrimary,
+            fontSize: '0.9375rem',
+            mb: message.image ? 2 : 0,
+          }}
+        >
+          <HighlightText text={message.text} searchTerm={searchTerm} />
+          {message.updatedAt && message.updatedAt !== message.createdAt && (
+            <Typography
+              component="span"
+              variant="caption"
+              sx={{ color: colors.textMuted, ml: 1 }}
+            >
+              （編集済み）
+            </Typography>
+          )}
+        </Typography>
+      )}
+
+      {/* 画像表示 */}
+      {message.image && (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            width: '100%',
+            mt: 2,
+          }}
+        >
+          <Box
+            component="img"
+            src={message.image}
+            alt={message.imageName}
             sx={{
-              height: 24,
-              fontSize: '0.75rem',
-              borderColor: colors.primary,
-              color: colors.primary,
-              backgroundColor: 'rgba(59, 130, 246, 0.05)',
+              maxWidth: '100%',
+              maxHeight: 300,
+              objectFit: 'contain',
+              borderRadius: 2,
             }}
           />
         </Box>
-        {/* テキスト表示 or 編集フィールド */}
-        {isEditing ? (
-          <TextField
-            fullWidth
-            multiline
-            minRows={2}
-            value={editText}
-            onChange={(e) => onEditTextChange(e.target.value)}
-            autoFocus
-          />
-        ) : (
-          <Typography
-            variant="body1"
-            component="p"
-            sx={{
-              lineHeight: 1.7,
-              color: '#1f2937',
-              fontSize: { xs: '0.95rem', sm: '1rem' },
-              fontWeight: 400,
-              mb: message.image ? 2 : 0,
-            }}
-          >
-            <HighlightText text={message.text} searchTerm={searchTerm} />
-            <Typography variant="caption" sx={{ color: 'gray' }}>
-              {message.updatedAt && '（編集済み）'}
-            </Typography>
-          </Typography>
-        )}
-
-        {/* 画像表示 */}
-        {message.image && (
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              width: '100%',
-              mt: 2,
-            }}
-          >
-            <Box
-              component="img"
-              src={message.image}
-              alt={message.imageName}
-              sx={{
-                maxWidth: '100%',
-                maxHeight: 400,
-                objectFit: 'contain',
-                borderRadius: 2,
-                boxShadow: '0 6px 20px rgba(0,0,0,0.1)',
-                transition: 'transform 0.3s ease',
-                '&:hover': {
-                  transform: 'scale(1.02)',
-                },
-              }}
-            />
-          </Box>
-        )}
-      </CardContent>
-      <Divider sx={{ borderColor: 'rgba(59, 130, 246, 0.1)' }} />
-      <CardActions sx={{ justifyContent: 'flex-end', p: { xs: 1.5, sm: 2 } }}>
-        {!isEditing && (
-          <Button
-            size="small"
-            color="primary"
-            startIcon={<EditIcon />}
-            onClick={() => onStartEdit(message.id, message.text)}
-            sx={{
-              borderRadius: 2,
-              fontSize: { xs: '0.8rem', sm: '0.875rem' },
-            }}
-          >
-            編集
-          </Button>
-        )}
-        <Button
-          size="small"
-          color="error"
-          startIcon={<DeleteIcon />}
-          onClick={() => handleDelete(message.id)}
-          sx={{
-            borderRadius: 2,
-            fontSize: { xs: '0.8rem', sm: '0.875rem' },
-            '&:hover': {
-              backgroundColor: 'rgba(244, 67, 54, 0.08)',
-            },
-          }}
-        >
-          削除
-        </Button>
-      </CardActions>
-    </Card>
+      )}
+    </Box>
   );
 };
