@@ -12,7 +12,6 @@ export const HighlightText = ({ text, searchTerm }: HighlightTextProps) => {
 
   const regex = new RegExp(`(${searchTerm})`, 'gi');
   const parts = text.split(regex);
-
   return (
     <>
       {parts.map((part, index) =>
@@ -22,9 +21,11 @@ export const HighlightText = ({ text, searchTerm }: HighlightTextProps) => {
             component="span"
             sx={{
               backgroundColor: '#fff59d',
+              color: '#000',
               fontWeight: 'bold',
-              padding: '2px 4px',
+              padding: '2px 6px',
               borderRadius: '4px',
+              boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
             }}
           >
             {part}

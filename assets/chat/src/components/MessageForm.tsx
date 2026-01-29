@@ -1,7 +1,7 @@
-import type { ChangeEvent, FormEvent } from 'react';
-import { Paper, Stack, TextField } from '@mui/material';
+import type { FormEvent, ChangeEvent } from 'react';
+import { Box, Stack, TextField } from '@mui/material';
 import { ImageUploader } from './ImageUploader';
-import { Colors } from '../types';
+import type { Colors } from '../types';
 
 type MessageFormProps = {
   text: string;
@@ -25,55 +25,51 @@ export const MessageForm = ({
   onDeleteImage,
 }: MessageFormProps) => {
   return (
-    <Paper
-      elevation={2}
-      sx={{
-        borderRadius: { xs: 2, sm: 3 },
-        p: { xs: 2, sm: 3 },
-        mb: { xs: 2, sm: 3 },
-        background: colors.surface,
-        backdropFilter: 'blur(20px)',
-        border: '1px solid rgba(59, 130, 246, 0.1)',
-      }}
-    >
+    <Box>
       <form onSubmit={onSubmit}>
-        <Stack spacing={{ xs: 2, sm: 3 }}>
+        <Stack spacing={2}>
           <TextField
-            label="今の気分はいかがでしょうか？"
+            placeholder="今の気分はいかがでしょうか？"
             multiline
             fullWidth
-            rows={4}
+            rows={3}
+            variant="outlined"
             value={text}
             onChange={onTextChange}
-            variant="outlined"
-            error={text.length > 140}
-            helperText={`${text.length}/140文字`}
             sx={{
               '& .MuiOutlinedInput-root': {
-                borderRadius: 2,
-                backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                borderRadius: 1,
+                backgroundColor: '#fff',
+                '& fieldset': {
+                  borderColor: '#e2e8f0',
+                },
                 '&:hover fieldset': {
-                  borderColor: colors.primary,
+                  borderColor: '#cbd5e1',
                 },
                 '&.Mui-focused fieldset': {
-                  borderColor: colors.primary,
+                  borderColor: '#3b82f6',
+                  borderWidth: 1,
                 },
               },
-              '& .MuiInputLabel-root.Mui-focused': {
-                color: colors.primary,
+              '& .MuiOutlinedInput-input': {
+                '&::placeholder': {
+                  color: '#94a3b8',
+                  opacity: 1,
+                },
               },
             }}
           />
+
+          <ImageUploader
+            text={text}
+            isPosting={isPosting}
+            image={image}
+            colors={colors}
+            onSelectImage={onSelectImage}
+            onDeleteImage={onDeleteImage}
+          />
         </Stack>
-        <ImageUploader
-          text={text}
-          isPosting={isPosting}
-          image={image}
-          colors={colors}
-          onSelectImage={onSelectImage}
-          onDeleteImage={onDeleteImage}
-        />
       </form>
-    </Paper>
+    </Box>
   );
 };

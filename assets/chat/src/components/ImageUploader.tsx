@@ -1,7 +1,7 @@
 import type { ChangeEvent } from 'react';
-import { Box, Button, Fab, Paper, Typography } from '@mui/material';
+import { Box, Button, Typography, Paper } from '@mui/material';
 import { Image as ImageIcon, Send as SendIcon } from '@mui/icons-material';
-import { Colors } from '../types';
+import type { Colors } from '../types';
 
 type ImageUploaderProps = {
   text: string;
@@ -25,16 +25,16 @@ export const ImageUploader = ({
       {/* 画像プレビュー */}
       {image && (
         <Paper
-          elevation={2}
+          elevation={0}
           sx={{
             p: 2,
-            borderRadius: 2,
-            background: 'rgba(255, 255, 255, 0.8)',
-            border: '1px solid rgba(59, 130, 246, 0.1)',
+            borderRadius: 1,
+            background: '#f8fafc',
+            border: '1px solid #e2e8f0',
           }}
         >
           <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-            📸 画像プレビュー
+            画像プレビュー
           </Typography>
           <Box
             sx={{
@@ -66,20 +66,28 @@ export const ImageUploader = ({
             <Typography variant="caption" color="text.secondary">
               {image.name} ({Math.round(image.size / 1024)}KB)
             </Typography>
-            <Button size="small" color="error" onClick={onDeleteImage}>
+            <Button
+              size="small"
+              color="error"
+              onClick={onDeleteImage}
+              sx={{
+                minWidth: 'auto',
+                px: 1,
+              }}
+            >
               削除
             </Button>
           </Box>
         </Paper>
       )}
 
-      {/* 画像を追加ボタン */}
+      {/* ボタンエリア */}
       <Box
         sx={{
           display: 'flex',
           gap: 2,
           alignItems: 'center',
-          flexDirection: { xs: 'column', sm: 'row' },
+          justifyContent: 'flex-end',
         }}
       >
         <Button
@@ -87,10 +95,14 @@ export const ImageUploader = ({
           component="label"
           startIcon={<ImageIcon />}
           sx={{
-            flex: 1,
-            width: { xs: '100%', sm: 'auto' },
-            height: 48,
-            borderRadius: 2,
+            height: 44,
+            borderRadius: 6,
+            borderColor: '#e2e8f0',
+            color: '#64748b',
+            '&:hover': {
+              borderColor: colors.primary,
+              backgroundColor: 'rgba(59, 130, 246, 0.04)',
+            },
           }}
         >
           画像を追加
@@ -101,24 +113,31 @@ export const ImageUploader = ({
             onChange={onSelectImage}
           />
         </Button>
-
-        <Fab
-          color="primary"
+        <Button
           type="submit"
+          variant="contained"
           disabled={!text.trim() || isPosting}
-          size="large"
+          endIcon={<SendIcon />}
           sx={{
-            background: text.trim() && !isPosting ? colors.gradient : undefined,
+            height: 44,
+            px: 3,
+            borderRadius: 6,
+            backgroundColor: '#3b82f6',
+            textTransform: 'none',
+            fontWeight: 600,
+            boxShadow: 'none',
             '&:hover': {
-              background:
-                text.trim() && !isPosting ? colors.gradientHover : undefined,
+              backgroundColor: '#2563eb',
+              boxShadow: 'none',
             },
-            transition: 'all 0.3s ease',
-            transform: text.trim() ? 'scale(1.05)' : 'scale(1)',
+            '&:disabled': {
+              backgroundColor: '#e2e8f0',
+              color: '#94a3b8',
+            },
           }}
         >
-          <SendIcon />
-        </Fab>
+          投稿する
+        </Button>
       </Box>
     </>
   );
