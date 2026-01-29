@@ -1,5 +1,5 @@
 // src/utils/dateFormatter.test.ts
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { formatRelativeTime } from './dateFormatter';
 
 describe('formatRelativeTime', () => {
