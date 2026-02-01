@@ -259,7 +259,7 @@ const App = () => {
       <Container
         maxWidth="md"
         sx={{
-          maxWidth: { xs: '100%', sm: '600px' },
+          maxWidth: { xs: '100%', sm: '720px' },
           px: { xs: 0, sm: 0 },
         }}
       >
@@ -274,7 +274,7 @@ const App = () => {
             variant="h4"
             component="h1"
             sx={{
-              fontSize: { xs: '1.5rem', sm: '1.75rem' },
+              fontSize: { xs: '1.5rem', sm: '2rem' },
               fontWeight: 700,
               color: colors.textPrimary,
               mb: 0.5,
