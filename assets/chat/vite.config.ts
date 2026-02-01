@@ -11,6 +11,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './src/test/setup.ts',
     css: true,
+    reporters: [['default', { summary: false }], 'vitest-nyancat-reporter'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],

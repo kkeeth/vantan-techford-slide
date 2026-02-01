@@ -1473,6 +1473,9 @@ layout: section
 
 # 参考資料とコミュニティ
 
+<div grid="~ cols-2 gap-4">
+<div>
+
 ## 📚 継続学習のための資料
 
 **公式ドキュメント：**
@@ -1486,11 +1489,17 @@ layout: section
 - TypeScript Deep Dive: https://basarat.gitbook.io/typescript/
 - React Patterns: https://reactpatterns.com/
 
+</div>
+<div>
+
 ## 🔗 コミュニティ
 
 - React Japan コミュニティ
 - TypeScript Japan
 - Qiita, Zenn での技術記事投稿
+
+</div>
+</div>
 
 ---
 layout: section

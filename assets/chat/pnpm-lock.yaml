@@ -87,6 +87,9 @@ importers:
       vitest:
         specifier: ^4.0.18
         version: 4.0.18(@types/node@24.10.9)(jsdom@27.4.0)
+      vitest-nyancat-reporter:
+        specifier: ^1.0.0
+        version: 1.0.0(vitest@4.0.18(@types/node@24.10.9)(jsdom@27.4.0))
 
 packages:
 
@@ -1615,6 +1618,10 @@ packages:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
     engines: {node: '>=8'}
 
+  supports-color@8.1.1:
+    resolution: {integrity: sha512-MpUEN2OodtUzxvKQl72cUF7RQ5EiHsGvSsVG0ia9c5RbWGL2CI4C7EpPS8UTBIplnlzZiNuV56w+FuNxy3ty2Q==}
+    engines: {node: '>=10'}
+
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
@@ -1657,6 +1664,9 @@ packages:
     engines: {node: '>=18.12'}
     peerDependencies:
       typescript: '>=4.8.4'
+
+  tty@1.0.1:
+    resolution: {integrity: sha512-yCPqGIuidycVkRigBDshlGDLKu9+p4JKtBQijtYcI7ZnWwak56vwT7y7dGGTcxG+ecjxgWQOPWuvlePmxC5S2w==}
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -1729,6 +1739,12 @@ packages:
         optional: true
       yaml:
         optional: true
+
+  vitest-nyancat-reporter@1.0.0:
+    resolution: {integrity: sha512-kTADmw/ltRPZhtmB7tL0FVmn3Lr5L9gJ0Wx0+TlRfv1L8mPXwPkMGbBUfbcLXutjIiItND4+ysKPrPOLMT98yg==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      vitest: ^0.27.2
 
   vitest@4.0.18:
     resolution: {integrity: sha512-hOQuK7h0FGKgBAas7v0mSAsnvrIgAvWmRFjmzpJ7SwFHH3g1k2u37JtYwOwmEKhK6ZO3v9ggDBBm0La1LCK4uQ==}
@@ -3323,6 +3339,10 @@ snapshots:
     dependencies:
       has-flag: 4.0.0
 
+  supports-color@8.1.1:
+    dependencies:
+      has-flag: 4.0.0
+
   supports-preserve-symlinks-flag@1.0.0: {}
 
   symbol-tree@3.2.4: {}
@@ -3355,6 +3375,8 @@ snapshots:
   ts-api-utils@2.4.0(typescript@5.9.3):
     dependencies:
       typescript: 5.9.3
+
+  tty@1.0.1: {}
 
   type-check@0.4.0:
     dependencies:
@@ -3398,6 +3420,13 @@ snapshots:
     optionalDependencies:
       '@types/node': 24.10.9
       fsevents: 2.3.3
+
+  vitest-nyancat-reporter@1.0.0(vitest@4.0.18(@types/node@24.10.9)(jsdom@27.4.0)):
+    dependencies:
+      ms: 2.1.3
+      supports-color: 8.1.1
+      tty: 1.0.1
+      vitest: 4.0.18(@types/node@24.10.9)(jsdom@27.4.0)
 
   vitest@4.0.18(@types/node@24.10.9)(jsdom@27.4.0):
     dependencies:
