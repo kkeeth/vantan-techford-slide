@@ -1,28 +1,36 @@
 // src/utils/validator.test.ts
 import { describe, it, expect } from 'vitest';
-import { validateMessage, validateFile } from './validator';
+import {
+  validateMessage,
+  validateFile,
+  MAX_MESSAGE_LENGTH,
+  MAX_SIZE,
+  MAX_FILENAME_LENGTH,
+  ERROR_MESSAGES,
+  FILE_ERROR_MESSAGES,
+} from './validator';
 
 describe('validateMessage', () => {
   it('空文字の場合はエラーを返す', () => {
-    expect(validateMessage('')).toBe('内容を入力してください');
+    expect(validateMessage('')).toBe(ERROR_MESSAGES.EMPTY);
   });
 
   it('空白のみの場合もエラーを返す', () => {
-    expect(validateMessage('   ')).toBe('内容を入力してください');
+    expect(validateMessage('   ')).toBe(ERROR_MESSAGES.EMPTY);
   });
 
   it('正常な入力の場合は空文字を返す', () => {
     expect(validateMessage('こんにちは')).toBe('');
   });
 
-  it('140文字ちょうどは有効', () => {
-    const text = 'a'.repeat(140);
+  it(`${MAX_MESSAGE_LENGTH}文字ちょうどは有効`, () => {
+    const text = 'a'.repeat(MAX_MESSAGE_LENGTH);
     expect(validateMessage(text)).toBe('');
   });
 
-  it('141文字以上はエラー', () => {
-    const text = 'a'.repeat(141);
-    expect(validateMessage(text)).toContain('140');
+  it(`${MAX_MESSAGE_LENGTH + 1}文字以上はエラー`, () => {
+    const text = 'a'.repeat(MAX_MESSAGE_LENGTH + 1);
+    expect(validateMessage(text)).toBe(ERROR_MESSAGES.TOO_LONG);
   });
 });
 
@@ -32,7 +40,7 @@ describe('validateFile', () => {
     lastModified: Date.now(),
   });
   const overSizedImage = new File(
-    [new ArrayBuffer(6 * 1024 * 1024)],
+    [new ArrayBuffer((MAX_SIZE + 1) * 1024 * 1024)],
     'large.png',
     {
       type: 'image/png',
@@ -41,7 +49,7 @@ describe('validateFile', () => {
   );
   const longNameImage = new File(
     ['dummy image data'],
-    'a'.repeat(101) + '.png',
+    'a'.repeat(MAX_FILENAME_LENGTH + 1) + '.png',
     {
       type: 'image/png',
       lastModified: Date.now(),
@@ -54,18 +62,16 @@ describe('validateFile', () => {
 
   it('対象外の拡張子ファイルの場合はエラーを返す', () => {
     expect(validateFile(invalidExtensionImage)).toBe(
-      'JPEG, PNG, GIF ファイルのみアップロード可能です',
+      FILE_ERROR_MESSAGES.INVALID_TYPE,
     );
   });
 
   it('ファイルサイズが大きい場合はエラーを返す', () => {
-    expect(validateFile(overSizedImage)).toBe(
-      'ファイルサイズが大きすぎます（最大5MB）',
-    );
+    expect(validateFile(overSizedImage)).toBe(FILE_ERROR_MESSAGES.TOO_LARGE);
   });
 
   it('ファイル名が長すぎる場合はエラーを返す', () => {
-    expect(validateFile(longNameImage)).toBe('ファイル名が長すぎます');
+    expect(validateFile(longNameImage)).toBe(FILE_ERROR_MESSAGES.NAME_TOO_LONG);
   });
 
   it('正常な入力の場合は空文字を返す', () => {
